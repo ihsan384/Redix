@@ -1,0 +1,190 @@
+"use client";
+
+import { useRef, useState } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+
+type Category = "All" | "Branding" | "Web" | "Social" | "Video" | "Design";
+const categories: Category[] = ["All", "Branding", "Web", "Social", "Video", "Design"];
+
+const projects = [
+  { id: "p1", title: "Brand Identity — The Brew Lab",      cat: "Branding" as Category, size: "tall",   emoji: "☕", tags: ["Logo", "Typography", "Brand Guide"], color: "#F5F0E8" },
+  { id: "p2", title: "E-commerce Website",                 cat: "Web" as Category,      size: "normal",  emoji: "🛒", tags: ["Next.js", "UI/UX"],                color: "#EFF0F5" },
+  { id: "p3", title: "Social Campaign — Ramadan Series",   cat: "Social" as Category,   size: "normal",  emoji: "🌙", tags: ["Social", "Content"],               color: "#F5F2E8" },
+  { id: "p4", title: "Promo Reel — FoodBrand",             cat: "Video" as Category,    size: "tall",    emoji: "🎬", tags: ["Video Edit", "Motion"],            color: "#F5EBE8" },
+  { id: "p5", title: "Portfolio Website — Architect",      cat: "Web" as Category,      size: "normal",  emoji: "🏛️", tags: ["React", "Animations"],            color: "#E8F0F5" },
+  { id: "p6", title: "Brand Poster Series",                cat: "Design" as Category,   size: "normal",  emoji: "🎨", tags: ["Print", "Social Media"],          color: "#F0F5E8" },
+  { id: "p7", title: "Instagram Growth Package",           cat: "Social" as Category,   size: "normal",  emoji: "📈", tags: ["Strategy", "Content"],            color: "#F5F0F0" },
+  { id: "p8", title: "Logo System — TechCo",               cat: "Branding" as Category, size: "tall",    emoji: "⬡",  tags: ["Logo", "Icon System"],           color: "#F0EBF5" },
+];
+
+export default function Portfolio() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const [active, setActive] = useState<Category>("All");
+
+  const filtered = active === "All" ? projects : projects.filter((p) => p.cat === active);
+
+  return (
+    <section
+      id="portfolio"
+      className="section-padding"
+      style={{ background: "var(--bg-secondary)" }}
+    >
+      <div className="max-w-7xl mx-auto" ref={ref}>
+        {/* Header */}
+        <div
+          className="flex items-center gap-4 mb-12"
+          style={{ borderBottom: "1px solid var(--border)", paddingBottom: "1.5rem" }}
+        >
+          <div className="badge">Our Work</div>
+          <span className="text-xs uppercase tracking-widest" style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}>
+            Selected Projects
+          </span>
+        </div>
+
+        {/* Title + Filter row */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-10">
+          <motion.h2
+            initial={{ opacity: 0, y: 24 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="section-title"
+          >
+            Work That{" "}
+            <span className="relative inline-block">
+              Speaks.
+              <span
+                style={{
+                  position: "absolute",
+                  bottom: "4px",
+                  left: 0,
+                  width: "100%",
+                  height: "6px",
+                  background: "var(--yellow)",
+                  zIndex: -1,
+                  opacity: 0.7,
+                }}
+              />
+            </span>
+          </motion.h2>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex flex-wrap gap-2"
+          >
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActive(cat)}
+                className={`filter-tab ${active === cat ? "active" : ""}`}
+              >
+                {cat}
+              </button>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Masonry Grid */}
+        <motion.div layout className="columns-1 sm:columns-2 lg:columns-3 gap-4">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((project) => (
+              <motion.div
+                key={project.id}
+                layout
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.3 }}
+                className="group relative overflow-hidden break-inside-avoid mb-4 cursor-pointer"
+                style={{
+                  background: project.color,
+                  border: "1px solid var(--border)",
+                  borderRadius: "2px",
+                  minHeight: project.size === "tall" ? "300px" : "200px",
+                }}
+                whileHover={{ y: -2 }}
+              >
+                <div className="absolute inset-0 flex flex-col justify-between p-6">
+                  <div className="flex justify-between items-start">
+                    <span className="text-5xl">{project.emoji}</span>
+                    <span
+                      className="text-xs font-bold px-2.5 py-1 uppercase tracking-wider"
+                      style={{
+                        background: "rgba(0,0,0,0.07)",
+                        color: "var(--text-secondary)",
+                        borderRadius: "2px",
+                        fontFamily: "var(--font-space)",
+                      }}
+                    >
+                      {project.cat}
+                    </span>
+                  </div>
+
+                  <div>
+                    <div className="flex gap-1.5 mb-2 flex-wrap">
+                      {project.tags.map((t) => (
+                        <span
+                          key={t}
+                          className="text-xs px-2 py-0.5"
+                          style={{
+                            background: "rgba(0,0,0,0.06)",
+                            color: "var(--text-secondary)",
+                            borderRadius: "2px",
+                            fontFamily: "var(--font-space)",
+                          }}
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                    <h3
+                      className="font-bold text-sm"
+                      style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}
+                    >
+                      {project.title}
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Hover overlay */}
+                <div
+                  className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-250"
+                  style={{ background: "rgba(255,214,10,0.15)", backdropFilter: "blur(2px)" }}
+                >
+                  <span
+                    className="text-xs font-bold uppercase tracking-widest px-4 py-2"
+                    style={{
+                      background: "var(--text-primary)",
+                      color: "#fff",
+                      borderRadius: "2px",
+                      fontFamily: "var(--font-space)",
+                    }}
+                  >
+                    View Project
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="text-center mt-12"
+        >
+          <a
+            href="#contact"
+            onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
+            className="btn-primary"
+          >
+            Start Your Project
+          </a>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
