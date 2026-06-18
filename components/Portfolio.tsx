@@ -2,19 +2,20 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import { Coffee, ShoppingBag, Moon, Film, Compass, Palette, TrendingUp, Hexagon } from "lucide-react";
 
 type Category = "All" | "Branding" | "Web" | "Social" | "Video" | "Design";
 const categories: Category[] = ["All", "Branding", "Web", "Social", "Video", "Design"];
 
 const projects = [
-  { id: "p1", title: "Brand Identity — The Brew Lab",      cat: "Branding" as Category, size: "tall",   emoji: "☕", tags: ["Logo", "Typography", "Brand Guide"], color: "#F5F0E8" },
-  { id: "p2", title: "E-commerce Website",                 cat: "Web" as Category,      size: "normal",  emoji: "🛒", tags: ["Next.js", "UI/UX"],                color: "#EFF0F5" },
-  { id: "p3", title: "Social Campaign — Ramadan Series",   cat: "Social" as Category,   size: "normal",  emoji: "🌙", tags: ["Social", "Content"],               color: "#F5F2E8" },
-  { id: "p4", title: "Promo Reel — FoodBrand",             cat: "Video" as Category,    size: "tall",    emoji: "🎬", tags: ["Video Edit", "Motion"],            color: "#F5EBE8" },
-  { id: "p5", title: "Portfolio Website — Architect",      cat: "Web" as Category,      size: "normal",  emoji: "🏛️", tags: ["React", "Animations"],            color: "#E8F0F5" },
-  { id: "p6", title: "Brand Poster Series",                cat: "Design" as Category,   size: "normal",  emoji: "🎨", tags: ["Print", "Social Media"],          color: "#F0F5E8" },
-  { id: "p7", title: "Instagram Growth Package",           cat: "Social" as Category,   size: "normal",  emoji: "📈", tags: ["Strategy", "Content"],            color: "#F5F0F0" },
-  { id: "p8", title: "Logo System — TechCo",               cat: "Branding" as Category, size: "tall",    emoji: "⬡",  tags: ["Logo", "Icon System"],           color: "#F0EBF5" },
+  { id: "p1", title: "Brand Identity — The Brew Lab",      cat: "Branding" as Category, size: "tall",   icon: Coffee, tags: ["Logo", "Typography", "Brand Guide"], color: "#F5F0E8" },
+  { id: "p2", title: "E-commerce Website",                 cat: "Web" as Category,      size: "normal",  icon: ShoppingBag, tags: ["Next.js", "UI/UX"],                color: "#EFF0F5" },
+  { id: "p3", title: "Social Campaign — Ramadan Series",   cat: "Social" as Category,   size: "normal",  icon: Moon, tags: ["Social", "Content"],               color: "#F5F2E8" },
+  { id: "p4", title: "Promo Reel — FoodBrand",             cat: "Video" as Category,    size: "tall",    icon: Film, tags: ["Video Edit", "Motion"],            color: "#F5EBE8" },
+  { id: "p5", title: "Portfolio Website — Architect",      cat: "Web" as Category,      size: "normal",  icon: Compass, tags: ["React", "Animations"],            color: "#E8F0F5" },
+  { id: "p6", title: "Brand Poster Series",                cat: "Design" as Category,   size: "normal",  icon: Palette, tags: ["Print", "Social Media"],          color: "#F0F5E8" },
+  { id: "p7", title: "Instagram Growth Package",           cat: "Social" as Category,   size: "normal",  icon: TrendingUp, tags: ["Strategy", "Content"],            color: "#F5F0F0" },
+  { id: "p8", title: "Logo System — TechCo",               cat: "Branding" as Category, size: "tall",    icon: Hexagon,  tags: ["Logo", "Icon System"],           color: "#F0EBF5" },
 ];
 
 export default function Portfolio() {
@@ -108,7 +109,7 @@ export default function Portfolio() {
               >
                 <div className="absolute inset-0 flex flex-col justify-between p-6">
                   <div className="flex justify-between items-start">
-                    <span className="text-5xl">{project.emoji}</span>
+                    <project.icon size={32} style={{ color: "var(--text-primary)" }} />
                     <span
                       className="text-xs font-bold px-2.5 py-1 uppercase tracking-wider"
                       style={{

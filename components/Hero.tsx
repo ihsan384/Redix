@@ -37,24 +37,24 @@ export default function Hero() {
       {/* Main content — vertically centered */}
       <motion.div
         style={{ y, opacity }}
-        className="flex-1 flex flex-col justify-center max-w-7xl mx-auto w-full px-6 pt-24 pb-8"
+        className="flex-1 flex flex-col justify-center max-w-7xl mx-auto w-full px-6 pt-24 pb-12"
       >
-        <div className="grid lg:grid-cols-12 gap-0 items-end">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-center">
 
           {/* Left — Badge + Headline */}
-          <div className="lg:col-span-8">
+          <div className="lg:col-span-7">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="mb-8"
+              className="mb-6"
             >
               <div className="badge">Creative Studio · Est. 2022</div>
             </motion.div>
 
             <h1
               className="display-title mb-0"
-              style={{ fontSize: "clamp(3rem, 8vw, 7.5rem)" }}
+              style={{ fontSize: "clamp(2.5rem, 6.2vw, 5.75rem)", lineHeight: 1.05, maxWidth: "760px" }}
               aria-label="We don't just market. We make brands impossible to ignore."
             >
               {/* Line 1 */}
@@ -132,20 +132,14 @@ export default function Hero() {
 
           {/* Right — Sub + CTA (editorial column) */}
           <motion.div
-            className="lg:col-span-4 lg:pl-12 mt-12 lg:mt-0 lg:pb-4"
+            className="lg:col-span-5 lg:pl-16 mt-12 lg:mt-0 lg:pb-4"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
           >
-            {/* Vertical rule */}
-            <div
-              className="hidden lg:block mb-6"
-              style={{ width: "1px", height: "40px", background: "var(--border-strong)" }}
-            />
-
             <p
-              className="leading-relaxed mb-8 text-sm"
-              style={{ color: "var(--text-secondary)", maxWidth: "300px" }}
+              className="leading-relaxed mb-6 text-[0.95rem]"
+              style={{ color: "var(--text-secondary)", maxWidth: "340px" }}
             >
               REDIX.MEDIA helps businesses grow through strategic content, stunning websites,
               branding, and digital experiences that drive real results.
@@ -156,7 +150,7 @@ export default function Hero() {
                 id="hero-start-project-btn"
                 onClick={() => goto("#contact")}
                 className="btn-yellow group"
-                whileHover={{ scale: 1.02 }}
+                whileHover={{ y: -2, scale: 1.01 }}
                 whileTap={{ scale: 0.97 }}
               >
                 Start Your Project
@@ -166,7 +160,7 @@ export default function Hero() {
                 id="hero-view-work-btn"
                 onClick={() => goto("#portfolio")}
                 className="btn-outline"
-                whileHover={{ scale: 1.02 }}
+                whileHover={{ y: -2, scale: 1.01 }}
                 whileTap={{ scale: 0.97 }}
               >
                 View Our Work
@@ -174,7 +168,7 @@ export default function Hero() {
             </div>
 
             {/* Stats */}
-            <div className="flex gap-8 mt-10 pt-8" style={{ borderTop: "1px solid var(--border)" }}>
+            <div className="flex gap-8 mt-8 pt-6" style={{ borderTop: "1px solid var(--border)" }}>
               {[
                 { v: "50+", l: "Projects" },
                 { v: "30+", l: "Clients" },

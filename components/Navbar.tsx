@@ -5,12 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Home",         href: "#home" },
-  { label: "Services",     href: "#services" },
-  { label: "Portfolio",    href: "#portfolio" },
-  { label: "Founders",     href: "#founders" },
+  { label: "Home", href: "#home" },
+  { label: "Services", href: "#services" },
+  { label: "Portfolio", href: "#portfolio" },
+  { label: "Founders", href: "#founders" },
   { label: "Testimonials", href: "#testimonials" },
-  { label: "Contact",      href: "#contact" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {
@@ -34,11 +34,10 @@ export default function Navbar() {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
             ? "glass-dark shadow-sm"
             : "bg-transparent py-1"
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
           {/* Logo */}
@@ -47,17 +46,12 @@ export default function Navbar() {
             onClick={(e) => { e.preventDefault(); goto("#home"); }}
             className="flex items-center gap-3 group"
           >
-            <div
-              className="w-8 h-8 flex items-center justify-center flex-shrink-0"
-              style={{ background: "var(--yellow)", borderRadius: "2px" }}
-            >
-              <span
-                className="font-black text-sm"
-                style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}
-              >
-                R
-              </span>
-            </div>
+            <img
+              src="/logo.svg"
+              alt="Redix Media Logo"
+              className="w-8 h-8 object-cover flex-shrink-0"
+              style={{ borderRadius: "2px" }}
+            />
             <span
               className="font-black text-lg tracking-tight"
               style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}

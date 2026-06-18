@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Mail, MessageCircle, Phone, MapPin, Send, CheckCircle2 } from "lucide-react";
+import { Mail, MessageCircle, Phone, MapPin, Send, CheckCircle2, Sparkles } from "lucide-react";
 
 const contactLinks = [
   { Icon: MessageCircle, label: "WhatsApp",  value: "Chat with us",      href: "https://wa.me/923001234567",      color: "#25d366" },
@@ -130,7 +130,12 @@ export default function Contact() {
               onMouseEnter={(e) => { e.currentTarget.style.boxShadow = "var(--shadow-sm)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.boxShadow = "none"; }}
             >
-              <span className="text-2xl">🚀</span>
+              <div
+                className="w-10 h-10 flex items-center justify-center flex-shrink-0"
+                style={{ background: "var(--yellow)", borderRadius: "2px" }}
+              >
+                <Sparkles size={20} style={{ color: "var(--text-primary)" }} />
+              </div>
               <div>
                 <p className="font-bold text-sm mb-0.5" style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}>
                   Free 30-Min Strategy Call

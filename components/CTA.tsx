@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MessageCircle, Check } from "lucide-react";
 
 export default function CTA() {
   const ref = useRef(null);
@@ -89,7 +89,7 @@ export default function CTA() {
                 onMouseEnter={(e) => (e.currentTarget.style.color = "var(--yellow)")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
               >
-                💬 Or Chat on WhatsApp
+                <MessageCircle size={16} /> Or Chat on WhatsApp
               </a>
             </div>
 
@@ -101,7 +101,7 @@ export default function CTA() {
                   className="flex items-center gap-2 text-xs uppercase tracking-widest"
                   style={{ color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-space)" }}
                 >
-                  <span style={{ color: "var(--yellow)" }}>✓</span>
+                  <Check size={12} style={{ color: "var(--yellow)" }} />
                   {item}
                 </span>
               ))}

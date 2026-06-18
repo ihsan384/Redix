@@ -2,13 +2,14 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { Search, Map, Sparkles, Rocket, TrendingUp } from "lucide-react";
 
 const steps = [
-  { num: "01", title: "Discovery",  desc: "Deep-diving into your business, goals, audience, and competitors to build a solid foundation.",       icon: "🔍" },
-  { num: "02", title: "Strategy",   desc: "A clear roadmap covering brand positioning, content strategy, and technical requirements.",            icon: "🗺️" },
-  { num: "03", title: "Creation",   desc: "Design, development, content, and motion — all crafted with precision and purpose.",                  icon: "⚡" },
-  { num: "04", title: "Launch",     desc: "Ensuring a smooth, impactful launch across all relevant platforms and channels.",                      icon: "🚀" },
-  { num: "05", title: "Growth",     desc: "Post-launch analysis and iteration to keep your brand growing and improving continuously.",            icon: "📈" },
+  { num: "01", title: "Discovery",  desc: "Deep-diving into your business, goals, audience, and competitors to build a solid foundation.",       icon: Search },
+  { num: "02", title: "Strategy",   desc: "A clear roadmap covering brand positioning, content strategy, and technical requirements.",            icon: Map },
+  { num: "03", title: "Creation",   desc: "Design, development, content, and motion — all crafted with precision and purpose.",                  icon: Sparkles },
+  { num: "04", title: "Launch",     desc: "Ensuring a smooth, impactful launch across all relevant platforms and channels.",                      icon: Rocket },
+  { num: "05", title: "Growth",     desc: "Post-launch analysis and iteration to keep your brand growing and improving continuously.",            icon: TrendingUp },
 ];
 
 export default function Process() {
@@ -77,13 +78,13 @@ export default function Process() {
             >
               {/* Step icon circle */}
               <div
-                className="w-12 h-12 flex items-center justify-center text-2xl mb-6 group-hover:bg-yellow-400 transition-colors duration-300"
+                className="w-12 h-12 flex items-center justify-center mb-6 group-hover:bg-yellow-400 transition-colors duration-300"
                 style={{
                   background: "var(--bg-secondary)",
                   borderRadius: "2px",
                 }}
               >
-                {step.icon}
+                <step.icon size={20} style={{ color: "var(--text-primary)" }} />
               </div>
 
               <p
@@ -119,10 +120,10 @@ export default function Process() {
               style={{ borderBottom: "1px solid var(--border)" }}
             >
               <div
-                className="w-12 h-12 flex items-center justify-center text-2xl flex-shrink-0"
+                className="w-12 h-12 flex items-center justify-center flex-shrink-0"
                 style={{ background: "var(--bg-secondary)", borderRadius: "2px" }}
               >
-                {step.icon}
+                <step.icon size={20} style={{ color: "var(--text-primary)" }} />
               </div>
               <div>
                 <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}>
