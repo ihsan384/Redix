@@ -5,10 +5,10 @@ import { motion, useInView } from "framer-motion";
 import { Mail, MessageCircle, Phone, MapPin, Send, CheckCircle2, Sparkles } from "lucide-react";
 
 const contactLinks = [
-  { Icon: MessageCircle, label: "WhatsApp",  value: "Chat with us",      href: "https://wa.me/923001234567",      color: "#25d366" },
-  { Icon: Mail,          label: "Email",     value: "hello@redix.media",  href: "mailto:hello@redix.media",         color: "var(--text-primary)" },
-  { Icon: Phone,         label: "Call",      value: "+92 300 123 4567",   href: "tel:+923001234567",                color: "var(--text-primary)" },
-  { Icon: MapPin,        label: "Location",  value: "Remote · Worldwide", href: "#",                               color: "var(--text-muted)" },
+  { Icon: MessageCircle, label: "WhatsApp", value: "Chat with us", href: "https://wa.me/919744206583", color: "#25d366" },
+  { Icon: Mail, label: "Email", value: "[EMAIL_ADDRESS]", href: "mailto:[EMAIL_ADDRESS]", color: "var(--text-primary)" },
+  { Icon: Phone, label: "Call", value: "+91 8075 511 982", href: "tel:+918075511982", color: "var(--text-primary)" },
+  { Icon: MapPin, label: "Location", value: "Based in India · Serving Remotly", href: "#", color: "var(--text-muted)" },
 ];
 
 const services = [
@@ -16,12 +16,65 @@ const services = [
   "Branding & Design", "Digital Marketing", "Content Creation", "Other",
 ];
 
+const serviceBudgets: Record<string, string[]> = {
+  "Social Media Management": [
+    "Under $300 / mo",
+    "$300 – $600 / mo",
+    "$600 – $1,200 / mo",
+    "$1,200+ / mo"
+  ],
+  "Website Development": [
+    "Under $1,000",
+    "$1,000 – $3,500",
+    "$3,500 – $7,500",
+    "$7,500+"
+  ],
+  "Video Editing": [
+    "Under $200 / video",
+    "$200 – $500 / video",
+    "$500 – $1,500 / video",
+    "$1,500+"
+  ],
+  "Branding & Design": [
+    "Under $500",
+    "$500 – $1,500",
+    "$1,500 – $3,000",
+    "$3,000+"
+  ],
+  "Digital Marketing": [
+    "Under $500 / mo",
+    "$500 – $1,500 / mo",
+    "$1,500 – $3,000 / mo",
+    "$3,000+ / mo"
+  ],
+  "Content Creation": [
+    "Under $400 / mo",
+    "$400 – $1,000 / mo",
+    "$1,000 – $2,500 / mo",
+    "$2,500+ / mo"
+  ],
+  "Other": [
+    "Under $500",
+    "$500 – $1,500",
+    "$1,500 – $3,000",
+    "$3,000+"
+  ]
+};
+
 export default function Contact() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const [formData, setFormData] = useState({ name: "", email: "", service: "", budget: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const handleServiceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setFormData({
+      ...formData,
+      service: e.target.value,
+      budget: "", // Reset budget selection when service changes
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -117,7 +170,7 @@ export default function Contact() {
 
             {/* WhatsApp CTA */}
             <a
-              href="https://wa.me/923001234567"
+              href="https://wa.me/919744206583"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-4 p-5 transition-all duration-200"
@@ -209,7 +262,7 @@ export default function Contact() {
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider mb-2" style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}>Service *</label>
                   <select id="contact-service" required className="form-input appearance-none"
-                    value={formData.service} onChange={(e) => setFormData({ ...formData, service: e.target.value })}>
+                    value={formData.service} onChange={handleServiceChange}>
                     <option value="">Select a service</option>
                     {services.map((s) => <option key={s}>{s}</option>)}
                   </select>
@@ -218,12 +271,13 @@ export default function Contact() {
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider mb-2" style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}>Budget</label>
                   <select id="contact-budget" className="form-input appearance-none"
-                    value={formData.budget} onChange={(e) => setFormData({ ...formData, budget: e.target.value })}>
-                    <option value="">Select range</option>
-                    <option>Under $500</option>
-                    <option>$500 – $1,000</option>
-                    <option>$1,000 – $3,000</option>
-                    <option>$3,000+</option>
+                    value={formData.budget} onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                    disabled={!formData.service}
+                  >
+                    <option value="">{formData.service ? "Select range" : "Please select a service first"}</option>
+                    {formData.service && serviceBudgets[formData.service]?.map((b) => (
+                      <option key={b} value={b}>{b}</option>
+                    ))}
                   </select>
                 </div>
 

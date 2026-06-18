@@ -81,7 +81,7 @@ export default function CTA() {
                 <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
               </a>
               <a
-                href="https://wa.me/923001234567"
+                href="https://wa.me/919744206583"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm font-bold uppercase tracking-widest flex items-center gap-2 transition-colors"
