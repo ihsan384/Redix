@@ -29,14 +29,11 @@ export default function Portfolio() {
     <section
       id="portfolio"
       className="section-padding"
-      style={{ background: "var(--bg-secondary)" }}
+      style={{ background: "var(--bg-primary)" }}
     >
       <div className="max-w-7xl mx-auto" ref={ref}>
         {/* Header */}
-        <div
-          className="flex items-center gap-4 mb-12"
-          style={{ borderBottom: "1px solid var(--border)", paddingBottom: "1.5rem" }}
-        >
+        <div className="section-header">
           <div className="badge">Our Work</div>
           <span className="text-xs uppercase tracking-widest" style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}>
             Selected Projects
@@ -44,7 +41,7 @@ export default function Portfolio() {
         </div>
 
         {/* Title + Filter row */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
@@ -88,7 +85,7 @@ export default function Portfolio() {
         </div>
 
         {/* Masonry Grid */}
-        <motion.div layout className="columns-1 sm:columns-2 lg:columns-3 gap-4">
+        <motion.div layout className="columns-1 sm:columns-2 lg:columns-3 gap-5">
           <AnimatePresence mode="popLayout">
             {filtered.map((project) => (
               <motion.div
@@ -97,25 +94,34 @@ export default function Portfolio() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.3 }}
-                className="group relative overflow-hidden break-inside-avoid mb-4 cursor-pointer"
+                transition={{ duration: 0.35, ease: "easeOut" }}
+                className="group relative overflow-hidden break-inside-avoid mb-5 cursor-pointer"
                 style={{
                   background: project.color,
                   border: "1px solid var(--border)",
-                  borderRadius: "2px",
-                  minHeight: project.size === "tall" ? "300px" : "200px",
+                  borderRadius: "var(--radius-md)",
+                  minHeight: project.size === "tall" ? "340px" : "240px",
                 }}
-                whileHover={{ y: -2 }}
+                whileHover={{ y: -4, boxShadow: "var(--shadow-lg)" }}
               >
-                <div className="absolute inset-0 flex flex-col justify-between p-6">
+                <div className="absolute inset-0 flex flex-col justify-between p-7">
                   <div className="flex justify-between items-start">
-                    <project.icon size={32} style={{ color: "var(--text-primary)" }} />
+                    <div
+                      className="w-12 h-12 flex items-center justify-center"
+                      style={{
+                        background: "rgba(255,255,255,0.7)",
+                        borderRadius: "var(--radius-sm)",
+                        backdropFilter: "blur(8px)",
+                      }}
+                    >
+                      <project.icon size={24} style={{ color: "var(--text-primary)" }} />
+                    </div>
                     <span
-                      className="text-xs font-bold px-2.5 py-1 uppercase tracking-wider"
+                      className="text-xs font-bold px-3 py-1.5 uppercase tracking-wider"
                       style={{
                         background: "rgba(0,0,0,0.07)",
                         color: "var(--text-secondary)",
-                        borderRadius: "2px",
+                        borderRadius: "var(--radius-sm)",
                         fontFamily: "var(--font-space)",
                       }}
                     >
@@ -124,15 +130,15 @@ export default function Portfolio() {
                   </div>
 
                   <div>
-                    <div className="flex gap-1.5 mb-2 flex-wrap">
+                    <div className="flex gap-1.5 mb-3 flex-wrap">
                       {project.tags.map((t) => (
                         <span
                           key={t}
-                          className="text-xs px-2 py-0.5"
+                          className="text-xs px-2.5 py-1"
                           style={{
                             background: "rgba(0,0,0,0.06)",
                             color: "var(--text-secondary)",
-                            borderRadius: "2px",
+                            borderRadius: "var(--radius-sm)",
                             fontFamily: "var(--font-space)",
                           }}
                         >
@@ -141,7 +147,7 @@ export default function Portfolio() {
                       ))}
                     </div>
                     <h3
-                      className="font-bold text-sm"
+                      className="font-bold text-base"
                       style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}
                     >
                       {project.title}
@@ -151,15 +157,15 @@ export default function Portfolio() {
 
                 {/* Hover overlay */}
                 <div
-                  className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-250"
-                  style={{ background: "rgba(255,214,10,0.15)", backdropFilter: "blur(2px)" }}
+                  className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
+                  style={{ background: "rgba(255,214,10,0.12)", backdropFilter: "blur(3px)" }}
                 >
                   <span
-                    className="text-xs font-bold uppercase tracking-widest px-4 py-2"
+                    className="text-xs font-bold uppercase tracking-widest px-5 py-2.5"
                     style={{
                       background: "var(--text-primary)",
                       color: "#fff",
-                      borderRadius: "2px",
+                      borderRadius: "var(--radius-sm)",
                       fontFamily: "var(--font-space)",
                     }}
                   >
@@ -175,7 +181,7 @@ export default function Portfolio() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="text-center mt-12"
+          className="text-center mt-14"
         >
           <a
             href="#contact"

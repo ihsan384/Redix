@@ -56,10 +56,7 @@ export default function Services() {
     >
       <div className="max-w-7xl mx-auto" ref={ref}>
         {/* Header */}
-        <div
-          className="flex items-center gap-4 mb-16"
-          style={{ borderBottom: "1px solid var(--border)", paddingBottom: "1.5rem" }}
-        >
+        <div className="section-header">
           <div className="badge">Services</div>
           <span
             className="text-xs uppercase tracking-widest"
@@ -133,15 +130,15 @@ export default function Services() {
                   initial={{ opacity: 0 }}
                   animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                   transition={{ duration: 0.5, delay: 0.05 * i }}
-                  className="relative p-8 cursor-default"
+                  className="relative p-8 lg:p-10 cursor-default"
                   style={{
                     borderRight: "1px solid var(--border)",
                     borderBottom: "1px solid var(--border)",
                     background: isHov ? "var(--bg-secondary)" : "var(--bg-primary)",
-                    transition: "background 0.25s ease",
+                    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                   }}
-                  onHoverStart={() => setHovered(service.num)}
-                  onHoverEnd={() => setHovered(null)}
+                  onMouseEnter={() => setHovered(service.num)}
+                  onMouseLeave={() => setHovered(null)}
                 >
                   {/* Yellow bottom bar */}
                   <motion.div
@@ -157,73 +154,67 @@ export default function Services() {
                     transition={{ duration: 0.3 }}
                   />
 
-                  <div className="flex items-start justify-between mb-6">
+                  <div className="flex items-start justify-between mb-8">
                     <span
-                      className="text-4xl font-black select-none"
+                      className="text-5xl font-black select-none"
                       style={{
                         fontFamily: "var(--font-space)",
                         color: isHov ? "var(--text-primary)" : "var(--border-strong)",
-                        transition: "color 0.25s ease",
+                        transition: "color 0.3s ease",
                         letterSpacing: "-0.04em",
+                        lineHeight: 1,
                       }}
                     >
                       {service.num}
                     </span>
                     <div
-                      className="w-10 h-10 flex items-center justify-center"
+                      className="w-11 h-11 flex items-center justify-center"
                       style={{
                         background: isHov ? "var(--yellow)" : "var(--bg-secondary)",
-                        borderRadius: "2px",
-                        transition: "background 0.25s ease",
+                        borderRadius: "var(--radius-sm)",
+                        transition: "all 0.3s ease",
+                        boxShadow: isHov ? "0 4px 12px var(--yellow-dim)" : "none",
                       }}
                     >
                       <Icon
                         size={18}
                         style={{
                           color: isHov ? "var(--text-primary)" : "var(--text-muted)",
-                          transition: "color 0.25s ease",
+                          transition: "color 0.3s ease",
                         }}
                       />
                     </div>
                   </div>
 
                   <h3
-                    className="font-bold text-base mb-3"
+                    className="font-bold text-lg mb-3"
                     style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}
                   >
                     {service.title}
                   </h3>
 
-                  <p className="text-sm leading-relaxed mb-5" style={{ color: "var(--text-secondary)" }}>
+                  <p className="text-sm leading-relaxed mb-6" style={{ color: "var(--text-secondary)" }}>
                     {service.description}
                   </p>
 
-                  <AnimatePresence>
-                    {isHov && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.25 }}
-                        className="flex flex-wrap gap-1.5 mb-4"
+                  {/* Outcomes — always visible */}
+                  <div className="flex flex-wrap gap-1.5 mb-6">
+                    {service.outcomes.map((o) => (
+                      <span
+                        key={o}
+                        className="text-xs font-semibold px-2.5 py-1"
+                        style={{
+                          background: isHov ? "var(--yellow)" : "var(--bg-secondary)",
+                          color: "var(--text-primary)",
+                          borderRadius: "2px",
+                          fontFamily: "var(--font-space)",
+                          transition: "background 0.3s ease",
+                        }}
                       >
-                        {service.outcomes.map((o) => (
-                          <span
-                            key={o}
-                            className="text-xs font-semibold px-2.5 py-1"
-                            style={{
-                              background: "var(--yellow)",
-                              color: "var(--text-primary)",
-                              borderRadius: "2px",
-                              fontFamily: "var(--font-space)",
-                            }}
-                          >
-                            {o}
-                          </span>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                        {o}
+                      </span>
+                    ))}
+                  </div>
 
                   <button
                     onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
@@ -231,11 +222,11 @@ export default function Services() {
                     style={{
                       color: isHov ? "var(--text-primary)" : "var(--text-muted)",
                       fontFamily: "var(--font-space)",
-                      transition: "color 0.25s ease",
+                      transition: "color 0.3s ease",
                     }}
                   >
                     Get Started
-                    <ArrowRight size={12} className={`transition-transform ${isHov ? "translate-x-1" : ""}`} />
+                    <ArrowRight size={12} className={`transition-transform duration-300 ${isHov ? "translate-x-1" : ""}`} />
                   </button>
                 </motion.div>
               );

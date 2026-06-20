@@ -14,7 +14,21 @@ export default function CTA() {
       className="relative overflow-hidden"
       style={{ background: "var(--text-primary)" }}
     >
-      <div className="max-w-7xl mx-auto px-6 py-24 lg:py-32" ref={ref}>
+      {/* Floating yellow accent shapes */}
+      <div
+        className="absolute top-12 right-20 w-24 h-24 rounded-full animate-float-slow"
+        style={{ background: "var(--yellow)", opacity: 0.05 }}
+      />
+      <div
+        className="absolute bottom-20 left-16 w-16 h-16 rounded-full animate-float-reverse"
+        style={{ background: "var(--yellow)", opacity: 0.08 }}
+      />
+      <div
+        className="absolute top-1/2 right-1/3 w-8 h-8 rotate-45 animate-float"
+        style={{ background: "var(--yellow)", opacity: 0.06 }}
+      />
+
+      <div className="max-w-7xl mx-auto px-6 py-24 lg:py-36" ref={ref}>
         <div className="grid lg:grid-cols-12 gap-8 items-end">
 
           {/* Left — headline */}
@@ -26,11 +40,12 @@ export default function CTA() {
               className="mb-8"
             >
               <span
-                className="text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-sm"
+                className="text-xs font-bold uppercase tracking-widest px-3 py-1.5"
                 style={{
                   background: "var(--yellow)",
                   color: "var(--text-primary)",
                   fontFamily: "var(--font-space)",
+                  borderRadius: "var(--radius-sm)",
                 }}
               >
                 Ready to Grow?
@@ -72,12 +87,12 @@ export default function CTA() {
 
             <div className="flex flex-col gap-3">
               <a
-                id="cta-book-consultation-btn"
+                id="cta-start-project-btn"
                 href="#contact"
                 onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
                 className="btn-yellow group"
               >
-                Book A Free Consultation
+                Start Your Project
                 <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
               </a>
               <a
@@ -94,7 +109,7 @@ export default function CTA() {
             </div>
 
             {/* Trust list */}
-            <div className="mt-10 pt-8 flex flex-col gap-2" style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}>
+            <div className="mt-10 pt-8 flex flex-col gap-3" style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}>
               {["Free Consultation", "Quick Turnaround", "Direct Communication", "No Hidden Fees"].map((item) => (
                 <span
                   key={item}

@@ -10,7 +10,7 @@ const features = [
   { icon: TrendingUp,    title: "Growth Focused",         desc: "Every decision we make is filtered through one question: will this help your brand grow?" },
   { icon: MessageCircle, title: "Direct Communication",   desc: "No account managers, no middlemen. You talk directly to the people doing the work." },
   { icon: Lightbulb,     title: "Creative Strategy",      desc: "Strategy meets creativity. We think before we execute — so everything we build has purpose." },
-  { icon: Target,        title: "Results Driven",         desc: "We measure success the way you do — in growth, conversions, and real business impact." },
+  { icon: Target,        title: "Premium Results",        desc: "We measure success the way you do — in growth, conversions, and real business impact." },
 ];
 
 export default function WhyChooseUs() {
@@ -25,10 +25,7 @@ export default function WhyChooseUs() {
     >
       <div className="max-w-7xl mx-auto" ref={ref}>
         {/* Header */}
-        <div
-          className="flex items-center gap-4 mb-16"
-          style={{ borderBottom: "1px solid var(--border)", paddingBottom: "1.5rem" }}
-        >
+        <div className="section-header">
           <div className="badge">Why REDIX</div>
           <span className="text-xs uppercase tracking-widest" style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}>
             What Makes Us Different
@@ -72,7 +69,7 @@ export default function WhyChooseUs() {
         </div>
 
         {/* Feature grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {features.map((f, i) => {
             const Icon = f.icon;
             return (
@@ -81,31 +78,41 @@ export default function WhyChooseUs() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
                 transition={{ duration: 0.5, delay: 0.08 * i, ease: "easeOut" }}
-                className="group p-7 cursor-default"
+                className="group p-8 cursor-default relative overflow-hidden"
                 style={{
                   background: "var(--bg-card)",
                   border: "1px solid var(--border)",
-                  borderRadius: "2px",
-                  transition: "all 0.25s ease",
+                  borderRadius: "var(--radius-md)",
+                  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                 }}
                 whileHover={{
                   y: -4,
                   boxShadow: "var(--shadow-md)",
-                  borderColor: "var(--border-strong)",
                 }}
               >
+                {/* Yellow top accent bar on hover */}
                 <div
-                  className="w-11 h-11 flex items-center justify-center mb-5 group-hover:bg-yellow-400 transition-colors duration-300"
+                  className="absolute top-0 left-0 right-0 h-[3px] transition-all duration-300"
+                  style={{
+                    background: "var(--yellow)",
+                    transform: "scaleX(0)",
+                    transformOrigin: "left",
+                  }}
+                />
+
+                <div
+                  className="w-12 h-12 flex items-center justify-center mb-6 transition-all duration-300"
                   style={{
                     background: "var(--bg-secondary)",
-                    borderRadius: "2px",
+                    borderRadius: "var(--radius-sm)",
+                    border: "1px solid var(--border)",
                   }}
                 >
-                  <Icon size={18} style={{ color: "var(--text-primary)" }} />
+                  <Icon size={20} style={{ color: "var(--text-primary)" }} />
                 </div>
 
                 <h3
-                  className="font-bold text-base mb-2"
+                  className="font-bold text-base mb-3"
                   style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}
                 >
                   {f.title}
@@ -113,6 +120,16 @@ export default function WhyChooseUs() {
                 <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
                   {f.desc}
                 </p>
+
+                <style jsx>{`
+                  .group:hover > div:first-child {
+                    transform: scaleX(1) !important;
+                  }
+                  .group:hover > div:nth-child(2) {
+                    background: var(--yellow) !important;
+                    border-color: var(--yellow) !important;
+                  }
+                `}</style>
               </motion.div>
             );
           })}

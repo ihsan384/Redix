@@ -92,10 +92,7 @@ export default function Contact() {
     >
       <div className="max-w-7xl mx-auto" ref={ref}>
         {/* Header */}
-        <div
-          className="flex items-center gap-4 mb-16"
-          style={{ borderBottom: "1px solid var(--border)", paddingBottom: "1.5rem" }}
-        >
+        <div className="section-header">
           <div className="badge">Contact</div>
           <span className="text-xs uppercase tracking-widest" style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}>
             Get In Touch
@@ -139,24 +136,30 @@ export default function Contact() {
                   href={href}
                   target={href.startsWith("http") ? "_blank" : undefined}
                   rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="flex items-center gap-3 p-4 transition-all duration-200 group"
+                  className="flex items-center gap-3 p-4 transition-all duration-300 group"
                   style={{
                     background: "var(--bg-card)",
                     border: "1px solid var(--border)",
-                    borderRadius: "2px",
+                    borderRadius: "var(--radius-md)",
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.borderColor = "var(--border-strong)";
                     e.currentTarget.style.boxShadow = "var(--shadow-sm)";
+                    e.currentTarget.style.transform = "translateY(-2px)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.borderColor = "var(--border)";
                     e.currentTarget.style.boxShadow = "none";
+                    e.currentTarget.style.transform = "translateY(0)";
                   }}
                 >
                   <div
-                    className="w-9 h-9 flex items-center justify-center flex-shrink-0 group-hover:bg-yellow-400 transition-colors duration-200"
-                    style={{ background: "var(--bg-secondary)", borderRadius: "2px" }}
+                    className="w-10 h-10 flex items-center justify-center flex-shrink-0 transition-all duration-300"
+                    style={{
+                      background: "var(--bg-secondary)",
+                      borderRadius: "var(--radius-sm)",
+                      border: "1px solid var(--border)",
+                    }}
                   >
                     <Icon size={16} style={{ color }} />
                   </div>
@@ -173,19 +176,19 @@ export default function Contact() {
               href="https://wa.me/919744206583"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-4 p-5 transition-all duration-200"
+              className="flex items-center gap-4 p-5 transition-all duration-300"
               style={{
                 background: "var(--bg-card)",
                 border: "1px solid var(--border)",
                 borderLeft: "4px solid var(--yellow)",
-                borderRadius: "2px",
+                borderRadius: "var(--radius-md)",
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.boxShadow = "var(--shadow-sm)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.boxShadow = "none"; }}
+              onMouseEnter={(e) => { e.currentTarget.style.boxShadow = "var(--shadow-md)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.transform = "translateY(0)"; }}
             >
               <div
-                className="w-10 h-10 flex items-center justify-center flex-shrink-0"
-                style={{ background: "var(--yellow)", borderRadius: "2px" }}
+                className="w-11 h-11 flex items-center justify-center flex-shrink-0"
+                style={{ background: "var(--yellow)", borderRadius: "var(--radius-sm)" }}
               >
                 <Sparkles size={20} style={{ color: "var(--text-primary)" }} />
               </div>
@@ -215,12 +218,12 @@ export default function Contact() {
                   background: "var(--bg-card)",
                   border: "1px solid var(--border)",
                   borderTop: "4px solid var(--yellow)",
-                  borderRadius: "2px",
+                  borderRadius: "var(--radius-md)",
                 }}
               >
                 <div
                   className="w-16 h-16 flex items-center justify-center mb-6"
-                  style={{ background: "var(--yellow)", borderRadius: "2px" }}
+                  style={{ background: "var(--yellow)", borderRadius: "var(--radius-md)" }}
                 >
                   <CheckCircle2 size={28} style={{ color: "var(--text-primary)" }} />
                 </div>
@@ -238,12 +241,12 @@ export default function Contact() {
               <form
                 id="contact-form"
                 onSubmit={handleSubmit}
-                className="space-y-4 p-8"
+                className="space-y-5 p-8 lg:p-10"
                 style={{
                   background: "var(--bg-card)",
                   border: "1px solid var(--border)",
-                  borderTop: "4px solid var(--text-primary)",
-                  borderRadius: "2px",
+                  borderTop: "4px solid var(--yellow)",
+                  borderRadius: "var(--radius-md)",
                 }}
               >
                 <div className="grid grid-cols-2 gap-4">
@@ -292,14 +295,14 @@ export default function Contact() {
                   id="contact-submit-btn"
                   type="submit"
                   disabled={loading}
-                  className="btn-primary w-full justify-center"
+                  className="btn-yellow w-full justify-center"
                   whileHover={{ scale: loading ? 1 : 1.02 }}
                   whileTap={{ scale: loading ? 1 : 0.98 }}
                 >
                   {loading ? (
                     <>
                       <span>Sending...</span>
-                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <div className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin" />
                     </>
                   ) : (
                     <>

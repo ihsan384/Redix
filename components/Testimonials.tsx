@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
 
 const testimonials = [
   {
@@ -60,17 +60,17 @@ export default function Testimonials() {
                 key={label}
                 onClick={fn}
                 aria-label={label}
-                className="w-10 h-10 flex items-center justify-center transition-all duration-200"
+                className="w-11 h-11 flex items-center justify-center transition-all duration-300"
                 style={{
                   background: "var(--bg-secondary)",
                   border: "1px solid var(--border-strong)",
-                  borderRadius: "2px",
+                  borderRadius: "var(--radius-sm)",
                   color: "var(--text-secondary)",
                 }}
                 onMouseEnter={(e) => { e.currentTarget.style.background = "var(--yellow)"; e.currentTarget.style.borderColor = "var(--yellow)"; e.currentTarget.style.color = "var(--text-primary)"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.background = "var(--bg-secondary)"; e.currentTarget.style.borderColor = "var(--border-strong)"; e.currentTarget.style.color = "var(--text-secondary)"; }}
               >
-                {i === 0 ? <ChevronLeft size={17} /> : <ChevronRight size={17} />}
+                {i === 0 ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
               </button>
             ))}
           </div>
@@ -85,36 +85,42 @@ export default function Testimonials() {
             exit={{ opacity: 0, x: -30 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
             className="grid lg:grid-cols-12 gap-0 mb-8"
-            style={{ border: "1px solid var(--border)", borderRadius: "2px" }}
+            style={{
+              border: "1px solid var(--border)",
+              borderRadius: "var(--radius-md)",
+              overflow: "hidden",
+            }}
           >
             {/* Yellow left accent column */}
             <div
-              className="lg:col-span-1 hidden lg:block"
+              className="lg:col-span-1 hidden lg:flex items-center justify-center"
               style={{ background: "var(--yellow)", minHeight: "200px" }}
-            />
+            >
+              <Quote size={28} style={{ color: "var(--text-primary)", opacity: 0.3 }} />
+            </div>
 
             {/* Content */}
-            <div className="lg:col-span-8 p-10 lg:p-12">
+            <div className="lg:col-span-8 p-10 lg:p-14">
               {/* Stars */}
-              <div className="flex gap-1 mb-6">
+              <div className="flex gap-1 mb-8">
                 {Array.from({ length: testimonials[current].rating }).map((_, i) => (
-                  <Star key={i} size={16} fill="var(--yellow)" style={{ color: "var(--yellow)" }} />
+                  <Star key={i} size={18} fill="var(--yellow)" style={{ color: "var(--yellow)" }} />
                 ))}
               </div>
 
               <p
-                className="text-xl lg:text-2xl font-medium leading-relaxed mb-8"
+                className="text-xl lg:text-2xl font-medium leading-relaxed mb-10"
                 style={{ color: "var(--text-primary)", fontFamily: "var(--font-space)" }}
               >
                 &ldquo;{testimonials[current].text}&rdquo;
               </p>
 
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 flex-wrap">
                 <div
-                  className="w-12 h-12 flex items-center justify-center font-black text-base flex-shrink-0"
+                  className="w-14 h-14 flex items-center justify-center font-black text-lg flex-shrink-0"
                   style={{
                     background: "var(--yellow)",
-                    borderRadius: "2px",
+                    borderRadius: "var(--radius-sm)",
                     color: "var(--text-primary)",
                     fontFamily: "var(--font-space)",
                   }}
@@ -122,7 +128,7 @@ export default function Testimonials() {
                   {testimonials[current].initials}
                 </div>
                 <div>
-                  <p className="font-bold text-sm" style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}>
+                  <p className="font-bold text-base" style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}>
                     {testimonials[current].name}
                   </p>
                   <p className="text-xs" style={{ color: "var(--text-muted)" }}>
@@ -136,7 +142,7 @@ export default function Testimonials() {
                       background: "var(--bg-secondary)",
                       border: "1px solid var(--border-strong)",
                       color: "var(--text-secondary)",
-                      borderRadius: "2px",
+                      borderRadius: "var(--radius-sm)",
                       fontFamily: "var(--font-space)",
                     }}
                   >
@@ -152,7 +158,7 @@ export default function Testimonials() {
               style={{ borderLeft: "1px solid var(--border)", background: "var(--bg-secondary)" }}
             >
               <p
-                className="font-black text-6xl mb-1"
+                className="font-black text-7xl mb-1"
                 style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}
               >
                 {String(current + 1).padStart(2, "0")}
@@ -162,16 +168,16 @@ export default function Testimonials() {
               </p>
 
               {/* Dot indicators */}
-              <div className="flex gap-1.5 mt-6">
+              <div className="flex gap-1.5 mt-8">
                 {testimonials.map((_, i) => (
                   <button
                     key={i}
                     onClick={() => setCurrent(i)}
                     style={{
-                      width: i === current ? "24px" : "6px",
+                      width: i === current ? "28px" : "6px",
                       height: "6px",
                       borderRadius: "3px",
-                      background: i === current ? "var(--text-primary)" : "var(--border-strong)",
+                      background: i === current ? "var(--yellow)" : "var(--border-strong)",
                       transition: "all 0.3s ease",
                     }}
                     aria-label={`Testimonial ${i + 1}`}
@@ -191,19 +197,19 @@ export default function Testimonials() {
               initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
               transition={{ duration: 0.4, delay: 0.3 + i * 0.06 }}
-              className="p-4 text-left transition-all duration-200"
+              className="p-5 text-left transition-all duration-300"
               style={{
                 background: i === current ? "var(--yellow)" : "var(--bg-secondary)",
                 border: "1px solid var(--border)",
-                borderRadius: "2px",
+                borderRadius: "var(--radius-md)",
               }}
             >
               <div className="flex gap-0.5 mb-2">
                 {Array.from({ length: t.rating }).map((_, j) => (
-                  <Star key={j} size={10} fill={i === current ? "var(--text-primary)" : "var(--text-muted)"} style={{ color: i === current ? "var(--text-primary)" : "var(--text-muted)" }} />
+                  <Star key={j} size={11} fill={i === current ? "var(--text-primary)" : "var(--text-muted)"} style={{ color: i === current ? "var(--text-primary)" : "var(--text-muted)" }} />
                 ))}
               </div>
-              <p className="text-xs font-bold" style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}>
+              <p className="text-sm font-bold" style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}>
                 {t.name}
               </p>
               <p className="text-xs mt-0.5" style={{ color: i === current ? "var(--text-secondary)" : "var(--text-muted)" }}>

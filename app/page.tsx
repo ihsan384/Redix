@@ -1,13 +1,15 @@
 import Navbar from "@/components/Navbar";
 import ScrollProgress from "@/components/ScrollProgress";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
+import TrustStrip from "@/components/TrustStrip";
 import Services from "@/components/Services";
 import Portfolio from "@/components/Portfolio";
+import About from "@/components/About";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Founders from "@/components/Founders";
 import Process from "@/components/Process";
 import Testimonials from "@/components/Testimonials";
+import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -27,31 +29,37 @@ export default function Home() {
         {/* 1. Hero */}
         <Hero />
 
-        {/* 2. About */}
-        <About />
+        {/* 2. Trust Strip */}
+        <TrustStrip />
 
         {/* 3. Services */}
         <Services />
 
-        {/* 4. Portfolio */}
+        {/* 4. Portfolio (moved above About — proof before story) */}
         <Portfolio />
 
-        {/* 5. Why Choose Us */}
+        {/* 5. About */}
+        <About />
+
+        {/* 6. Why Choose Us */}
         <WhyChooseUs />
 
-        {/* 6. Founders */}
+        {/* 7. Founders */}
         <Founders />
 
-        {/* 7. Process */}
+        {/* 8. Process */}
         <Process />
 
-        {/* 8. Testimonials */}
+        {/* 9. Testimonials */}
         <Testimonials />
 
-        {/* 9. CTA */}
+        {/* 10. FAQ */}
+        <FAQ />
+
+        {/* 11. CTA */}
         <CTA />
 
-        {/* 10. Contact */}
+        {/* 12. Contact */}
         <Contact />
       </main>
 

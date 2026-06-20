@@ -26,6 +26,7 @@ const founders = [
     instagram: "https://instagram.com/redixmedia",
     linkedin: "https://linkedin.com/company/redixmedia",
     email: "mailto:ihsan.anas8281@gmail.com",
+    gradient: "linear-gradient(135deg, #FFD60A33, #FFD60A11)",
   },
   {
     id: "f2",
@@ -36,6 +37,7 @@ const founders = [
     instagram: "https://instagram.com/redixmedia",
     linkedin: "https://linkedin.com/company/redixmedia",
     email: "mailto:fahad.nasir445566@gmail.com",
+    gradient: "linear-gradient(135deg, #11111111, #11111105)",
   },
   {
     id: "f3",
@@ -46,6 +48,7 @@ const founders = [
     instagram: "https://instagram.com/redixmedia",
     linkedin: "https://linkedin.com/company/redixmedia",
     email: "mailto:[EMAIL_ADDRESS]",
+    gradient: "linear-gradient(135deg, #FFD60A22, #FFD60A08)",
   },
 ];
 
@@ -61,10 +64,7 @@ export default function Founders() {
     >
       <div className="max-w-7xl mx-auto" ref={ref}>
         {/* Header */}
-        <div
-          className="flex items-center gap-4 mb-16"
-          style={{ borderBottom: "1px solid var(--border)", paddingBottom: "1.5rem" }}
-        >
+        <div className="section-header">
           <div className="badge">The Team</div>
           <span className="text-xs uppercase tracking-widest" style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}>
             Meet the Founders
@@ -108,84 +108,106 @@ export default function Founders() {
         </div>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-px" style={{ background: "var(--border)" }}>
+        <div className="grid md:grid-cols-3 gap-6">
           {founders.map((founder, i) => (
             <motion.div
               key={founder.id}
               initial={{ opacity: 0, y: 32 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
-              transition={{ duration: 0.6, delay: 0.1 + i * 0.1, ease: "easeOut" }}
-              className="group relative p-8"
-              style={{ background: "var(--bg-primary)" }}
+              transition={{ duration: 0.6, delay: 0.1 + i * 0.12, ease: "easeOut" }}
+              className="group relative overflow-hidden"
+              style={{
+                background: "var(--bg-card)",
+                border: "1px solid var(--border)",
+                borderRadius: "var(--radius-md)",
+                transition: "all 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
+              }}
+              whileHover={{
+                y: -6,
+                boxShadow: "var(--shadow-lg)",
+              }}
             >
               {/* Yellow top bar on hover */}
-              <motion.div
-                style={{ position: "absolute", top: 0, left: 0, height: "3px", background: "var(--yellow)", width: 0 }}
-                animate={{ width: 0 }}
-                whileHover={{ width: "100%" }}
-                transition={{ duration: 0.3 }}
-              />
-
-              {/* Avatar */}
               <div
-                className="w-16 h-16 flex items-center justify-center font-black text-xl mb-6 group-hover:bg-yellow-400 transition-colors duration-300"
+                className="absolute top-0 left-0 right-0 h-[3px] transition-all duration-300"
                 style={{
-                  background: "var(--bg-secondary)",
-                  borderRadius: "2px",
-                  color: "var(--text-primary)",
-                  fontFamily: "var(--font-space)",
+                  background: "var(--yellow)",
+                  transform: "scaleX(0)",
+                  transformOrigin: "left",
                 }}
-              >
-                {founder.initials}
-              </div>
+              />
+              <style jsx>{`
+                .group:hover > div:first-child {
+                  transform: scaleX(1) !important;
+                }
+              `}</style>
 
-              <h3
-                className="font-bold text-lg mb-1"
-                style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}
-              >
-                {founder.name}
-              </h3>
-              <p
-                className="text-xs font-bold uppercase tracking-widest mb-4"
-                style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}
-              >
-                {founder.role}
-              </p>
-              <p className="text-sm leading-relaxed mb-6" style={{ color: "var(--text-secondary)" }}>
-                {founder.bio}
-              </p>
+              <div className="p-8 lg:p-10">
+                {/* Avatar */}
+                <div
+                  className="w-20 h-20 flex items-center justify-center font-black text-2xl mb-8 transition-all duration-300"
+                  style={{
+                    background: founder.gradient,
+                    borderRadius: "var(--radius-md)",
+                    color: "var(--text-primary)",
+                    fontFamily: "var(--font-space)",
+                    border: "1px solid var(--border)",
+                  }}
+                >
+                  {founder.initials}
+                </div>
 
-              {/* Social links */}
-              <div className="flex gap-3">
-                {[
-                  { icon: <InstagramIcon size={15} />, href: founder.instagram, label: "Instagram" },
-                  { icon: <LinkedInIcon size={15} />,  href: founder.linkedin,  label: "LinkedIn" },
-                  { icon: <Mail size={15} />, href: founder.email,    label: "Email" },
-                ].map(({ icon, href, label }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target={href.startsWith("mailto") ? undefined : "_blank"}
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    className="w-9 h-9 flex items-center justify-center transition-all duration-200"
-                    style={{
-                      background: "var(--bg-secondary)",
-                      borderRadius: "2px",
-                      color: "var(--text-muted)",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = "var(--yellow)";
-                      e.currentTarget.style.color = "var(--text-primary)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = "var(--bg-secondary)";
-                      e.currentTarget.style.color = "var(--text-muted)";
-                    }}
-                  >
-                    {icon}
-                  </a>
-                ))}
+                <h3
+                  className="font-bold text-xl mb-1"
+                  style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}
+                >
+                  {founder.name}
+                </h3>
+                <p
+                  className="text-xs font-bold uppercase tracking-widest mb-5"
+                  style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}
+                >
+                  {founder.role}
+                </p>
+                <p className="text-sm leading-relaxed mb-8" style={{ color: "var(--text-secondary)" }}>
+                  {founder.bio}
+                </p>
+
+                {/* Social links */}
+                <div className="flex gap-3">
+                  {[
+                    { icon: <InstagramIcon size={15} />, href: founder.instagram, label: "Instagram" },
+                    { icon: <LinkedInIcon size={15} />,  href: founder.linkedin,  label: "LinkedIn" },
+                    { icon: <Mail size={15} />, href: founder.email,    label: "Email" },
+                  ].map(({ icon, href, label }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target={href.startsWith("mailto") ? undefined : "_blank"}
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      className="w-10 h-10 flex items-center justify-center transition-all duration-300"
+                      style={{
+                        background: "var(--bg-secondary)",
+                        borderRadius: "var(--radius-sm)",
+                        color: "var(--text-muted)",
+                        border: "1px solid var(--border)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = "var(--yellow)";
+                        e.currentTarget.style.color = "var(--text-primary)";
+                        e.currentTarget.style.borderColor = "var(--yellow)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = "var(--bg-secondary)";
+                        e.currentTarget.style.color = "var(--text-muted)";
+                        e.currentTarget.style.borderColor = "var(--border)";
+                      }}
+                    >
+                      {icon}
+                    </a>
+                  ))}
+                </div>
               </div>
             </motion.div>
           ))}

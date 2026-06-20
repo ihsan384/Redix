@@ -24,6 +24,7 @@ const quickLinks = [
   { label: "Home",         href: "#home" },
   { label: "Services",     href: "#services" },
   { label: "Portfolio",    href: "#portfolio" },
+  { label: "About",        href: "#about" },
   { label: "Founders",     href: "#founders" },
   { label: "Testimonials", href: "#testimonials" },
   { label: "Contact",      href: "#contact" },
@@ -44,8 +45,8 @@ export default function Footer() {
   const goto = (href: string) => document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <footer style={{ background: "var(--bg-primary)", borderTop: "1px solid var(--border)" }}>
-      <div className="max-w-7xl mx-auto px-6 py-16">
+    <footer className="footer-dark">
+      <div className="max-w-7xl mx-auto px-6 py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
 
           {/* Brand */}
@@ -57,12 +58,12 @@ export default function Footer() {
                 className="w-8 h-8 object-cover flex-shrink-0"
                 style={{ borderRadius: "2px" }}
               />
-              <span className="font-black text-lg tracking-tight" style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}>
-                REDIX<span style={{ color: "var(--text-muted)" }}>.MEDIA</span>
+              <span className="font-black text-lg tracking-tight" style={{ fontFamily: "var(--font-space)", color: "#FFFFFF" }}>
+                REDIX<span style={{ color: "rgba(255,255,255,0.4)" }}>.MEDIA</span>
               </span>
             </div>
 
-            <p className="text-sm leading-relaxed mb-6" style={{ color: "var(--text-secondary)" }}>
+            <p className="text-sm leading-relaxed mb-6" style={{ color: "rgba(255,255,255,0.5)" }}>
               A creative studio helping businesses build a powerful digital presence through
               branding, web, content, and strategy.
             </p>
@@ -75,15 +76,23 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-9 h-9 flex items-center justify-center transition-all duration-200"
+                  className="w-10 h-10 flex items-center justify-center transition-all duration-300"
                   style={{
-                    background: "var(--bg-secondary)",
-                    border: "1px solid var(--border)",
-                    borderRadius: "2px",
-                    color: "var(--text-muted)",
+                    background: "rgba(255,255,255,0.08)",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    borderRadius: "var(--radius-sm)",
+                    color: "rgba(255,255,255,0.5)",
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = "var(--yellow)"; e.currentTarget.style.borderColor = "var(--yellow)"; e.currentTarget.style.color = "var(--text-primary)"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.background = "var(--bg-secondary)"; e.currentTarget.style.borderColor = "var(--border)"; e.currentTarget.style.color = "var(--text-muted)"; }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "var(--yellow)";
+                    e.currentTarget.style.borderColor = "var(--yellow)";
+                    e.currentTarget.style.color = "#111111";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "rgba(255,255,255,0.08)";
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+                    e.currentTarget.style.color = "rgba(255,255,255,0.5)";
+                  }}
                 >
                   <Icon size={15} />
                 </a>
@@ -93,18 +102,16 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-bold text-xs uppercase tracking-widest mb-6" style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}>
-              Quick Links
-            </h4>
+            <h4 className="footer-heading">Quick Links</h4>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.label}>
                   <button
                     onClick={() => goto(link.href)}
-                    className="text-sm transition-colors"
-                    style={{ color: "var(--text-secondary)" }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-primary)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
+                    className="text-sm transition-colors duration-200"
+                    style={{ color: "rgba(255,255,255,0.5)" }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--yellow)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
                   >
                     {link.label}
                   </button>
@@ -115,18 +122,16 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="font-bold text-xs uppercase tracking-widest mb-6" style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}>
-              Services
-            </h4>
+            <h4 className="footer-heading">Services</h4>
             <ul className="space-y-3">
               {serviceLinks.map((s) => (
                 <li key={s}>
                   <button
                     onClick={() => goto("#services")}
-                    className="text-sm transition-colors text-left"
-                    style={{ color: "var(--text-secondary)" }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-primary)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
+                    className="text-sm transition-colors duration-200 text-left"
+                    style={{ color: "rgba(255,255,255,0.5)" }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--yellow)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
                   >
                     {s}
                   </button>
@@ -137,15 +142,14 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-bold text-xs uppercase tracking-widest mb-6" style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}>
-              Contact
-            </h4>
-            <div className="space-y-3 text-sm" style={{ color: "var(--text-secondary)" }}>
+            <h4 className="footer-heading">Contact</h4>
+            <div className="space-y-3 text-sm">
               <a
                 href="mailto:hello@redix.media"
-                className="block transition-colors"
-                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-primary)")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
+                className="block transition-colors duration-200"
+                style={{ color: "rgba(255,255,255,0.5)" }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--yellow)")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
               >
                 hello@redix.media
               </a>
@@ -153,25 +157,26 @@ export default function Footer() {
                 href="https://wa.me/919744206583"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block transition-colors"
+                className="block transition-colors duration-200"
+                style={{ color: "rgba(255,255,255,0.5)" }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "#25d366")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
               >
                 WhatsApp: +91 97442 06583
               </a>
               <div
                 className="p-4 mt-2"
                 style={{
-                  background: "var(--bg-secondary)",
-                  border: "1px solid var(--border)",
+                  background: "rgba(255,255,255,0.05)",
+                  border: "1px solid rgba(255,255,255,0.08)",
                   borderLeft: "3px solid var(--yellow)",
-                  borderRadius: "2px",
+                  borderRadius: "var(--radius-sm)",
                 }}
               >
-                <p className="text-xs font-semibold mb-1" style={{ color: "var(--text-primary)", fontFamily: "var(--font-space)" }}>
+                <p className="text-xs font-semibold mb-1" style={{ color: "#FFFFFF", fontFamily: "var(--font-space)" }}>
                   Available Worldwide
                 </p>
-                <p className="text-xs" style={{ color: "var(--text-muted)" }}>
+                <p className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
                   Mon–Sat: 9 AM – 8 PM IST
                   <br />
                   Response within 24 hours
@@ -183,19 +188,20 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div style={{ borderTop: "1px solid var(--border)" }}>
-        <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs" style={{ color: "var(--text-muted)" }}>
+      <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+        <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>
             © {new Date().getFullYear()} REDIX.MEDIA. All rights reserved.
           </p>
-          <div className="flex items-center gap-5 text-xs" style={{ color: "var(--text-muted)" }}>
+          <div className="flex items-center gap-5 text-xs">
             {["Privacy Policy", "Terms of Service"].map((item) => (
               <a
                 key={item}
                 href="#"
-                className="transition-colors"
-                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-primary)")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
+                className="transition-colors duration-200"
+                style={{ color: "rgba(255,255,255,0.35)" }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--yellow)")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.35)")}
               >
                 {item}
               </a>

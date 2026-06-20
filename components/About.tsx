@@ -3,13 +3,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-const stats = [
-  { value: "50+",  label: "Projects Delivered" },
-  { value: "30+",  label: "Happy Clients" },
-  { value: "6",    label: "Core Services" },
-  { value: "2+",   label: "Years Building" },
-];
-
 export default function About() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
@@ -22,10 +15,7 @@ export default function About() {
     >
       <div className="max-w-7xl mx-auto" ref={ref}>
         {/* Section label row */}
-        <div
-          className="flex items-center gap-4 mb-16"
-          style={{ borderBottom: "1px solid var(--border)", paddingBottom: "1.5rem" }}
-        >
+        <div className="section-header">
           <div className="badge">About</div>
           <span className="text-xs uppercase tracking-widest" style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}>
             REDIX.MEDIA
@@ -99,7 +89,7 @@ export default function About() {
               style={{
                 background: "var(--bg-card)",
                 border: "1px solid var(--border)",
-                borderRadius: "2px",
+                borderRadius: "var(--radius-md)",
                 borderLeft: "4px solid var(--yellow)",
               }}
             >
@@ -124,7 +114,7 @@ export default function About() {
                   style={{
                     border: "1px solid var(--border-strong)",
                     color: "var(--text-secondary)",
-                    borderRadius: "2px",
+                    borderRadius: "var(--radius-sm)",
                     fontFamily: "var(--font-space)",
                     letterSpacing: "0.04em",
                     textTransform: "uppercase",
@@ -135,32 +125,43 @@ export default function About() {
               ))}
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 gap-4">
-              {stats.map((s) => (
-                <div
-                  key={s.label}
-                  className="p-5"
-                  style={{
-                    background: "var(--bg-primary)",
-                    border: "1px solid var(--border)",
-                    borderRadius: "2px",
-                  }}
+            {/* Large decorative quote */}
+            <div
+              className="p-8 relative"
+              style={{
+                background: "var(--bg-primary)",
+                border: "1px solid var(--border)",
+                borderRadius: "var(--radius-md)",
+              }}
+            >
+              <span
+                className="absolute -top-4 left-6 text-6xl font-black leading-none"
+                style={{
+                  color: "var(--yellow)",
+                  fontFamily: "var(--font-space)",
+                  opacity: 0.8,
+                }}
+              >
+                &ldquo;
+              </span>
+              <p
+                className="text-lg font-medium leading-relaxed mt-4"
+                style={{
+                  color: "var(--text-primary)",
+                  fontFamily: "var(--font-space)",
+                }}
+              >
+                We believe great brands aren&apos;t born — they&apos;re built with intention, creativity, and relentless execution.
+              </p>
+              <div className="mt-4 flex items-center gap-3">
+                <div className="divider" />
+                <span
+                  className="text-xs font-bold uppercase tracking-widest"
+                  style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}
                 >
-                  <div
-                    className="font-black text-3xl mb-1"
-                    style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}
-                  >
-                    {s.value}
-                  </div>
-                  <div
-                    className="text-xs font-medium uppercase tracking-widest"
-                    style={{ color: "var(--text-muted)" }}
-                  >
-                    {s.label}
-                  </div>
-                </div>
-              ))}
+                  REDIX.MEDIA Team
+                </span>
+              </div>
             </div>
           </motion.div>
         </div>
