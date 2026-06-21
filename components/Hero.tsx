@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 
 const TICKER_ITEMS = [
   "Social Media Management",
@@ -11,6 +11,12 @@ const TICKER_ITEMS = [
   "Branding & Design",
   "Digital Marketing",
   "Content Creation",
+];
+
+const TRUST_INDICATORS = [
+  "50+ Projects Delivered",
+  "100% Client Satisfaction",
+  "Replies Within 1 Hour",
 ];
 
 export default function Hero() {
@@ -43,7 +49,7 @@ export default function Hero() {
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="mb-6"
             >
-              <div className="badge">Creative Studio · Est. 2022</div>
+              <div className="badge">Creative Studio for Ambitious Brands</div>
             </motion.div>
 
             <h1
@@ -134,8 +140,8 @@ export default function Hero() {
                 className="leading-relaxed mb-6 text-[0.95rem]"
                 style={{ color: "var(--text-secondary)", maxWidth: "480px" }}
               >
-                REDIX.MEDIA helps businesses grow through strategic content, stunning websites,
-                branding, and digital experiences that drive real results.
+                We help startups and growing businesses build brand identities, websites,
+                and content strategies that drive real revenue.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3">
@@ -145,6 +151,7 @@ export default function Hero() {
                   className="btn-yellow group"
                   whileHover={{ y: -2, scale: 1.01 }}
                   whileTap={{ scale: 0.97 }}
+                  data-analytics="hero-cta-primary"
                 >
                   Start Your Project
                   <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
@@ -155,10 +162,30 @@ export default function Hero() {
                   className="btn-outline"
                   whileHover={{ y: -2, scale: 1.01 }}
                   whileTap={{ scale: 0.97 }}
+                  data-analytics="hero-cta-secondary"
                 >
                   View Our Work
                 </motion.button>
               </div>
+
+              {/* Trust indicators */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.1, duration: 0.5 }}
+                className="flex flex-wrap gap-x-5 gap-y-2 mt-6"
+              >
+                {TRUST_INDICATORS.map((item) => (
+                  <span
+                    key={item}
+                    className="flex items-center gap-1.5 text-xs"
+                    style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}
+                  >
+                    <Check size={12} style={{ color: "var(--yellow)" }} />
+                    {item}
+                  </span>
+                ))}
+              </motion.div>
             </motion.div>
           </div>
 

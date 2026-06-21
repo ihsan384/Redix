@@ -1,45 +1,51 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
-import { Share2, Globe, Video, Palette, TrendingUp, FileText, ArrowRight } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { Share2, Globe, Video, Palette, TrendingUp, FileText, ArrowRight, Star } from "lucide-react";
 
 const services = [
   {
     num: "01", icon: Share2,
     title: "Social Media Management",
-    description: "We don't just post content — we build communities. Strategic management that grows your following and turns followers into loyal customers.",
+    description: "Turn followers into loyal customers. We build engaged communities with strategic content, data-driven posting, and growth campaigns that deliver measurable ROI.",
     outcomes: ["Content Calendar", "Community Growth", "Analytics & Reports", "Platform Strategy"],
+    popular: false,
   },
   {
     num: "02", icon: Globe,
     title: "Website Development",
-    description: "Fast, beautiful, conversion-optimized websites that work as hard as you do. From landing pages to full-scale web applications.",
+    description: "Convert visitors into paying customers with fast, beautiful websites designed for your industry. From landing pages to full web applications — built to perform.",
     outcomes: ["Landing Pages", "Business Websites", "E-Commerce", "Web Apps"],
+    popular: true,
   },
   {
     num: "03", icon: Video,
     title: "Video Editing",
-    description: "Professional video content that stops the scroll. From cinematic reels to brand stories — edited with purpose and style.",
+    description: "Stop the scroll and start conversations. Cinematic reels, brand stories, and motion content that boost engagement by 3x and keep audiences watching.",
     outcomes: ["Reels & Shorts", "YouTube Content", "Brand Videos", "Motion Graphics"],
+    popular: true,
   },
   {
     num: "04", icon: Palette,
     title: "Branding & Design",
-    description: "A brand that people remember. We craft logo systems, brand identities, and visual languages that make your business unforgettable.",
+    description: "Build a brand people remember and trust. We craft logo systems, visual identities, and design languages that set you apart from every competitor.",
     outcomes: ["Logo Design", "Brand Identity", "Style Guides", "Print & Digital"],
+    popular: true,
   },
   {
     num: "05", icon: TrendingUp,
     title: "Digital Marketing",
-    description: "Data-driven campaigns that reach the right people at the right time. We grow your digital footprint and revenue.",
+    description: "Reach the right audience at the right time with data-driven campaigns. We grow your traffic, leads, and revenue through precision targeting.",
     outcomes: ["Meta & Google Ads", "SEO Strategy", "Email Marketing", "Campaign Analytics"],
+    popular: false,
   },
   {
     num: "06", icon: FileText,
     title: "Content Creation",
-    description: "Scroll-stopping content made to perform. Graphics, copywriting, and creative concepts that consistently communicate your brand voice.",
+    description: "Scroll-stopping content that consistently builds authority and trust. Graphics, copy, and creative concepts aligned with your brand voice.",
     outcomes: ["Social Graphics", "Copy & Scripts", "Content Strategy", "Creative Direction"],
+    popular: false,
   },
 ];
 
@@ -48,10 +54,25 @@ export default function Services() {
   const isInView = useInView(ref, { once: true, margin: "-60px" });
   const [hovered, setHovered] = useState<string | null>(null);
 
+  const scrollToContactWithService = (serviceName: string) => {
+    const contactSection = document.querySelector("#contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+      // Pre-select the service in the form after scroll
+      setTimeout(() => {
+        const serviceSelect = document.getElementById("contact-service") as HTMLSelectElement | null;
+        if (serviceSelect) {
+          serviceSelect.value = serviceName;
+          serviceSelect.dispatchEvent(new Event("change", { bubbles: true }));
+        }
+      }, 800);
+    }
+  };
+
   return (
     <section
       id="services"
-      className="section-padding"
+      className="section-padding section-lazy"
       style={{ background: "var(--bg-primary)" }}
     >
       <div className="max-w-7xl mx-auto" ref={ref}>
@@ -107,6 +128,7 @@ export default function Services() {
               href="#contact"
               onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
               className="btn-yellow"
+              data-analytics="services-cta"
             >
               Book Free Consultation
             </a>
@@ -140,6 +162,16 @@ export default function Services() {
                   onMouseEnter={() => setHovered(service.num)}
                   onMouseLeave={() => setHovered(null)}
                 >
+                  {/* Popular badge */}
+                  {service.popular && (
+                    <div className="absolute top-4 right-4">
+                      <span className="badge-popular">
+                        <Star size={8} fill="currentColor" />
+                        Popular
+                      </span>
+                    </div>
+                  )}
+
                   {/* Yellow bottom bar */}
                   <motion.div
                     style={{
@@ -217,13 +249,15 @@ export default function Services() {
                   </div>
 
                   <button
-                    onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
+                    onClick={() => scrollToContactWithService(service.title)}
                     className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest transition-all"
                     style={{
                       color: isHov ? "var(--text-primary)" : "var(--text-muted)",
                       fontFamily: "var(--font-space)",
                       transition: "color 0.3s ease",
+                      minHeight: "44px",
                     }}
+                    data-analytics={`service-cta-${service.num}`}
                   >
                     Get Started
                     <ArrowRight size={12} className={`transition-transform duration-300 ${isHov ? "translate-x-1" : ""}`} />

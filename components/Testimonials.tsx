@@ -2,28 +2,38 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
+import { ChevronLeft, ChevronRight, Star, Quote, ArrowRight, Users, Briefcase, Globe } from "lucide-react";
+
+const socialProofStats = [
+  { icon: Users, value: "30+", label: "Happy Clients" },
+  { icon: Briefcase, value: "50+", label: "Projects Delivered" },
+  { icon: Globe, value: "4", label: "Countries Served" },
+];
 
 const testimonials = [
   {
     id: "t1", initials: "AF", name: "Ahmad Farooq", role: "Founder, The Brew Lab", rating: 5,
     service: "Branding & Design",
     text: "REDIX.MEDIA completely transformed how our brand looks and feels online. The branding package was beyond what we imagined — modern, bold, and perfectly aligned with our vision. We've seen a noticeable uptick in customer trust.",
+    result: "42% increase in brand trust",
   },
   {
     id: "t2", initials: "SN", name: "Sara Naqvi", role: "CEO, StyleHub PK", rating: 5,
     service: "Social Media",
     text: "Our Instagram grew from 2K to 18K followers in three months thanks to REDIX. The content quality is consistently excellent and the strategy is genuinely different from any agency I've worked with.",
+    result: "2K → 18K followers in 3 months",
   },
   {
     id: "t3", initials: "BC", name: "Bilal Chaudhry", role: "Co-Founder, QuickShip", rating: 5,
     service: "Website Development",
     text: "The website they built for us is fast, clean, and actually converts visitors into customers. We've had compliments from investors every single week. REDIX delivered on every promise — on time, on budget.",
+    result: "2.8x conversion improvement",
   },
   {
     id: "t4", initials: "ZH", name: "Zara Hussain", role: "Marketing Director, PureFoods", rating: 5,
     service: "Video Editing",
     text: "The video editing work for our Ramadan campaign was phenomenal. Every reel hit differently — cinematic, on-brand, and perfectly paced. Our campaign reach tripled compared to the previous year.",
+    result: "3x campaign reach",
   },
 ];
 
@@ -38,10 +48,47 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="section-padding"
+      className="section-padding section-lazy"
       style={{ background: "var(--bg-primary)" }}
     >
       <div className="max-w-7xl mx-auto" ref={ref}>
+        {/* Social proof stats bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-wrap items-center justify-center gap-8 mb-12 pb-8"
+          style={{ borderBottom: "1px solid var(--border)" }}
+        >
+          {socialProofStats.map((stat) => {
+            const Icon = stat.icon;
+            return (
+              <div key={stat.label} className="flex items-center gap-2.5">
+                <div
+                  className="w-8 h-8 flex items-center justify-center"
+                  style={{ background: "var(--yellow-dim)", borderRadius: "var(--radius-sm)" }}
+                >
+                  <Icon size={14} style={{ color: "var(--text-primary)" }} />
+                </div>
+                <div>
+                  <span
+                    className="font-black text-lg"
+                    style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}
+                  >
+                    {stat.value}
+                  </span>
+                  <span
+                    className="text-xs ml-1.5 uppercase tracking-wider"
+                    style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}
+                  >
+                    {stat.label}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </motion.div>
+
         {/* Header */}
         <div
           className="flex items-center justify-between mb-16"
@@ -66,6 +113,8 @@ export default function Testimonials() {
                   border: "1px solid var(--border-strong)",
                   borderRadius: "var(--radius-sm)",
                   color: "var(--text-secondary)",
+                  minWidth: "44px",
+                  minHeight: "44px",
                 }}
                 onMouseEnter={(e) => { e.currentTarget.style.background = "var(--yellow)"; e.currentTarget.style.borderColor = "var(--yellow)"; e.currentTarget.style.color = "var(--text-primary)"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.background = "var(--bg-secondary)"; e.currentTarget.style.borderColor = "var(--border-strong)"; e.currentTarget.style.color = "var(--text-secondary)"; }}
@@ -109,11 +158,27 @@ export default function Testimonials() {
               </div>
 
               <p
-                className="text-xl lg:text-2xl font-medium leading-relaxed mb-10"
+                className="text-xl lg:text-2xl font-medium leading-relaxed mb-6"
                 style={{ color: "var(--text-primary)", fontFamily: "var(--font-space)" }}
               >
                 &ldquo;{testimonials[current].text}&rdquo;
               </p>
+
+              {/* Result badge */}
+              <div className="mb-8">
+                <span
+                  className="text-xs font-bold px-3 py-1.5 uppercase tracking-wider inline-flex items-center gap-1.5"
+                  style={{
+                    background: "var(--yellow-dim)",
+                    color: "var(--text-primary)",
+                    borderRadius: "var(--radius-sm)",
+                    fontFamily: "var(--font-space)",
+                    border: "1px solid var(--yellow)",
+                  }}
+                >
+                  ↗ {testimonials[current].result}
+                </span>
+              </div>
 
               <div className="flex items-center gap-4 flex-wrap">
                 <div
@@ -179,6 +244,7 @@ export default function Testimonials() {
                       borderRadius: "3px",
                       background: i === current ? "var(--yellow)" : "var(--border-strong)",
                       transition: "all 0.3s ease",
+                      minHeight: "6px",
                     }}
                     aria-label={`Testimonial ${i + 1}`}
                   />
@@ -202,6 +268,7 @@ export default function Testimonials() {
                 background: i === current ? "var(--yellow)" : "var(--bg-secondary)",
                 border: "1px solid var(--border)",
                 borderRadius: "var(--radius-md)",
+                minHeight: "44px",
               }}
             >
               <div className="flex gap-0.5 mb-2">
@@ -213,11 +280,29 @@ export default function Testimonials() {
                 {t.name}
               </p>
               <p className="text-xs mt-0.5" style={{ color: i === current ? "var(--text-secondary)" : "var(--text-muted)" }}>
-                {t.role.split(",")[0]}
+                {t.result}
               </p>
             </motion.button>
           ))}
         </div>
+
+        {/* CTA after testimonials */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="text-center mt-12"
+        >
+          <a
+            href="#contact"
+            onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
+            className="btn-primary group"
+            data-analytics="testimonials-cta"
+          >
+            Join Our Happy Clients
+            <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
+          </a>
+        </motion.div>
       </div>
     </section>
   );

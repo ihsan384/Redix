@@ -20,7 +20,7 @@ export default function WhyChooseUs() {
   return (
     <section
       id="why-us"
-      className="section-padding"
+      className="section-padding section-lazy"
       style={{ background: "var(--bg-secondary)" }}
     >
       <div className="max-w-7xl mx-auto" ref={ref}>

@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import TrustStrip from "@/components/TrustStrip";
 import Services from "@/components/Services";
 import Portfolio from "@/components/Portfolio";
+import MidPageCTA from "@/components/MidPageCTA";
 import About from "@/components/About";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Founders from "@/components/Founders";
@@ -35,31 +36,34 @@ export default function Home() {
         {/* 3. Services */}
         <Services />
 
-        {/* 4. Portfolio (moved above About — proof before story) */}
+        {/* 4. Portfolio (proof before story) */}
         <Portfolio />
 
-        {/* 5. About */}
+        {/* 5. Mid-Page CTA — conversion nudge */}
+        <MidPageCTA />
+
+        {/* 6. About */}
         <About />
 
-        {/* 6. Why Choose Us */}
+        {/* 7. Why Choose Us */}
         <WhyChooseUs />
 
-        {/* 7. Founders */}
+        {/* 8. Founders */}
         <Founders />
 
-        {/* 8. Process */}
+        {/* 9. Process */}
         <Process />
 
-        {/* 9. Testimonials */}
+        {/* 10. Testimonials */}
         <Testimonials />
 
-        {/* 10. FAQ */}
+        {/* 11. FAQ */}
         <FAQ />
 
-        {/* 11. CTA */}
+        {/* 12. CTA */}
         <CTA />
 
-        {/* 12. Contact */}
+        {/* 13. Contact */}
         <Contact />
       </main>
 

@@ -10,7 +10,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="section-padding relative"
+      className="section-padding relative section-lazy"
       style={{ background: "var(--bg-secondary)" }}
     >
       <div className="max-w-7xl mx-auto" ref={ref}>

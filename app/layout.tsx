@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Poppins, Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -67,6 +68,37 @@ export const metadata: Metadata = {
   },
 };
 
+// JSON-LD Structured Data for Organization/LocalBusiness
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "REDIX.MEDIA",
+  description:
+    "Creative digital studio specializing in branding, website development, video editing, social media management, and digital marketing.",
+  url: "https://redix.media",
+  logo: "https://redix.media/logo.svg",
+  foundingDate: "2022",
+  areaServed: "Worldwide",
+  serviceType: [
+    "Website Development",
+    "Branding & Design",
+    "Social Media Management",
+    "Video Editing",
+    "Digital Marketing",
+    "Content Creation",
+  ],
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer service",
+    availableLanguage: ["English", "Hindi"],
+  },
+  sameAs: [
+    "https://instagram.com/redix.media",
+    "https://twitter.com/redixmedia",
+    "https://linkedin.com/company/redixmedia",
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -81,9 +113,55 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <meta name="theme-color" content="#FFFFFF" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+
+        {/* DNS Prefetch & Preconnect for performance */}
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+        {/* JSON-LD Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body className="antialiased overflow-x-hidden">
         {children}
+
+        {/* ─── Analytics (placeholder — replace IDs with actual values) ─────── */}
+
+        {/* Google Analytics (gtag.js) */}
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="gtag-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+                  page_path: window.location.pathname,
+                });
+              `}
+            </Script>
+          </>
+        )}
+
+        {/* Microsoft Clarity */}
+        {process.env.NEXT_PUBLIC_CLARITY_ID && (
+          <Script id="clarity-init" strategy="afterInteractive">
+            {`
+              (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window, document, "clarity", "script", "${process.env.NEXT_PUBLIC_CLARITY_ID}");
+            `}
+          </Script>
+        )}
       </body>
     </html>
   );

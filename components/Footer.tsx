@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ArrowRight, ArrowUp } from "lucide-react";
 
 const InstagramIcon = ({ size = 15 }: { size?: number }) => (
   <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
@@ -25,8 +26,9 @@ const quickLinks = [
   { label: "Services",     href: "#services" },
   { label: "Portfolio",    href: "#portfolio" },
   { label: "About",        href: "#about" },
-  { label: "Founders",     href: "#founders" },
+  { label: "Process",      href: "#process" },
   { label: "Testimonials", href: "#testimonials" },
+  { label: "FAQ",          href: "#faq" },
   { label: "Contact",      href: "#contact" },
 ];
 
@@ -42,10 +44,52 @@ const socialLinks = [
 ];
 
 export default function Footer() {
-  const goto = (href: string) => document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+  const goto = (href: string) => {
+    const el = document.querySelector(href);
+    if (el) {
+      const navHeight = 80;
+      const top = el.getBoundingClientRect().top + window.scrollY - navHeight;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <footer className="footer-dark">
+      {/* Mini CTA Row */}
+      <div
+        className="px-6 py-8 lg:py-10"
+        style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
+      >
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-5">
+          <div>
+            <p
+              className="text-lg font-bold mb-1"
+              style={{ fontFamily: "var(--font-space)", color: "#FFFFFF" }}
+            >
+              Ready to grow your brand?
+            </p>
+            <p className="text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>
+              Book a free consultation — no commitment required.
+            </p>
+          </div>
+          <motion.a
+            href="#contact"
+            onClick={(e) => { e.preventDefault(); goto("#contact"); }}
+            className="btn-yellow group flex-shrink-0"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            data-analytics="footer-cta"
+          >
+            Start Your Project
+            <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
+          </motion.a>
+        </div>
+      </div>
+
       <div className="max-w-7xl mx-auto px-6 py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
 
@@ -82,6 +126,8 @@ export default function Footer() {
                     border: "1px solid rgba(255,255,255,0.1)",
                     borderRadius: "var(--radius-sm)",
                     color: "rgba(255,255,255,0.5)",
+                    minWidth: "44px",
+                    minHeight: "44px",
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.background = "var(--yellow)";
@@ -109,7 +155,7 @@ export default function Footer() {
                   <button
                     onClick={() => goto(link.href)}
                     className="text-sm transition-colors duration-200"
-                    style={{ color: "rgba(255,255,255,0.5)" }}
+                    style={{ color: "rgba(255,255,255,0.5)", minHeight: "32px" }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = "var(--yellow)")}
                     onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
                   >
@@ -129,7 +175,7 @@ export default function Footer() {
                   <button
                     onClick={() => goto("#services")}
                     className="text-sm transition-colors duration-200 text-left"
-                    style={{ color: "rgba(255,255,255,0.5)" }}
+                    style={{ color: "rgba(255,255,255,0.5)", minHeight: "32px" }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = "var(--yellow)")}
                     onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
                   >
@@ -206,6 +252,17 @@ export default function Footer() {
                 {item}
               </a>
             ))}
+            <button
+              onClick={scrollToTop}
+              className="flex items-center gap-1.5 transition-colors duration-200"
+              style={{ color: "rgba(255,255,255,0.35)", minHeight: "32px" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--yellow)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.35)")}
+              aria-label="Back to top"
+            >
+              <ArrowUp size={12} />
+              Back to Top
+            </button>
           </div>
         </div>
       </div>

@@ -219,6 +219,7 @@ export default function WhatsAppButton() {
       {/* Main Floating Trigger Button */}
       <motion.button
         id="whatsapp-float-btn"
+        data-analytics="whatsapp-float-btn"
         onClick={() => {
           setIsOpen(!isOpen);
           setShowTooltip(false);

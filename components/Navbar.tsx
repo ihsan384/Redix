@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -9,19 +9,42 @@ const navLinks = [
   { label: "Services", href: "#services" },
   { label: "Portfolio", href: "#portfolio" },
   { label: "About", href: "#about" },
-  { label: "Founders", href: "#founders" },
-  { label: "Testimonials", href: "#testimonials" },
+  { label: "Process", href: "#process" },
   { label: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("#home");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Scroll-spy: track which section is currently visible
+  useEffect(() => {
+    const sectionIds = navLinks.map((l) => l.href.replace("#", ""));
+    const observers: IntersectionObserver[] = [];
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActiveSection(`#${id}`);
+          }
+        },
+        { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+      );
+      observer.observe(el);
+      observers.push(observer);
+    });
+
+    return () => observers.forEach((o) => o.disconnect());
   }, []);
 
   // Lock body scroll when mobile menu is open
@@ -34,10 +57,15 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
-  const goto = (href: string) => {
+  const goto = useCallback((href: string) => {
     setMenuOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
+    const el = document.querySelector(href);
+    if (el) {
+      const navHeight = 80;
+      const top = el.getBoundingClientRect().top + window.scrollY - navHeight;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  }, []);
 
   return (
     <>
@@ -93,7 +121,7 @@ export default function Navbar() {
                 key={link.label}
                 href={link.href}
                 onClick={(e) => { e.preventDefault(); goto(link.href); }}
-                className="nav-link"
+                className={`nav-link ${activeSection === link.href ? "active" : ""}`}
               >
                 {link.label}
               </a>
@@ -108,6 +136,7 @@ export default function Navbar() {
               className="btn-yellow text-xs px-5 py-2.5"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
+              data-analytics="nav-cta"
             >
               Start Project
             </motion.a>
@@ -117,7 +146,7 @@ export default function Navbar() {
           <button
             id="nav-menu-toggle"
             className="lg:hidden p-2 rounded"
-            style={{ color: "var(--text-primary)" }}
+            style={{ color: "var(--text-primary)", minWidth: "44px", minHeight: "44px", display: "flex", alignItems: "center", justifyContent: "center" }}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
@@ -149,8 +178,11 @@ export default function Navbar() {
                   onClick={(e) => { e.preventDefault(); goto(link.href); }}
                   className="py-3 text-xl font-bold tracking-tight transition-colors"
                   style={{
-                    color: "var(--text-primary)",
+                    color: activeSection === link.href ? "var(--yellow-hover)" : "var(--text-primary)",
                     fontFamily: "var(--font-space)",
+                    minHeight: "48px",
+                    display: "flex",
+                    alignItems: "center",
                   }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -160,13 +192,18 @@ export default function Navbar() {
                   {link.label}
                 </motion.a>
               ))}
+
+              {/* Divider */}
+              <div className="w-12 h-px my-2" style={{ background: "var(--border-strong)" }} />
+
               <motion.a
                 href="#contact"
                 onClick={(e) => { e.preventDefault(); goto("#contact"); }}
-                className="btn-yellow mt-6 text-center justify-center"
+                className="btn-yellow mt-4 text-center justify-center"
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
+                data-analytics="mobile-nav-cta"
               >
                 Start Your Project
               </motion.a>

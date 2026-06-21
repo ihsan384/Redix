@@ -2,14 +2,14 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Search, Map, Sparkles, Rocket, TrendingUp } from "lucide-react";
+import { Search, Map, Sparkles, Rocket, TrendingUp, ArrowRight } from "lucide-react";
 
 const steps = [
-  { num: "01", title: "Discovery",  desc: "Deep-diving into your business, goals, audience, and competitors to build a solid foundation.",       icon: Search },
-  { num: "02", title: "Strategy",   desc: "A clear roadmap covering brand positioning, content strategy, and technical requirements.",            icon: Map },
-  { num: "03", title: "Creation",   desc: "Design, development, content, and motion — all crafted with precision and purpose.",                  icon: Sparkles },
-  { num: "04", title: "Launch",     desc: "Ensuring a smooth, impactful launch across all relevant platforms and channels.",                      icon: Rocket },
-  { num: "05", title: "Growth",     desc: "Post-launch analysis and iteration to keep your brand growing and improving continuously.",            icon: TrendingUp },
+  { num: "01", title: "Discovery",       desc: "Deep-diving into your business, goals, audience, and competitors to build a solid foundation.",       icon: Search,     duration: "1–2 days" },
+  { num: "02", title: "Strategy",        desc: "A clear roadmap covering brand positioning, content strategy, and technical requirements.",            icon: Map,        duration: "2–3 days" },
+  { num: "03", title: "Design & Build",  desc: "Design, development, content, and motion — all crafted with precision and purpose.",                  icon: Sparkles,   duration: "5–15 days" },
+  { num: "04", title: "Launch",          desc: "Ensuring a smooth, impactful launch across all relevant platforms and channels.",                      icon: Rocket,     duration: "1–2 days" },
+  { num: "05", title: "Growth",          desc: "Post-launch analysis and iteration to keep your brand growing and improving continuously.",            icon: TrendingUp, duration: "Ongoing" },
 ];
 
 export default function Process() {
@@ -19,7 +19,7 @@ export default function Process() {
   return (
     <section
       id="process"
-      className="section-padding"
+      className="section-padding section-lazy"
       style={{ background: "var(--bg-primary)" }}
     >
       <div className="max-w-7xl mx-auto" ref={ref}>
@@ -106,11 +106,24 @@ export default function Process() {
                   </p>
 
                   <h3
-                    className="font-bold text-lg mb-3"
+                    className="font-bold text-lg mb-2"
                     style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}
                   >
                     {step.title}
                   </h3>
+
+                  {/* Duration badge */}
+                  <span
+                    className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 mb-3"
+                    style={{
+                      background: "var(--yellow-dim)",
+                      color: "var(--text-secondary)",
+                      borderRadius: "2px",
+                      fontFamily: "var(--font-space)",
+                    }}
+                  >
+                    {step.duration}
+                  </span>
 
                   <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
                     {step.desc}
@@ -159,9 +172,22 @@ export default function Process() {
                   </div>
 
                   <div className="pt-2">
-                    <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}>
-                      {step.num}
-                    </p>
+                    <div className="flex items-center gap-2 mb-1">
+                      <p className="text-xs font-bold uppercase tracking-widest" style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}>
+                        {step.num}
+                      </p>
+                      <span
+                        className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5"
+                        style={{
+                          background: "var(--yellow-dim)",
+                          color: "var(--text-secondary)",
+                          borderRadius: "2px",
+                          fontFamily: "var(--font-space)",
+                        }}
+                      >
+                        {step.duration}
+                      </span>
+                    </div>
                     <h3 className="font-bold text-lg mb-2" style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}>
                       {step.title}
                     </h3>
@@ -174,6 +200,24 @@ export default function Process() {
             })}
           </div>
         </div>
+
+        {/* CTA after process */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+          transition={{ duration: 0.5, delay: 1.2 }}
+          className="text-center mt-16"
+        >
+          <a
+            href="#contact"
+            onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
+            className="btn-yellow group"
+            data-analytics="process-cta"
+          >
+            Book Free Consultation
+            <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
+          </a>
+        </motion.div>
       </div>
     </section>
   );

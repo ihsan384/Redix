@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
-
 @import "tailwindcss";
 
 /* ─── Design Tokens ─────────────────────────────────────────────────────── */
@@ -30,7 +28,10 @@
 /* ─── Base ───────────────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
 
 body {
   background-color: var(--bg-primary);
@@ -39,6 +40,24 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ─── Selection ──────────────────────────────────────────────────────────── */
+::selection {
+  background: var(--yellow);
+  color: var(--text-primary);
+}
+
+::-moz-selection {
+  background: var(--yellow);
+  color: var(--text-primary);
+}
+
+/* ─── Focus Visible ──────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 2px;
 }
 
 /* ─── Scrollbar ──────────────────────────────────────────────────────────── */
@@ -102,6 +121,7 @@ body {
   gap: 0.6rem;
   text-decoration: none;
   font-family: 'Space Grotesk', sans-serif;
+  min-height: 44px;
 }
 
 .btn-primary:hover {
@@ -129,6 +149,7 @@ body {
   text-decoration: none;
   font-family: 'Space Grotesk', sans-serif;
   box-shadow: 0 2px 8px rgba(255, 214, 10, 0.3);
+  min-height: 44px;
 }
 
 .btn-yellow:hover {
@@ -154,6 +175,7 @@ body {
   gap: 0.6rem;
   text-decoration: none;
   font-family: 'Space Grotesk', sans-serif;
+  min-height: 44px;
 }
 
 .btn-outline:hover {
@@ -201,6 +223,12 @@ body {
   margin-bottom: 4rem;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--border);
+}
+
+/* ─── Content Visibility for below-fold sections ─────────────────────────── */
+.section-lazy {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
 }
 
 /* ─── Cards ──────────────────────────────────────────────────────────────── */
@@ -284,6 +312,9 @@ body {
 .nav-link:hover { color: var(--text-primary); }
 .nav-link:hover::after { width: 100%; }
 
+.nav-link.active { color: var(--text-primary); font-weight: 600; }
+.nav-link.active::after { width: 100%; }
+
 /* ─── Badge ──────────────────────────────────────────────────────────────── */
 .badge {
   display: inline-flex;
@@ -297,6 +328,22 @@ body {
   text-transform: uppercase;
   background: var(--yellow);
   color: var(--text-primary);
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* ─── Popular Badge ──────────────────────────────────────────────────────── */
+.badge-popular {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 2px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--text-primary);
+  color: #FFFFFF;
   font-family: 'Space Grotesk', sans-serif;
 }
 
@@ -314,6 +361,7 @@ body {
   color: var(--text-secondary);
   background: transparent;
   font-family: 'Space Grotesk', sans-serif;
+  min-height: 40px;
 }
 
 .filter-tab.active,
@@ -335,6 +383,7 @@ body {
   font-size: 0.875rem;
   transition: all 0.25s ease;
   outline: none;
+  min-height: 44px;
 }
 
 .form-input::placeholder { color: var(--text-muted); }
@@ -366,6 +415,7 @@ body {
   background: var(--yellow);
   z-index: 9999;
   transform-origin: left;
+  will-change: transform;
 }
 
 /* ─── Accordion (FAQ) ────────────────────────────────────────────────────── */
@@ -400,6 +450,7 @@ body {
   color: var(--text-primary);
   text-align: left;
   transition: all 0.2s ease;
+  min-height: 56px;
 }
 
 .accordion-trigger:hover {
@@ -524,10 +575,10 @@ body {
   50% { box-shadow: 0 0 0 8px transparent; }
 }
 
-/* Utility */
-.animate-float { animation: float 5s ease-in-out infinite; }
-.animate-float-slow { animation: floatSlow 7s ease-in-out infinite; }
-.animate-float-reverse { animation: floatReverse 6s ease-in-out infinite; }
+/* Utility — GPU-accelerated animations */
+.animate-float { animation: float 5s ease-in-out infinite; will-change: transform; }
+.animate-float-slow { animation: floatSlow 7s ease-in-out infinite; will-change: transform; }
+.animate-float-reverse { animation: floatReverse 6s ease-in-out infinite; will-change: transform; }
 .animate-whatsapp-pulse { animation: whatsapp-pulse 2s infinite; }
 .animate-pulse-glow { animation: pulseGlow 2s ease-in-out infinite; }
 
@@ -571,6 +622,7 @@ body {
   .section-header { margin-bottom: 2.5rem; }
   .accordion-trigger { padding: 1.25rem 1.5rem; font-size: 0.9rem; }
   .accordion-content { padding: 0 1.5rem 1.25rem; font-size: 0.85rem; }
+  .filter-tab { padding: 0.45rem 0.9rem; font-size: 0.72rem; min-height: 38px; }
 }
 
 @media (max-width: 480px) {
@@ -584,4 +636,11 @@ body {
   }
   .accordion-trigger { padding: 1rem 1.25rem; }
   .accordion-content { padding: 0 1.25rem 1rem; }
+}
+
+@media (max-width: 360px) {
+  .section-padding { padding: 3rem 0.75rem; }
+  .section-title { font-size: clamp(1.3rem, 8vw, 1.6rem); }
+  .section-header { margin-bottom: 2rem; gap: 0.75rem; flex-wrap: wrap; }
+  .badge { font-size: 0.6rem; padding: 0.25rem 0.7rem; }
 }

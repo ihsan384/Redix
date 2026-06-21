@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { Plus, Minus } from "lucide-react";
+import { Plus, Minus, MessageCircle, ArrowRight } from "lucide-react";
 
 const faqs = [
   {
@@ -30,6 +30,26 @@ const faqs = [
     answer:
       "We love working with small businesses and startups! REDIX.MEDIA was built to help growing businesses compete with bigger brands. Our flexible packages and direct communication style make us the perfect partner for businesses of any size looking for premium quality at fair prices.",
   },
+  {
+    question: "How many revisions are included?",
+    answer:
+      "Every project includes 2–3 rounds of revisions at no extra cost, depending on the service. For branding and web projects, we work closely with you throughout the design process to ensure we hit the mark. Additional revisions beyond the included rounds are available at a nominal fee.",
+  },
+  {
+    question: "Will I own the website and all files?",
+    answer:
+      "Yes, 100%. Once the project is completed and final payment is made, you receive full ownership of all deliverables — website code, design files, brand assets, and content. Everything we create for you belongs to you. We'll also provide a clean handover package with all source files.",
+  },
+  {
+    question: "Do you offer hosting and maintenance?",
+    answer:
+      "Yes! We offer optional hosting and maintenance packages starting from ₹500/month. This includes reliable hosting, regular backups, security updates, minor content updates, and priority support. We also handle domain setup and SSL certificates. You're free to host elsewhere if you prefer — we'll help with the transition.",
+  },
+  {
+    question: "What happens after the project is done?",
+    answer:
+      "We don't disappear after delivery. Every client gets 30 days of free post-launch support for any issues or minor adjustments. After that, you can opt for our monthly maintenance package or reach out anytime for new projects. Many of our clients have been with us since day one — we build long-term relationships, not one-time transactions.",
+  },
 ];
 
 export default function FAQ() {
@@ -44,7 +64,7 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="section-padding"
+      className="section-padding section-lazy"
       style={{ background: "var(--bg-secondary)" }}
     >
       <div className="max-w-4xl mx-auto" ref={ref}>
@@ -101,7 +121,7 @@ export default function FAQ() {
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.4, delay: 0.1 + i * 0.06, ease: "easeOut" }}
+                transition={{ duration: 0.4, delay: 0.1 + i * 0.04, ease: "easeOut" }}
                 className={`accordion-item ${isOpen ? "active" : ""}`}
                 style={{ borderRadius: "var(--radius-md)" }}
               >
@@ -157,6 +177,53 @@ export default function FAQ() {
             );
           })}
         </div>
+
+        {/* CTA after FAQ */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="mt-12 p-6 lg:p-8 flex flex-col sm:flex-row items-center justify-between gap-5"
+          style={{
+            background: "var(--bg-card)",
+            border: "1px solid var(--border)",
+            borderRadius: "var(--radius-md)",
+            borderLeft: "4px solid var(--yellow)",
+          }}
+        >
+          <div>
+            <p
+              className="font-bold text-base mb-1"
+              style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}
+            >
+              Still have questions?
+            </p>
+            <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
+              Chat with us on WhatsApp or start your project directly.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
+            <a
+              href="https://wa.me/919744206583"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline text-xs"
+              data-analytics="faq-whatsapp-cta"
+            >
+              <MessageCircle size={14} />
+              Chat on WhatsApp
+            </a>
+            <a
+              href="#contact"
+              onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
+              className="btn-yellow text-xs group"
+              data-analytics="faq-start-project-cta"
+            >
+              Start Your Project
+              <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
