@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Poppins, Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+import PWARegistration from "@/components/PWARegistration";
+
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space",
@@ -66,6 +68,11 @@ export const metadata: Metadata = {
       "Bold creative studio helping businesses grow through branding, websites, content, and digital strategy.",
     creator: "@redixmedia",
   },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "REDIX.MEDIA",
+  },
 };
 
 // JSON-LD Structured Data for Organization/LocalBusiness
@@ -126,6 +133,7 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased overflow-x-hidden">
+        <PWARegistration />
         {children}
 
         {/* ─── Analytics (placeholder — replace IDs with actual values) ─────── */}
