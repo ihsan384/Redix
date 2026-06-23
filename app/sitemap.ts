@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://redix.media";
+  const baseUrl = "https://www.redix.in";
 
   return [
     {

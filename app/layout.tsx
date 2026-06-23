@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://redix.media",
+    url: "https://www.redix.in",
     siteName: "REDIX.MEDIA",
     title: "REDIX.MEDIA — Creative Digital Studio",
     description:
@@ -85,8 +85,8 @@ const jsonLd = {
   name: "REDIX.MEDIA",
   description:
     "Creative digital studio specializing in branding, website development, video editing, social media management, and digital marketing.",
-  url: "https://redix.media",
-  logo: "https://redix.media/logo.svg",
+  url: "https://www.redix.in",
+  logo: "https://www.redix.in/logo.svg",
   foundingDate: "2022",
   areaServed: "Worldwide",
   serviceType: [
