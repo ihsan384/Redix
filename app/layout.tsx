@@ -73,6 +73,9 @@ export const metadata: Metadata = {
     statusBarStyle: "default",
     title: "REDIX.MEDIA",
   },
+  verification: {
+    google: "Q60VYUYmofY_NzIHpV5SonHNLyq2QLEh5w9J2TQAP1g",
+  },
 };
 
 // JSON-LD Structured Data for Organization/LocalBusiness
