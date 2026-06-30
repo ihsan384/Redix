@@ -1,9 +1,13 @@
-@import url('https://api.fontshare.com/v2/css?f[]=clash-display@300,400,500,600,700&f[]=satoshi@300,400,500,700,900&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-clash: 'Clash Display', sans-serif;
+  --font-clash: 'Satoshi', sans-serif;
   --font-satoshi: 'Satoshi', sans-serif;
+  --font-space: 'Satoshi', sans-serif;
+  --font-poppins: 'Satoshi', sans-serif;
+  --font-inter: 'Satoshi', sans-serif;
+  --font-sans: 'Satoshi', sans-serif;
 }
 
 /* ─── Design Tokens ─────────────────────────────────────────────────────── */
@@ -39,10 +43,17 @@ html {
   scroll-padding-top: 80px;
 }
 
+body,
+button,
+input,
+textarea,
+select {
+  font-family: 'Satoshi', sans-serif;
+}
+
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  font-family: 'Poppins', 'Inter', system-ui, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -732,3 +743,49 @@ body {
   background-color: #FFD84D;
   border-color: #FFD84D;
 }
+
+/* ─── Redix Portfolio Redesign Extra Utilities ────────────────────────────────── */
+.noise-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.022'/%3E%3C/svg%3E");
+}
+
+.grid-overlay {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+}
+
+.text-premium-hero {
+  font-size: 72px;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+}
+
+.text-premium-heading {
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.text-premium-card-title {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.text-premium-description {
+  font-size: 18px;
+  line-height: 1.8;
+  font-weight: 400;
+}
+
+.text-premium-label {
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+}
+
