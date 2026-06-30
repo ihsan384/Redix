@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ArrowUpRight, Sparkles, ExternalLink, ArrowRight, Star, Layers, Zap, Heart, CheckCircle2 } from "lucide-react";
+import { ArrowUpRight, Sparkles, ArrowRight, Star, Zap, Eye } from "lucide-react";
 import Image from "next/image";
 import AnimatedCounter from "@/components/AnimatedCounter";
 
@@ -39,7 +39,7 @@ interface Project {
   year: string;
   rating: number;
   metrics: string[];
-  size: "large" | "small" | "wide" | "tall";
+  size: "large" | "small" | "wide";
 }
 
 const projects: Project[] = [
@@ -89,22 +89,6 @@ const projects: Project[] = [
     year: "2025",
     rating: 5,
     metrics: ["Lightweight", "Custom SVG", "SEO Opt"],
-    size: "tall",
-  },
-  {
-    id: "pet-shop",
-    title: "Paws & Claws Storefront",
-    categoryBadge: "Business Website",
-    filterCategories: ["All", "Business"],
-    image: "/assets/petshop.png",
-    description: "Charming digital storefront designed for a modern veterinary and premium pet supplies shop detailing appointments and care plans.",
-    tech: ["HTML", "CSS", "JavaScript"],
-    demoUrl: "https://petshop-demo.netlify.app/",
-    caseStudyUrl: "#",
-    client: "Paws & Claws Co.",
-    year: "2025",
-    rating: 5,
-    metrics: ["Accessible", "Clean UI", "Responsive"],
     size: "small",
   },
   {
@@ -122,6 +106,22 @@ const projects: Project[] = [
     rating: 5,
     metrics: ["Ultra Smooth", "GSAP Scroll", "High Perf"],
     size: "wide",
+  },
+  {
+    id: "pet-shop",
+    title: "Paws & Claws Storefront",
+    categoryBadge: "Business Website",
+    filterCategories: ["All", "Business"],
+    image: "/assets/petshop.png",
+    description: "Charming digital storefront designed for a modern veterinary and premium pet supplies shop detailing appointments and care plans.",
+    tech: ["HTML", "CSS", "JavaScript"],
+    demoUrl: "https://petshop-demo.netlify.app/",
+    caseStudyUrl: "#",
+    client: "Paws & Claws Co.",
+    year: "2025",
+    rating: 5,
+    metrics: ["Accessible", "Clean UI", "Responsive"],
+    size: "small",
   },
   {
     id: "cafe-v2",
@@ -178,19 +178,18 @@ function ProjectImage({ src, alt, heightClass }: { src: string; alt: string; hei
   const [imgSrc, setImgSrc] = useState(src);
 
   return (
-    <div className={`relative w-full overflow-hidden ${heightClass} bg-neutral-100`}>
+    <div className={`relative w-full overflow-hidden ${heightClass} bg-neutral-50`}>
       {loading && (
-        <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-neutral-200 via-neutral-300 to-neutral-200" style={{ backgroundSize: "200% 100%" }} />
+        <div className="absolute inset-0 animate-pulse bg-neutral-100" />
       )}
       <Image
         src={imgSrc}
         alt={alt}
         fill
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-108"
+        className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-106"
         onLoad={() => setLoading(false)}
         onError={() => {
-          // Fallback to beautiful Unsplash images if local images are missing
           if (src.includes("gym")) {
             setImgSrc("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80");
           } else if (src.includes("cafe") || src.includes("coco")) {
@@ -212,29 +211,23 @@ function ProjectImage({ src, alt, heightClass }: { src: string; alt: string; hei
 
 function BentoCard({ project, index }: { project: Project; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
-  
-  // Custom cursor follow position inside the card
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
   
-  // 3D tilt effect variables
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   
-  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [8, -8]), { stiffness: 250, damping: 25 });
-  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-8, 8]), { stiffness: 250, damping: 25 });
+  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [6, -6]), { stiffness: 200, damping: 25 });
+  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-6, 6]), { stiffness: 200, damping: 25 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
-    
-    // For local cursor tracking
     setCursorPos({
       x: e.clientX - rect.left,
       y: e.clientY - rect.top,
     });
     
-    // For 3D tilt
     const width = rect.width;
     const height = rect.height;
     const mouseX = e.clientX - rect.left - width / 2;
@@ -253,34 +246,32 @@ function BentoCard({ project, index }: { project: Project; index: number }) {
     setIsHovered(true);
   };
 
-  // Grid layout class based on size
+  // 12-column grid spans for layout
   const colSpanClass =
     project.size === "large"
-      ? "md:col-span-2 lg:col-span-2"
+      ? "md:col-span-8 lg:col-span-8"
       : project.size === "wide"
-      ? "md:col-span-2 lg:col-span-2"
-      : "col-span-1";
+      ? "md:col-span-8 lg:col-span-8"
+      : "md:col-span-4 lg:col-span-4";
 
+  // Aspect ratio/height adjustments for cards
   const imageContainerHeight =
     project.size === "large"
-      ? "h-[280px] sm:h-[360px] lg:h-[420px]"
+      ? "h-[260px] sm:h-[340px] lg:h-[420px]"
       : project.size === "wide"
-      ? "h-[240px] sm:h-[300px] lg:h-[320px]"
-      : project.size === "tall"
-      ? "h-[300px] sm:h-[340px] lg:h-[380px]"
+      ? "h-[220px] sm:h-[280px] lg:h-[320px]"
       : "h-[200px] sm:h-[240px] lg:h-[260px]";
 
-  // Motion variants for stagger entry
   const cardEntryVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 40 },
     show: { 
       opacity: 1, 
       y: 0,
       transition: {
         type: "spring" as const,
-        stiffness: 100,
-        damping: 18,
-        delay: index * 0.05
+        stiffness: 90,
+        damping: 16,
+        delay: index * 0.04
       }
     }
   };
@@ -297,71 +288,69 @@ function BentoCard({ project, index }: { project: Project; index: number }) {
         rotateY: rotateY,
         transformStyle: "preserve-3d"
       }}
-      className={`group relative flex flex-col bg-white rounded-[28px] overflow-hidden border border-black/[0.05] p-4 transition-all duration-500 ease-out shadow-[0_30px_80px_rgba(0,0,0,0.06)] hover:shadow-[0_40px_100px_rgba(255,196,0,0.12),0_20px_50px_rgba(0,0,0,0.08)] hover:-translate-y-3 hover:scale-[1.02] cursor-pointer ${colSpanClass}`}
+      className={`group relative flex flex-col bg-white rounded-[28px] overflow-hidden border border-black/[0.05] p-8 transition-all duration-500 ease-out shadow-[0_20px_60px_rgba(15,23,42,0.08)] hover:shadow-[0_40px_100px_rgba(0,0,0,0.14)] hover:-translate-y-[10px] hover:scale-[1.015] cursor-pointer ${colSpanClass}`}
     >
-      {/* Interactive cursor label */}
+      {/* Floating custom cursor */}
       <motion.div
-        className="absolute pointer-events-none z-30 bg-[#FFD60A] text-black font-extrabold text-xs uppercase tracking-widest px-4 py-2.5 rounded-full shadow-xl flex items-center gap-1.5 border border-black/10"
+        className="absolute pointer-events-none z-30 bg-[#111111] text-white font-bold text-[11px] uppercase tracking-[0.15em] px-4 py-2 rounded-full shadow-lg flex items-center gap-1.5 border border-white/10"
         animate={{
-          x: cursorPos.x - 60,
-          y: cursorPos.y - 20,
+          x: cursorPos.x - 55,
+          y: cursorPos.y - 18,
           scale: isHovered ? 1 : 0,
           opacity: isHovered ? 1 : 0,
         }}
-        transition={{ type: "spring", stiffness: 350, damping: 25, mass: 0.5 }}
+        transition={{ type: "spring", stiffness: 350, damping: 28, mass: 0.5 }}
       >
         <span>View Demo</span>
-        <ArrowUpRight size={14} />
+        <Eye size={12} className="text-[#FFC107]" />
       </motion.div>
 
-      {/* Image Container with Rounded Edge */}
-      <div className="relative w-full overflow-hidden rounded-[20px]">
+      {/* Image Wrap */}
+      <div className="relative w-full overflow-hidden rounded-[20px] mb-6">
         <ProjectImage src={project.image} alt={project.title} heightClass={imageContainerHeight} />
-        
-        {/* Dark Overlay transition */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
 
-        {/* Floating Category Badge (Glassmorphic) */}
+        {/* Top-Left Category Badge (Glassmorphic) */}
         <div className="absolute top-4 left-4 z-20 pointer-events-none">
-          <span className="inline-flex items-center px-4 py-2 rounded-full text-[11px] font-black uppercase tracking-wider bg-white/60 backdrop-blur-md text-[#111827] border border-white/40 shadow-sm">
+          <span className="inline-flex items-center px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-wider bg-white/70 backdrop-blur-md text-neutral-900 border border-white/40 shadow-sm">
             {project.categoryBadge}
           </span>
         </div>
 
-        {/* Year Badge floating top-right */}
+        {/* Top-Right Year Badge */}
         <div className="absolute top-4 right-4 z-20 pointer-events-none">
-          <span className="inline-flex items-center px-3 py-2 rounded-full text-[11px] font-black tracking-widest uppercase bg-black/75 backdrop-blur-sm text-[#FFD60A] border border-white/10 shadow-sm">
+          <span className="inline-flex items-center px-3.5 py-1.5 rounded-full text-[11px] font-bold tracking-widest uppercase bg-black/75 backdrop-blur-sm text-[#FFC107] border border-white/10 shadow-sm">
             {project.year}
           </span>
         </div>
       </div>
 
-      {/* Content Aligned below Image */}
-      <div className="pt-6 pb-2 px-2 flex flex-col justify-between flex-grow" style={{ transform: "translateZ(20px)" }}>
+      {/* Card Content - Aligned and balanced height */}
+      <div className="flex flex-col justify-between flex-grow" style={{ transform: "translateZ(10px)" }}>
         <div>
-          {/* Client & Metadata Row */}
+          {/* Metadata Row */}
           <div className="flex items-center gap-2 mb-2 text-xs text-neutral-400 font-medium">
             <span className="font-bold text-neutral-500 uppercase tracking-widest">{project.client}</span>
             <span className="w-1.5 h-1.5 rounded-full bg-neutral-200" />
             <span className="font-normal">{project.categoryBadge}</span>
           </div>
 
-          {/* Project Title */}
-          <h3 className="text-xl sm:text-2xl lg:text-[24px] font-black tracking-tight text-[#111827] mb-3 group-hover:text-black transition-colors duration-300">
+          {/* Card Title */}
+          <h3 className="text-xl sm:text-2xl lg:text-[26px] font-bold tracking-tight text-[#111111] mb-3 group-hover:text-[#FFC107] transition-colors duration-300">
             {project.title}
           </h3>
 
-          {/* Short Description */}
-          <p className="text-neutral-500 text-sm leading-relaxed mb-5 font-normal">
+          {/* Standardized description height */}
+          <p className="text-neutral-500 text-sm leading-[1.8] mb-5 font-normal h-[50px] line-clamp-2 overflow-hidden">
             {project.description}
           </p>
 
-          {/* Technology Chips */}
+          {/* Tech Pills */}
           <div className="flex flex-wrap gap-1.5 mb-6">
             {project.tech.map((t) => (
               <span
                 key={t}
-                className="text-[12px] font-bold px-3 py-1.5 rounded-full bg-neutral-100 hover:bg-[#FFD60A] text-neutral-600 hover:text-black border border-transparent transition-all duration-300 transform hover:scale-105"
+                className="text-[12px] font-medium px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 border border-transparent transition-colors duration-300 group-hover:bg-neutral-50 group-hover:border-black/5"
               >
                 {t}
               </span>
@@ -369,18 +358,21 @@ function BentoCard({ project, index }: { project: Project; index: number }) {
           </div>
         </div>
 
-        <div>
-          {/* Buttons: View Live & View Case Study */}
-          <div className="flex items-center gap-3 mt-auto">
+        <div className="mt-auto">
+          {/* Strictly Aligned Buttons */}
+          <div className="flex items-center gap-3">
+            {/* Primary Button */}
             <a
               href={project.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 py-3 px-4 rounded-xl text-center text-xs font-black uppercase tracking-wider bg-[#111827] text-[#FFD60A] border border-transparent hover:bg-black transition-all duration-300 flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
+              className="flex-1 py-3.5 px-5 rounded-full text-center text-xs font-bold uppercase tracking-wider bg-black text-white hover:bg-neutral-900 transition-all duration-300 flex items-center justify-center gap-2 shadow-sm hover:shadow-[0_10px_25px_rgba(0,0,0,0.12)] group/btn"
             >
               <span>View Live</span>
-              <ArrowUpRight size={13} className="transition-transform duration-300 group-hover:rotate-45" />
+              <ArrowUpRight size={13} className="transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
             </a>
+            
+            {/* Secondary Button */}
             <a
               href={project.caseStudyUrl}
               onClick={(e) => {
@@ -389,22 +381,22 @@ function BentoCard({ project, index }: { project: Project; index: number }) {
                   alert(`Case study for ${project.title} is coming soon!`);
                 }
               }}
-              className="flex-1 py-3 px-4 rounded-xl text-center text-xs font-black uppercase tracking-wider bg-neutral-50 hover:bg-neutral-100 border border-black/[0.06] text-[#111827] transition-all duration-300 flex items-center justify-center gap-2"
+              className="flex-1 py-3.5 px-5 rounded-full text-center text-xs font-bold uppercase tracking-wider bg-white hover:bg-neutral-50 border border-[#ECECEC] text-[#111111] transition-all duration-300 flex items-center justify-center gap-2"
             >
               <span>Case Study</span>
               <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-1" />
             </a>
           </div>
 
-          {/* Project Metrics at bottom */}
-          <div className="mt-5 pt-4 border-t border-black/[0.05] flex flex-wrap items-center justify-between gap-3 text-[11px] text-neutral-400 font-medium">
+          {/* Card Metrics Footer */}
+          <div className="mt-6 pt-4 border-t border-black/[0.05] flex flex-wrap items-center justify-between gap-3 text-[11px] text-neutral-400 font-medium">
             <div className="flex items-center gap-0.5">
-              <span className="text-[#FFC400] flex">
-                <Star size={11} fill="#FFC400" strokeWidth={0} />
-                <Star size={11} fill="#FFC400" strokeWidth={0} />
-                <Star size={11} fill="#FFC400" strokeWidth={0} />
-                <Star size={11} fill="#FFC400" strokeWidth={0} />
-                <Star size={11} fill="#FFC400" strokeWidth={0} />
+              <span className="text-[#FFC107] flex">
+                <Star size={11} fill="#FFC107" strokeWidth={0} />
+                <Star size={11} fill="#FFC107" strokeWidth={0} />
+                <Star size={11} fill="#FFC107" strokeWidth={0} />
+                <Star size={11} fill="#FFC107" strokeWidth={0} />
+                <Star size={11} fill="#FFC107" strokeWidth={0} />
               </span>
               <span className="text-neutral-500 font-extrabold ml-1">5.0</span>
             </div>
@@ -416,8 +408,8 @@ function BentoCard({ project, index }: { project: Project; index: number }) {
             </div>
 
             <div className="flex items-center gap-1.5">
-              <span className="px-2 py-0.5 rounded-full bg-green-50 text-green-600 border border-green-100 text-[9px] font-black uppercase tracking-wider">Responsive</span>
-              <span className="px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 border border-amber-100 text-[9px] font-black uppercase tracking-wider">Fast</span>
+              <span className="px-2 py-0.5 rounded-full bg-green-50 text-green-600 border border-green-100 text-[9px] font-bold uppercase tracking-wider">Responsive</span>
+              <span className="px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 border border-amber-100 text-[9px] font-bold uppercase tracking-wider">Fast</span>
             </div>
           </div>
         </div>
@@ -440,7 +432,7 @@ export default function Portfolio() {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08,
+        staggerChildren: 0.06,
       },
     },
   };
@@ -449,112 +441,55 @@ export default function Portfolio() {
     <section
       id="portfolio"
       ref={sectionRef}
-      className="py-28 md:py-36 lg:py-44 bg-[#FFFFFF] text-[#111111] relative overflow-hidden noise-overlay grid-overlay"
+      className="py-[140px] bg-[#FAFAF8] text-[#111111] relative overflow-hidden noise-overlay grid-overlay"
     >
-      {/* Floating Blurred Gradient Circles */}
-      <motion.div
-        animate={{
-          x: [0, 50, -30, 0],
-          y: [0, -80, 40, 0],
+      {/* Gradient 1: Faint Large Radial Gradient Behind Header */}
+      <div 
+        className="absolute top-0 left-0 w-full h-[600px] pointer-events-none opacity-[0.08]"
+        style={{
+          background: "radial-gradient(circle at 20% 20%, rgba(255,196,0,0.12), transparent 60%)"
         }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute top-[8%] left-[3%] w-[450px] h-[450px] rounded-full bg-gradient-to-tr from-[#FFD60A]/10 to-transparent blur-3xl pointer-events-none"
-      />
-      <motion.div
-        animate={{
-          x: [0, -60, 40, 0],
-          y: [0, 70, -50, 0],
-        }}
-        transition={{
-          duration: 22,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute bottom-[20%] right-[3%] w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-[#FFC400]/8 to-transparent blur-3xl pointer-events-none"
       />
 
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
+      <div className="max-w-[1440px] 2xl:max-w-[1560px] mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
         
-        {/* Premium Section Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16 md:mb-24 gap-10">
-          <div className="max-w-3xl flex flex-col items-start">
-            {/* Styled Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-50 border border-black/[0.05] mb-6">
-              <span className="w-2 h-2 rounded-full bg-[#FFD60A] animate-pulse" />
-              <span className="text-[11px] uppercase tracking-[0.2em] font-black text-neutral-600">
-                SELECTED PROJECTS
-              </span>
-            </div>
-
-            {/* Premium Section Heading */}
-            <h2 className="text-premium-heading text-neutral-900 mb-6 max-w-2xl leading-[1.08]">
-              Crafting Digital{" "}
-              <span className="inline-block bg-gradient-to-r from-[#111827] to-[#FFC400] bg-clip-text text-transparent">
-                Experiences.
-              </span>
-            </h2>
-
-            {/* Premium Description */}
-            <p className="text-premium-description text-neutral-500 max-w-xl">
-              Premium websites, ERP systems and digital products engineered for ambitious businesses.
-            </p>
+        {/* Left Aligned Section Header */}
+        <div className="mb-[140px] flex flex-col items-start text-left max-w-3xl">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-100 border border-black/[0.04] mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FFC107] animate-pulse" />
+            <span className="text-[11px] uppercase tracking-[0.2em] font-bold text-neutral-600">
+              SELECTED PROJECTS
+            </span>
           </div>
 
-          {/* Right Side - Animated Counters */}
-          <div className="flex flex-wrap sm:flex-nowrap gap-10 lg:gap-14 bg-neutral-50/50 backdrop-blur-md p-8 rounded-[24px] border border-black/[0.03] shadow-sm">
-            <div className="flex flex-col">
-              <span className="text-4xl lg:text-[46px] font-black text-[#111111] flex items-center leading-none tracking-tight">
-                <AnimatedCounter end={120} />
-                <span className="text-[#FFC400] ml-0.5">+</span>
-              </span>
-              <span className="text-[11px] uppercase tracking-wider text-neutral-400 font-bold mt-2.5">
-                Projects Delivered
-              </span>
-            </div>
-            
-            <div className="w-px h-12 bg-neutral-200/60 hidden sm:block self-center" />
-            
-            <div className="flex flex-col">
-              <span className="text-4xl lg:text-[46px] font-black text-[#111111] flex items-center leading-none tracking-tight">
-                <AnimatedCounter end={5} />
-                <span className="text-[#FFC400] text-3xl ml-1">★</span>
-              </span>
-              <span className="text-[11px] uppercase tracking-wider text-neutral-400 font-bold mt-2.5">
-                Client Rating
-              </span>
-            </div>
+          {/* Section Title */}
+          <h2 className="text-4xl sm:text-5xl lg:text-[56px] font-black tracking-tight text-neutral-900 mb-6 leading-[1.08]">
+            Crafting Digital{" "}
+            <span className="inline-block bg-gradient-to-r from-[#111827] to-[#FFC107] bg-clip-text text-transparent">
+              Experiences.
+            </span>
+          </h2>
 
-            <div className="w-px h-12 bg-neutral-200/60 hidden sm:block self-center" />
-
-            <div className="flex flex-col">
-              <span className="text-4xl lg:text-[46px] font-black text-[#111111] flex items-center leading-none tracking-tight">
-                <AnimatedCounter end={99} />
-                <span className="text-[#FFC400] ml-0.5">%</span>
-              </span>
-              <span className="text-[11px] uppercase tracking-wider text-neutral-400 font-bold mt-2.5">
-                Success Rate
-              </span>
-            </div>
-          </div>
+          {/* Subtitle */}
+          <p className="text-neutral-500 text-lg leading-[1.8] font-normal max-w-2xl">
+            Premium websites, ERP systems and digital products engineered for ambitious businesses.
+          </p>
         </div>
 
-        {/* Floating Pill Filter Bar */}
-        <div className="flex justify-center md:justify-start mb-16 md:mb-20 overflow-x-auto pb-4 pt-1 no-scrollbar border-b border-black/[0.05]">
-          <div className="flex items-center gap-3 p-1.5 rounded-full bg-neutral-50 border border-black/[0.04] backdrop-blur-md">
+        {/* Portfolio Filters - Center Aligned */}
+        <div className="flex justify-center mb-[100px] overflow-x-auto pb-4 pt-1 no-scrollbar border-b border-black/[0.04]">
+          <div className="flex items-center gap-2 p-1.5 rounded-full bg-neutral-100/80 border border-black/[0.03] backdrop-blur-md">
             {filterCategories.map((category) => {
               const isActive = activeFilter === category;
               return (
                 <button
                   key={category}
                   onClick={() => setActiveFilter(category)}
-                  className={`relative px-6 py-2.5 rounded-full text-xs font-extrabold uppercase tracking-wider whitespace-nowrap transition-all duration-300 cursor-pointer overflow-hidden ${
+                  className={`relative px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all duration-300 cursor-pointer overflow-hidden ${
                     isActive
-                      ? "text-[#FFD60A] bg-[#111111] shadow-md"
-                      : "text-neutral-500 hover:bg-[#FFD60A] hover:text-black hover:shadow-md hover:-translate-y-0.5"
+                      ? "text-[#FFC107] bg-[#111111] shadow-md"
+                      : "text-neutral-500 hover:bg-[#FFC107] hover:text-black hover:shadow-sm"
                   }`}
                 >
                   <span className="relative z-10">{category}</span>
@@ -564,13 +499,13 @@ export default function Portfolio() {
           </div>
         </div>
 
-        {/* Bento Grid */}
+        {/* Projects Bento Grid - 12 columns layout */}
         <motion.div
           layout
           variants={containerVariants}
           initial="hidden"
           animate="show"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 auto-rows-max"
+          className="grid grid-cols-1 md:grid-cols-8 lg:grid-cols-12 gap-8 auto-rows-max"
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, idx) => (
@@ -579,53 +514,88 @@ export default function Portfolio() {
           </AnimatePresence>
         </motion.div>
 
-        {/* Premium Dark CTA Section */}
-        <div className="mt-32 md:mt-40 lg:mt-48 relative rounded-[32px] overflow-hidden bg-[#111827] text-white p-8 sm:p-16 lg:p-24 shadow-2xl border border-white/5">
-          {/* Subtle Accent Glows */}
-          <div className="absolute -top-32 -right-32 w-[450px] h-[450px] bg-[#FFD60A]/15 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-32 -left-32 w-[450px] h-[450px] bg-[#FFC400]/10 rounded-full blur-3xl pointer-events-none" />
+        {/* Gradient 2: CTA Split Layout Section */}
+        <div className="mt-[140px] relative rounded-[32px] overflow-hidden bg-[#111827] text-white p-8 sm:p-14 lg:p-20 shadow-2xl border border-white/5">
+          {/* Subtle Radial Gradient behind CTA (5% opacity) */}
+          <div 
+            className="absolute inset-0 pointer-events-none opacity-[0.05]"
+            style={{
+              background: "radial-gradient(circle at 50% 50%, rgba(255,196,0,0.1), transparent 70%)"
+            }}
+          />
 
-          <div className="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center">
-            {/* Tiny Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8 text-[11px] uppercase tracking-[0.2em] font-black text-[#FFD60A]">
-              <Sparkles size={13} className="animate-spin-slow" />
-              <span>Next Steps</span>
+          <div className="relative z-10 grid lg:grid-cols-12 gap-12 items-center">
+            {/* Left Side: Copywriting & Actions */}
+            <div className="lg:col-span-7 flex flex-col items-start text-left">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6 text-[11px] uppercase tracking-[0.2em] font-bold text-[#FFC107]">
+                <Sparkles size={12} />
+                <span>Next Steps</span>
+              </div>
+
+              <h3 className="text-3xl sm:text-5xl lg:text-[52px] font-black tracking-tight text-white mb-6 leading-none">
+                Ready to build something amazing?
+              </h3>
+
+              <p className="text-neutral-400 text-base leading-relaxed mb-10 max-w-xl font-normal">
+                Let&apos;s engineer custom websites, enterprise-grade ERP systems and digital solutions designed to accelerate growth.
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+                <a
+                  href="#contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className="group w-full sm:w-auto px-9 py-4.5 rounded-full font-bold uppercase tracking-widest bg-[#FFC107] hover:bg-[#e0a800] text-[#111111] transition-all duration-300 shadow-[0_15px_30px_rgba(255,193,7,0.15)] hover:-translate-y-1 flex items-center justify-center gap-2 text-xs"
+                >
+                  Let&apos;s Start Your Project
+                  <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1.5" />
+                </a>
+
+                <a
+                  href="#services"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className="w-full sm:w-auto px-9 py-4.5 rounded-full font-bold uppercase tracking-widest bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-2 text-xs"
+                >
+                  View All Services
+                </a>
+              </div>
             </div>
 
-            {/* Headline */}
-            <h3 className="text-3xl sm:text-5xl lg:text-[64px] font-black tracking-tight text-white mb-6 leading-none max-w-3xl">
-              Ready to build something amazing?
-            </h3>
-
-            {/* Sub-description */}
-            <p className="text-base sm:text-lg lg:text-[20px] text-neutral-400 font-normal leading-relaxed mb-12 max-w-xl">
-              Let&apos;s engineer custom websites, enterprise-grade ERP systems and digital solutions designed to accelerate growth.
-            </p>
-
-            {/* Glowing CTA Button */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-5 w-full sm:w-auto">
-              <a
-                href="#contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="group w-full sm:w-auto px-9 py-5 rounded-full font-black uppercase tracking-widest bg-[#FFD60A] hover:bg-[#e6c000] text-[#111111] transition-all duration-300 shadow-[0_15px_30px_rgba(255,214,10,0.25)] hover:shadow-[0_20px_45px_rgba(255,214,10,0.4)] hover:-translate-y-1 flex items-center justify-center gap-2.5 text-xs"
-              >
-                Let&apos;s Start Your Project
-                <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1.5" />
-              </a>
-
-              <a
-                href="#services"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="w-full sm:w-auto px-9 py-5 rounded-full font-black uppercase tracking-widest bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-2.5 text-xs"
-              >
-                View All Services
-              </a>
+            {/* Right Side: Floating Abstract Graphic inside dark container */}
+            <div className="lg:col-span-5 flex justify-center items-center">
+              <div className="w-full max-w-[360px] aspect-square rounded-[24px] bg-neutral-900/50 border border-white/5 flex items-center justify-center relative overflow-hidden p-8 shadow-inner">
+                {/* Abstract animated geometric visualizer */}
+                <div className="relative w-56 h-56 flex items-center justify-center">
+                  {/* Outer ring */}
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                    className="absolute w-52 h-52 rounded-full border border-dashed border-[#FFC107]/10"
+                  />
+                  {/* Middle ring */}
+                  <motion.div
+                    animate={{ rotate: -360 }}
+                    transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+                    className="absolute w-36 h-36 rounded-full border border-[#FFC107]/20 border-t-transparent"
+                  />
+                  {/* Floating core */}
+                  <motion.div
+                    animate={{
+                      y: [-12, 12, -12],
+                      scale: [0.94, 1.06, 0.94],
+                    }}
+                    transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute w-20 h-20 rounded-full bg-gradient-to-tr from-[#FFC107]/30 to-transparent flex items-center justify-center shadow-lg shadow-[#FFC107]/10"
+                  >
+                    <Zap size={28} className="text-[#FFC107]" />
+                  </motion.div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

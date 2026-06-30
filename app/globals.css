@@ -12,27 +12,27 @@
 
 /* ─── Design Tokens ─────────────────────────────────────────────────────── */
 :root {
-  --bg-primary:      #FFFFFF;
-  --bg-secondary:    #F8F8F8;
+  --bg-primary:      #FAFAF8;
+  --bg-secondary:    #FAFAF8;
   --bg-card:         #FFFFFF;
-  --border:          rgba(0, 0, 0, 0.08);
-  --border-strong:   rgba(0, 0, 0, 0.15);
-  --yellow:          #FFD60A;
-  --yellow-hover:    #e6c000;
-  --yellow-dim:      rgba(255, 214, 10, 0.15);
-  --yellow-glow:     rgba(255, 214, 10, 0.25);
+  --border:          #ECECEC;
+  --border-strong:   #DCDCDC;
+  --yellow:          #FFC107;
+  --yellow-hover:    #e0a800;
+  --yellow-dim:      rgba(255, 193, 7, 0.12);
+  --yellow-glow:     rgba(255, 193, 7, 0.2);
   --text-primary:    #111111;
   --text-secondary:  #666666;
   --text-muted:      #888888;
-  --shadow-xs:       0 1px 2px rgba(0,0,0,0.04);
-  --shadow-sm:       0 1px 4px rgba(0,0,0,0.06);
-  --shadow-md:       0 4px 16px rgba(0,0,0,0.08);
-  --shadow-lg:       0 12px 40px rgba(0,0,0,0.1);
-  --shadow-xl:       0 20px 60px rgba(0,0,0,0.12);
-  --radius-sm:       4px;
-  --radius-md:       8px;
-  --radius-lg:       12px;
-  --radius-xl:       16px;
+  --shadow-xs:       0 1px 2px rgba(0,0,0,0.03);
+  --shadow-sm:       0 1px 4px rgba(0,0,0,0.05);
+  --shadow-md:       0 4px 16px rgba(0,0,0,0.06);
+  --shadow-lg:       0 12px 40px rgba(0,0,0,0.08);
+  --shadow-xl:       0 20px 60px rgba(15,23,42,0.08);
+  --radius-sm:       6px;
+  --radius-md:       12px;
+  --radius-lg:       20px;
+  --radius-xl:       28px;
 }
 
 /* ─── Base ───────────────────────────────────────────────────────────────── */
@@ -144,15 +144,15 @@ p {
 
 /* ─── Buttons ─────────────────────────────────────────────────────────────── */
 .btn-primary {
-  background: var(--text-primary);
+  background: #111111;
   color: #FFFFFF;
-  padding: 0.9rem 2.25rem;
-  border-radius: var(--radius-sm);
+  padding: 0.95rem 2.4rem;
+  border-radius: 9999px;
   font-weight: 700;
   font-size: 15px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
   border: none;
@@ -163,25 +163,25 @@ p {
   text-decoration: none;
   font-family: 'Satoshi', sans-serif;
   min-height: 44px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
 }
 
 .btn-primary:hover {
-  background: var(--yellow);
-  color: var(--text-primary);
+  background: #000000;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(255, 193, 7, 0.1);
 }
 
 .btn-yellow {
-  background: var(--yellow);
-  color: var(--text-primary);
+  background: #FFC107;
+  color: #111111;
   padding: 0.95rem 2.4rem;
-  border-radius: var(--radius-sm);
+  border-radius: 9999px;
   font-weight: 700;
   font-size: 15px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   border: none;
   cursor: pointer;
   display: inline-flex;
@@ -189,27 +189,27 @@ p {
   gap: 0.6rem;
   text-decoration: none;
   font-family: 'Satoshi', sans-serif;
-  box-shadow: 0 2px 8px rgba(255, 214, 10, 0.3);
+  box-shadow: 0 4px 14px rgba(255, 193, 7, 0.25);
   min-height: 44px;
 }
 
 .btn-yellow:hover {
-  background: var(--yellow-hover);
+  background: #e0a800;
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(255,214,10,0.4);
+  box-shadow: 0 8px 24px rgba(255, 193, 7, 0.4);
 }
 
 .btn-outline {
-  background: transparent;
-  color: var(--text-primary);
-  padding: 0.9rem 2.25rem;
-  border-radius: var(--radius-sm);
+  background: #FFFFFF;
+  color: #111111;
+  padding: 0.95rem 2.4rem;
+  border-radius: 9999px;
   font-weight: 700;
   font-size: 15px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  border: 1.5px solid var(--border-strong);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid #ECECEC;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -220,10 +220,9 @@ p {
 }
 
 .btn-outline:hover {
-  border-color: var(--text-primary);
-  background: var(--text-primary);
-  color: #fff;
-  transform: translateY(-2px);
+  background: #F3F3F3;
+  border-color: #DCDCDC;
+  transform: translateY(-1px);
 }
 
 /* ─── Section Styles ─────────────────────────────────────────────────────── */
