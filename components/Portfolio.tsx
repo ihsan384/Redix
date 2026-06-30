@@ -43,14 +43,14 @@ interface Project {
 
 const projects: Project[] = [
   {
-    id: "admin-dashboard",
-    title: "Admin Dashboard UI",
+    id: "Gym RRP",
+    title: "Gym RRP",
     categoryBadge: "ERP Software",
     filterCategories: ["All", "ERP Software", "Web Development"],
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
-    description: "Multi-page admin dashboard featuring analytics, Firebase integration, responsive layout, and modern UI.",
-    tech: ["HTML", "CSS", "JavaScript", "Firebase"],
-    demoUrl: "https://cafeadmintest.netlify.app/",
+    image: "/assets/gymrrp.png",
+    description: "Comprehensive gym management ERP platform with member management, attendance tracking, membership plans, trainer scheduling, payment management, analytics dashboards, and responsive admin tools designed to streamline daily fitness center operations.",
+    tech: ["React", "Tailwind CSS", "Typescript", "Supabase"],
+    demoUrl: "https://gymrrp.vercel.app/",
     size: "large",
   },
   {
@@ -193,7 +193,7 @@ export default function Portfolio() {
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-[#FFD60A]/10 to-transparent rounded-full blur-3xl pointer-events-none opacity-60" />
 
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-        
+
         {/* Section Header */}
         <div className="mb-14 md:mb-20 flex flex-col items-start max-w-4xl">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/[0.04] border border-black/[0.08] mb-6">
@@ -220,9 +220,8 @@ export default function Portfolio() {
               <button
                 key={category}
                 onClick={() => setActiveFilter(category)}
-                className={`relative px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide whitespace-nowrap transition-colors duration-[350ms] cursor-pointer ${
-                  isActive ? "text-[#111111]" : "text-[#666666] hover:text-[#111111]"
-                }`}
+                className={`relative px-5 py-2.5 rounded-full text-sm font-semibold tracking-wide whitespace-nowrap transition-colors duration-[350ms] cursor-pointer ${isActive ? "text-[#111111]" : "text-[#666666] hover:text-[#111111]"
+                  }`}
               >
                 {isActive && (
                   <motion.div
@@ -257,8 +256,8 @@ export default function Portfolio() {
                 project.size === "large"
                   ? "h-[360px] sm:h-[440px] lg:h-[480px]"
                   : project.size === "tall"
-                  ? "h-[380px] sm:h-[460px]"
-                  : "h-[300px] sm:h-[360px]";
+                    ? "h-[380px] sm:h-[460px]"
+                    : "h-[300px] sm:h-[360px]";
 
               return (
                 <motion.div
