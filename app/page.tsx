@@ -7,7 +7,7 @@ import Portfolio from "@/components/Portfolio";
 import MidPageCTA from "@/components/MidPageCTA";
 import About from "@/components/About";
 import WhyChooseUs from "@/components/WhyChooseUs";
-import Founders from "@/components/Founders";
+import SkillsTeam from "@/components/SkillsTeam";
 import Process from "@/components/Process";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
@@ -48,8 +48,8 @@ export default function Home() {
         {/* 7. Why Choose Us */}
         <WhyChooseUs />
 
-        {/* 8. Founders */}
-        <Founders />
+        {/* 8. Our Skills & Team */}
+        <SkillsTeam />
 
         {/* 9. Process */}
         <Process />
