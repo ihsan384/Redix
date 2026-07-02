@@ -53,7 +53,6 @@ interface TeamMember {
   name: string;
   role: string;
   description: string;
-  avatarUrl: string;
   initials: string;
   skills: Skill[];
   linkedin: string;
@@ -204,7 +203,6 @@ const team: TeamMember[] = [
     name: "Ihsan",
     role: "Founder & Full Stack Developer",
     description: "Passionate full-stack developer specializing in modern web applications, scalable systems, ERP platforms, automation, and AI-powered solutions.",
-    avatarUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=256&h=256&q=80",
     initials: "IK",
     glowColor: "rgba(255, 193, 7, 0.22)",
     borderGradient: "from-yellow-400/40 via-amber-500/20 to-transparent",
@@ -242,7 +240,6 @@ const team: TeamMember[] = [
     name: "Fahad",
     role: "Video Editor & Motion Designer",
     description: "Creative editor focused on cinematic storytelling, promotional content, motion graphics, and professional video production.",
-    avatarUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=256&h=256&q=80",
     initials: "FN",
     glowColor: "rgba(139, 92, 246, 0.22)",
     borderGradient: "from-purple-400/40 via-violet-500/20 to-transparent",
@@ -268,7 +265,6 @@ const team: TeamMember[] = [
     name: "Ayan",
     role: "Graphic Designer & Brand Designer",
     description: "Creative designer crafting modern brand identities, marketing materials, social media graphics, and visual experiences.",
-    avatarUrl: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=256&h=256&q=80",
     initials: "AG",
     glowColor: "rgba(20, 184, 166, 0.22)",
     borderGradient: "from-teal-400/40 via-emerald-500/20 to-transparent",
@@ -349,12 +345,7 @@ export default function SkillsTeam() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   
-  // Track image load errors to fallback to initials
-  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
-
-  const handleImageError = (id: string) => {
-    setImageErrors(prev => ({ ...prev, [id]: true }));
-  };
+  // Render initials avatar directly
 
   return (
     <section
@@ -422,8 +413,6 @@ export default function SkillsTeam() {
           className="grid md:grid-cols-3 gap-8 items-stretch"
         >
           {team.map((member) => {
-            const hasImageError = imageErrors[member.id];
-            
             return (
               <motion.div
                 key={member.id}
@@ -456,25 +445,12 @@ export default function SkillsTeam() {
                 >
                   {/* Top Row: Avatar & Metadata */}
                   <div className="flex items-center gap-5 mb-6">
-                    {/* Avatar container */}
-                    <div className="relative w-18 h-18 rounded-2xl overflow-hidden shadow-inner border border-white/80 shrink-0 bg-neutral-100 flex items-center justify-center">
-                      {!hasImageError ? (
-                        <img
-                          src={member.avatarUrl}
-                          alt={`${member.name}'s professional portrait`}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
-                          loading="lazy"
-                          onError={() => handleImageError(member.id)}
-                        />
-                      ) : (
-                        // Premium fallback with initials & matching gradient
-                        <div 
-                          className="w-full h-full flex items-center justify-center font-bold text-white text-xl uppercase"
-                          style={{ background: member.avatarGradient }}
-                        >
-                          {member.initials}
-                        </div>
-                      )}
+                    {/* Avatar container with initials */}
+                    <div 
+                      className="relative w-18 h-18 rounded-2xl overflow-hidden border border-white/80 shrink-0 flex items-center justify-center font-bold text-white text-xl uppercase shadow-sm transition-transform duration-500 group-hover:scale-108"
+                      style={{ background: member.avatarGradient }}
+                    >
+                      {member.initials}
                     </div>
 
                     {/* Meta */}
