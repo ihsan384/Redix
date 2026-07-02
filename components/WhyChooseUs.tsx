@@ -60,7 +60,7 @@ export default function WhyChooseUs() {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-2 self-end text-sm leading-relaxed"
+            className="lg:col-span-2 self-end text-base md:text-[17px] leading-relaxed"
             style={{ color: "var(--text-secondary)" }}
           >
             We&apos;re not a typical agency. We&apos;re a creative studio that cares about your results as
@@ -112,12 +112,12 @@ export default function WhyChooseUs() {
                 </div>
 
                 <h3
-                  className="font-bold text-base mb-3"
+                  className="font-extrabold text-lg md:text-xl mb-3"
                   style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}
                 >
                   {f.title}
                 </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                <p className="text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
                   {f.desc}
                 </p>
 

@@ -456,30 +456,30 @@ export default function SkillsTeam() {
                     {/* Meta */}
                     <div className="flex-grow min-w-0">
                       <h3 
-                        className="font-bold text-xl leading-tight truncate text-neutral-900"
+                        className="font-extrabold text-2xl md:text-[28px] leading-tight truncate text-neutral-900"
                         style={{ fontFamily: "var(--font-space)" }}
                       >
                         {member.name}
                       </h3>
                       <p 
-                        className="text-[11px] font-bold uppercase tracking-wider mt-1.5 text-neutral-500"
+                        className="text-xs md:text-[13px] font-semibold uppercase tracking-widest mt-2 text-neutral-500"
                         style={{ fontFamily: "var(--font-space)" }}
                       >
                         {member.role}
                       </p>
                       {/* Skill Counter */}
-                      <span className="inline-flex items-center gap-1 mt-2.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-neutral-950 text-white shadow-xs">
+                      <span className="inline-flex items-center gap-1 mt-3 px-3 py-0.5 rounded-full text-[11px] font-bold tracking-wider uppercase bg-neutral-950 text-white shadow-xs">
                         {member.skills.length} Skills
                       </span>
                     </div>
                   </div>
 
                   {/* Divider */}
-                  <div className="w-12 h-0.5 bg-neutral-900/10 rounded-full mb-5" />
+                  <div className="w-16 h-0.5 bg-neutral-900/15 rounded-full mb-5" />
 
                   {/* Description */}
                   <p 
-                    className="text-[13.5px] leading-relaxed mb-6 flex-grow font-normal text-neutral-600"
+                    className="text-base leading-relaxed mb-6 flex-grow font-normal text-neutral-600"
                   >
                     {member.description}
                   </p>
@@ -487,7 +487,7 @@ export default function SkillsTeam() {
                   {/* Skills Section */}
                   <div className="mb-8">
                     <h4 
-                      className="text-[10px] font-bold uppercase tracking-widest text-neutral-400 mb-3.5"
+                      className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-3.5"
                       style={{ fontFamily: "var(--font-space)" }}
                     >
                       Core Skills
@@ -503,7 +503,7 @@ export default function SkillsTeam() {
                         <motion.li
                           key={skill.name}
                           variants={skillBadgeVariants}
-                          className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold tracking-wide border transition-colors duration-300 ${skill.colorClass}`}
+                          className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs md:text-[13px] font-medium tracking-wide border transition-colors duration-300 ${skill.colorClass}`}
                         >
                           <span className="shrink-0" aria-hidden="true">
                             <SkillIcon name={skill.name} />
@@ -517,7 +517,7 @@ export default function SkillsTeam() {
                   {/* Footer: Social Connections */}
                   <div className="flex items-center justify-between pt-4 border-t border-neutral-900/5 mt-auto">
                     <span 
-                      className="text-[10px] font-bold uppercase tracking-wider text-neutral-400"
+                      className="text-xs font-bold uppercase tracking-wider text-neutral-400"
                       style={{ fontFamily: "var(--font-space)" }}
                     >
                       Connect

@@ -112,7 +112,7 @@ export default function Services() {
                 />
               </span>
             </h2>
-            <p style={{ color: "var(--text-secondary)", lineHeight: 1.75, fontSize: "0.95rem" }}>
+            <p className="text-base md:text-lg leading-relaxed" style={{ color: "var(--text-secondary)" }}>
               Six focused services that work together to build, amplify, and grow your brand across
               every digital touchpoint.
             </p>
@@ -219,13 +219,13 @@ export default function Services() {
                   </div>
 
                   <h3
-                    className="font-bold text-lg mb-3"
+                    className="font-extrabold text-xl md:text-2xl mb-3"
                     style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}
                   >
                     {service.title}
                   </h3>
 
-                  <p className="text-sm leading-relaxed mb-6" style={{ color: "var(--text-secondary)" }}>
+                  <p className="text-base leading-relaxed mb-6" style={{ color: "var(--text-secondary)" }}>
                     {service.description}
                   </p>
 
@@ -234,11 +234,11 @@ export default function Services() {
                     {service.outcomes.map((o) => (
                       <span
                         key={o}
-                        className="text-xs font-semibold px-2.5 py-1"
+                        className="text-xs md:text-[13px] font-semibold px-3.5 py-1.5"
                         style={{
                           background: isHov ? "var(--yellow)" : "var(--bg-secondary)",
                           color: "var(--text-primary)",
-                          borderRadius: "2px",
+                          borderRadius: "4px",
                           fontFamily: "var(--font-space)",
                           transition: "background 0.3s ease",
                         }}
@@ -250,7 +250,7 @@ export default function Services() {
 
                   <button
                     onClick={() => scrollToContactWithService(service.title)}
-                    className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest transition-all"
+                    className="flex items-center gap-2 text-xs md:text-sm font-bold uppercase tracking-widest transition-all"
                     style={{
                       color: isHov ? "var(--text-primary)" : "var(--text-muted)",
                       fontFamily: "var(--font-space)",

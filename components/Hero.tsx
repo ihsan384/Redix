@@ -137,7 +137,7 @@ export default function Hero() {
               className="mt-8 lg:mt-10"
             >
               <p
-                className="leading-relaxed mb-6 text-[0.95rem]"
+                className="leading-relaxed mb-6 text-base md:text-lg"
                 style={{ color: "var(--text-secondary)", maxWidth: "480px" }}
               >
                 We help startups and growing businesses build brand identities, websites,
