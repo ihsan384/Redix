@@ -75,12 +75,12 @@ const projects: Project[] = [
     client: "Fusion Fit Gym",
     year: "2026",
     size: "large",
-    duration: "4 Weeks",
+    duration: "5 Weeks",
     industry: "Fitness",
     overview: {
       problem: "Fusion Fit Gym was struggling with manual spreadsheets, slow member check-ins, and fragmented billing systems that caused substantial revenue leakage.",
       solution: "We engineered a custom enterprise management ERP featuring automated membership subscription tiers, an active attendance tracking matrix, and trainer-scheduling APIs.",
-      result: "Streamlined operations by 40%, eliminated billing discrepancies, and introduced instant QR check-in functionality for all active members."
+      result: "Streamlined operations by 40%, eliminated billing discrepancies, and introduced instant Bio-metric check-in functionality for all active members."
     },
     features: [
       "Member Management",
@@ -88,19 +88,19 @@ const projects: Project[] = [
       "Billing & Subscriptions",
       "Trainer Management",
       "Analytics Dashboard",
-      "QR Check-in"
+      "Bio-metric Check-in"
     ],
     githubUrl: "https://github.com/ihsan384/GymRRP",
     metrics: [
       { value: "99%", label: "Performance" },
-      { value: "100", label: "SEO Score" },
+      
       { value: "2.1s", label: "Load Time" },
       { value: "Responsive", label: "Desktop • Tablet • Mobile" }
     ],
     gallery: [
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80",
-      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80"
+      "/assets/1.png",
+      "/assets/2.png",
+      "/assets/3.png"
     ],
     testimonial: {
       rating: 5,
@@ -115,7 +115,7 @@ const projects: Project[] = [
     filterCategories: ["All", "Restaurant", "Landing Page"],
     image: "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=600&h=400&fit=crop",
     description: "Premium culinary landing page showcasing virtual reservations, menu interactions, and dynamic booking systems.",
-    tech: ["HTML", "CSS", "GSAP", "JavaScript"],
+    tech: ["HTML", "Tailwind CSS", "GSAP", "JavaScript"],
     demoUrl: "https://restaurent-demo-landing-page.netlify.app/",
     caseStudyUrl: "#",
     client: "Aroma Bistro",
