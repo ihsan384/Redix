@@ -5,6 +5,7 @@ import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from
 import { ArrowUpRight, Sparkles, ArrowRight, Star, Zap, Eye } from "lucide-react";
 import Image from "next/image";
 import AnimatedCounter from "@/components/AnimatedCounter";
+import ProjectDetailsModal from "./ProjectDetailsModal";
 
 type FilterCategory =
   | "All"
@@ -25,7 +26,7 @@ const filterCategories: FilterCategory[] = [
   "Portfolio",
 ];
 
-interface Project {
+export interface Project {
   id: string;
   title: string;
   categoryBadge: string;
@@ -37,8 +38,27 @@ interface Project {
   caseStudyUrl: string;
   client: string;
   year: string;
-  
   size: "large" | "small" | "wide";
+  // Case Study Redesign fields
+  duration: string;
+  industry: string;
+  overview: {
+    problem: string;
+    solution: string;
+    result: string;
+  };
+  features: string[];
+  githubUrl?: string;
+  metrics: {
+    value: string;
+    label: string;
+  }[];
+  gallery: string[];
+  testimonial: {
+    rating: number;
+    text: string;
+    author: string;
+  };
 }
 
 const projects: Project[] = [
@@ -49,14 +69,44 @@ const projects: Project[] = [
     filterCategories: ["All", "ERP", "Business"],
     image: "/assets/gymrrp.png",
     description: "Enterprise resource planning system for gyms with active attendance matrixes, automated membership tier subscriptions, payment analytics dashboards, and trainer-scheduling APIs.",
-    tech: ["React", "Typescript", "Tailwind", "Supabase"],
+    tech: ["React", "Typescript", "Tailwind CSS", "Supabase", "Framer Motion", "Lucide"],
     demoUrl: "https://gymrrp.vercel.app/",
     caseStudyUrl: "#",
-    client: "Gym RRP Ltd.",
+    client: "Fusion Fit Gym",
     year: "2026",
-    
-    
     size: "large",
+    duration: "4 Weeks",
+    industry: "Fitness",
+    overview: {
+      problem: "Fusion Fit Gym was struggling with manual spreadsheets, slow member check-ins, and fragmented billing systems that caused substantial revenue leakage.",
+      solution: "We engineered a custom enterprise management ERP featuring automated membership subscription tiers, an active attendance tracking matrix, and trainer-scheduling APIs.",
+      result: "Streamlined operations by 40%, eliminated billing discrepancies, and introduced instant QR check-in functionality for all active members."
+    },
+    features: [
+      "Member Management",
+      "Attendance Tracking",
+      "Billing & Subscriptions",
+      "Trainer Management",
+      "Analytics Dashboard",
+      "QR Check-in"
+    ],
+    githubUrl: "https://github.com/ihsan384/GymRRP",
+    metrics: [
+      { value: "99%", label: "Performance" },
+      { value: "100", label: "SEO Score" },
+      { value: "2.1s", label: "Load Time" },
+      { value: "Responsive", label: "Desktop • Tablet • Mobile" }
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80",
+      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80"
+    ],
+    testimonial: {
+      rating: 5,
+      text: "REDIX.MEDIA delivered exactly what we needed. The system streamlined our operations.",
+      author: "Fusion Fit Gym"
+    }
   },
   {
     id: "restaurant-landing",
@@ -65,13 +115,43 @@ const projects: Project[] = [
     filterCategories: ["All", "Restaurant", "Landing Page"],
     image: "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=600&h=400&fit=crop",
     description: "Premium culinary landing page showcasing virtual reservations, menu interactions, and dynamic booking systems.",
-    tech: ["HTML", "CSS", "GSAP"],
+    tech: ["HTML", "CSS", "GSAP", "JavaScript"],
     demoUrl: "https://restaurent-demo-landing-page.netlify.app/",
     caseStudyUrl: "#",
     client: "Aroma Bistro",
     year: "2025",
-    
     size: "small",
+    duration: "2 Weeks",
+    industry: "Culinary",
+    overview: {
+      problem: "Aroma Bistro lacked a premium digital presence, causing them to miss reservation bookings and fail to capture their high-end restaurant atmosphere online.",
+      solution: "We designed a bespoke, highly interactive single-page booking application with smooth GSAP animations and web reservation integration.",
+      result: "Online table reservations increased by 65% in the first month, and session duration on the website tripled."
+    },
+    features: [
+      "Virtual Reservations",
+      "Interactive Menu Guide",
+      "Table Selection Map",
+      "Chef Showcases",
+      "Event Planner Module",
+      "SMS Confirmation API"
+    ],
+    githubUrl: "https://github.com/ihsan384/aroma-bistro",
+    metrics: [
+      { value: "98%", label: "Performance" },
+      { value: "96", label: "SEO Score" },
+      { value: "1.2s", label: "Load Time" },
+      { value: "Smooth", label: "GSAP Animations" }
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=800&q=80",
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80"
+    ],
+    testimonial: {
+      rating: 5,
+      text: "The booking flow is flawless. Our customers frequently praise the design when making reservations.",
+      author: "Aroma Bistro"
+    }
   },
   {
     id: "cafe-website",
@@ -80,13 +160,42 @@ const projects: Project[] = [
     filterCategories: ["All", "Restaurant", "Business"],
     image: "/assets/cafe-demo.png",
     description: "Bespoke café digital storefront with integrated online ordering systems, gallery matrices, and responsive map locators.",
-    tech: ["HTML", "CSS", "Vanilla JS"],
+    tech: ["HTML", "CSS", "Vanilla JS", "Netlify"],
     demoUrl: "https://cafe-demo-17.netlify.app/",
     caseStudyUrl: "#",
     client: "Elixir Coffee",
     year: "2025",
-    
     size: "small",
+    duration: "3 Weeks",
+    industry: "Food & Beverage",
+    overview: {
+      problem: "Elixir Coffee had a static social page but no direct ordering pipeline, relying on third-party food delivery apps that charged high commissions.",
+      solution: "We built a fast storefront with light cart capabilities, dynamic store maps, and mobile-first responsive architecture.",
+      result: "Allowed the client to take direct pickups, capturing 100% of ordering margins and building a direct customer relationship."
+    },
+    features: [
+      "Mobile Ordering Cart",
+      "Bespoke Menu Grid",
+      "Real-time Store Status",
+      "Integrated Map Locator",
+      "Interactive Gallery",
+      "Loyalty Signup Form"
+    ],
+    metrics: [
+      { value: "100%", label: "Mobile Score" },
+      { value: "98", label: "SEO Rank" },
+      { value: "0.9s", label: "Load Time" },
+      { value: "Zero", label: "Server Costs" }
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&q=80",
+      "https://images.unsplash.com/photo-1498804103079-a6351b050096?w=800&q=80"
+    ],
+    testimonial: {
+      rating: 5,
+      text: "It has never been easier for our regulars to place orders. We saved thousands in commission fees.",
+      author: "Elixir Coffee"
+    }
   },
   {
     id: "business-portfolio",
@@ -95,13 +204,43 @@ const projects: Project[] = [
     filterCategories: ["All", "Portfolio", "Business"],
     image: "/assets/ayan portfolio.png",
     description: "Award-winning portfolio for a graphic designer, built with buttery-smooth scroll physics and custom layout grids.",
-    tech: ["HTML", "CSS", "GSAP"],
+    tech: ["HTML", "CSS", "GSAP", "Vanilla JS"],
     demoUrl: "https://ayan-graphics-portfolio.netlify.app/",
     caseStudyUrl: "#",
     client: "Ayan Graphics",
     year: "2026",
-
     size: "wide",
+    duration: "3 Weeks",
+    industry: "Design & Media",
+    overview: {
+      problem: "Ayan Graphics needed a portfolio that matched his high level of visual art, requiring animations that felt tactile, smooth, and premium.",
+      solution: "We built a custom portfolio using advanced layout grids, custom scroll physics, and heavy animation composition via GSAP.",
+      result: "Featured on several design galleries, gaining direct inbound leads for the designer."
+    },
+    features: [
+      "Custom Scroll Physics",
+      "Layout Grid Matrices",
+      "High-Res Image Zoom",
+      "Dark/Light Mode Theme",
+      "Inbound Contact Funnel",
+      "Dynamic Project Filters"
+    ],
+    githubUrl: "https://github.com/ihsan384/ayan-portfolio",
+    metrics: [
+      { value: "95%", label: "Performance" },
+      { value: "100", label: "SEO Score" },
+      { value: "1.8s", label: "Load Time" },
+      { value: "Awwwards", label: "Nominated" }
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80",
+      "https://images.unsplash.com/photo-1600132806370-bf17e65e942f?w=800&q=80"
+    ],
+    testimonial: {
+      rating: 5,
+      text: "REDIX.MEDIA understood my aesthetic completely. The animations are incredibly polished.",
+      author: "Ayan Graphics"
+    }
   },
   {
     id: "pet-shop",
@@ -115,8 +254,37 @@ const projects: Project[] = [
     caseStudyUrl: "#",
     client: "Paws & Claws Co.",
     year: "2025",
-    
     size: "small",
+    duration: "3 Weeks",
+    industry: "Pet Care",
+    overview: {
+      problem: "A local pet boutique wanted to scale their reach and enable appointment scheduling for pet grooming without calling the reception desk.",
+      solution: "We designed a friendly, highly-accessible storefront with an automated booking wizard and interactive care plans.",
+      result: "Reduced front-desk booking inquiries by 50% while increasing overall retail store traffic by 30%."
+    },
+    features: [
+      "Booking Scheduler",
+      "Pet Profile Creator",
+      "Interactive Care Plans",
+      "Staff Calendar Sync",
+      "Automated Reminders",
+      "Local SEO Setup"
+    ],
+    metrics: [
+      { value: "99%", label: "Accessibility" },
+      { value: "95", label: "Performance" },
+      { value: "1.4s", label: "Load Time" },
+      { value: "50%", label: "Booking Uplift" }
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=800&q=80",
+      "https://images.unsplash.com/photo-1541599540903-216a46ca1ad0?w=800&q=80"
+    ],
+    testimonial: {
+      rating: 5,
+      text: "Our clients love the simplicity of scheduling groomings. It has streamlined our workflow.",
+      author: "Paws & Claws Co."
+    }
   },
   {
     id: "cafe-v2",
@@ -130,8 +298,38 @@ const projects: Project[] = [
     caseStudyUrl: "#",
     client: "Brew & Bites Corp.",
     year: "2024",
-    
     size: "large",
+    duration: "6 Weeks",
+    industry: "Hospitality",
+    overview: {
+      problem: "Brew & Bites needed a scalable web application that could handle multi-location ordering, real-time ticket kitchen views, and payment gateways.",
+      solution: "We engineered a Next-gen café portal featuring reactive state filters, online payment gateways, and lightweight motion templates built with React.",
+      result: "Reduced ordering processing times from minutes to seconds, improving guest satisfaction scores across three locations."
+    },
+    features: [
+      "Reactive Menu Filters",
+      "Multi-Location Support",
+      "Kitchen Display System",
+      "Payment Gateway Sync",
+      "Real-time Order Status",
+      "Admin Dashboard"
+    ],
+    githubUrl: "https://github.com/ihsan384/brew-bites-v2",
+    metrics: [
+      { value: "97%", label: "Mobile Load" },
+      { value: "98", label: "Performance" },
+      { value: "1.1s", label: "Interactive Time" },
+      { value: "Secured", label: "PCI Compliance" }
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&q=80",
+      "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&q=80"
+    ],
+    testimonial: {
+      rating: 5,
+      text: "The technology provided by REDIX.MEDIA helped us scale our operations to three locations with ease.",
+      author: "Brew & Bites Corp."
+    }
   },
   {
     id: "interior-studio",
@@ -145,8 +343,37 @@ const projects: Project[] = [
     caseStudyUrl: "#",
     client: "Hearth Studio",
     year: "2025",
-
     size: "small",
+    duration: "3 Weeks",
+    industry: "Architecture",
+    overview: {
+      problem: "An upscale architecture firm needed an elegant digital canvas to display high-resolution architectural works without compromising site speed.",
+      solution: "We developed a minimal portfolio showcasing high-resolution gallery matrices, responsive map locators, and optimized client reviews.",
+      result: "The studio won two new corporate interior contracts after presenting their new digital catalog to prospective clients."
+    },
+    features: [
+      "High-Res Image Optimization",
+      "Interactive Project Pins",
+      "Client Review Panel",
+      "Minimal Layout Grid",
+      "Inbound Inquiry Form",
+      "SVG Blueprint Visuals"
+    ],
+    metrics: [
+      { value: "100%", label: "Image Optimization" },
+      { value: "99", label: "SEO Rating" },
+      { value: "1.5s", label: "Page Load" },
+      { value: "Minimalist", label: "Apple-inspired UX" }
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80",
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80"
+    ],
+    testimonial: {
+      rating: 5,
+      text: "The website feels like our physical studio space—clean, spacious, and perfectly executed.",
+      author: "Hearth Studio"
+    }
   },
   {
     id: "coco-cafe",
@@ -160,8 +387,38 @@ const projects: Project[] = [
     caseStudyUrl: "#",
     client: "Coco Cafe India",
     year: "2022",
-
     size: "wide",
+    duration: "5 Weeks",
+    industry: "Food & Beverage",
+    overview: {
+      problem: "Coco Cafe India launched a luxury branch but was struggling with local search discovery, losing out on coffee lovers in premium metro areas.",
+      solution: "We built a luxury-focused branding portal with organic schema markup and search engine structured tables.",
+      result: "Attained Rank #1 for regional specialty cafes, driving a steady stream of foot traffic to their physical locations."
+    },
+    features: [
+      "Luxury Brand Storytelling",
+      "Menu Carousel Slider",
+      "Structured SEO Metadata",
+      "Location Store Guide",
+      "Event Booking Module",
+      "Social Media Aggregator"
+    ],
+    githubUrl: "https://github.com/ihsan384/coco-cafe",
+    metrics: [
+      { value: "100%", label: "SEO Score" },
+      { value: "96", label: "Performance" },
+      { value: "1.0s", label: "First Content Paint" },
+      { value: "#1 Rank", label: "Google Local Search" }
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&q=80",
+      "https://images.unsplash.com/photo-1507133750040-4a8f57021571?w=800&q=80"
+    ],
+    testimonial: {
+      rating: 5,
+      text: "Organic search traffic rose by over 200%. The site perfectly mirrors our brand aesthetic.",
+      author: "Coco Cafe India"
+    }
   },
 ];
 
@@ -201,7 +458,15 @@ function ProjectImage({ src, alt, heightClass }: { src: string; alt: string; hei
   );
 }
 
-function BentoCard({ project, index }: { project: Project; index: number }) {
+function BentoCard({
+  project,
+  index,
+  onSelectProject,
+}: {
+  project: Project;
+  index: number;
+  onSelectProject: (project: Project) => void;
+}) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
@@ -352,19 +617,13 @@ function BentoCard({ project, index }: { project: Project; index: number }) {
             </a>
 
             {/* Secondary Button */}
-            <a
-              href={project.caseStudyUrl}
-              onClick={(e) => {
-                if (project.caseStudyUrl === "#") {
-                  e.preventDefault();
-                  alert(`Project Details for ${project.title} is coming soon!`);
-                }
-              }}
-              className="flex-1 py-3.5 px-5 rounded-full text-center text-xs font-bold uppercase tracking-wider bg-white hover:bg-neutral-50 border border-[#ECECEC] text-[#111111] transition-all duration-300 flex items-center justify-center gap-2"
+            <button
+              onClick={() => onSelectProject(project)}
+              className="flex-1 py-3.5 px-5 rounded-full text-center text-xs font-bold uppercase tracking-wider bg-white hover:bg-neutral-50 border border-[#ECECEC] text-[#111111] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>Project Details</span>
               <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -375,6 +634,7 @@ function BentoCard({ project, index }: { project: Project; index: number }) {
 export default function Portfolio() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [activeFilter, setActiveFilter] = useState<FilterCategory>("All");
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const filteredProjects = projects.filter((p) => {
     if (activeFilter === "All") return true;
@@ -462,7 +722,12 @@ export default function Portfolio() {
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, idx) => (
-              <BentoCard key={project.id} project={project} index={idx} />
+              <BentoCard
+                key={project.id}
+                project={project}
+                index={idx}
+                onSelectProject={setSelectedProject}
+              />
             ))}
           </AnimatePresence>
         </motion.div>
@@ -554,6 +819,16 @@ export default function Portfolio() {
         </div>
 
       </div>
+
+      {/* Premium Case Study Modal */}
+      <AnimatePresence>
+        {selectedProject && (
+          <ProjectDetailsModal
+            project={selectedProject}
+            onClose={() => setSelectedProject(null)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 }
