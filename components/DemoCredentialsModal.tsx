@@ -45,7 +45,7 @@ export default function DemoCredentialsModal({ isOpen, onClose }: DemoCredential
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-hidden select-none">
+    <div className="fixed inset-0 z-[90] flex items-center justify-center p-4 overflow-hidden select-none">
       {/* Glassmorphic Backdrop */}
       <motion.div
         initial={{ opacity: 0 }}

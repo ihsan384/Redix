@@ -5,6 +5,7 @@ import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from
 import { ArrowUpRight, Sparkles, ArrowRight, Zap } from "lucide-react";
 import Image from "next/image";
 import DemoCredentialsModal from "./DemoCredentialsModal";
+import ProjectDetailsModal from "./ProjectDetailsModal";
 
 
 type FilterCategory =
@@ -462,10 +463,12 @@ function BentoCard({
   project,
   index,
   onOpenDemoCredentials,
+  onOpenProjectDetails,
 }: {
   project: Project;
   index: number;
   onOpenDemoCredentials: () => void;
+  onOpenProjectDetails: (project: Project) => void;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
@@ -611,7 +614,13 @@ function BentoCard({
                 <ArrowUpRight size={13} className="transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
               </a>
             )}
-
+            <button
+              type="button"
+              onClick={() => onOpenProjectDetails(project)}
+              className="flex-1 py-3.5 px-5 rounded-full text-center text-xs font-bold uppercase tracking-wider bg-white text-[#111111] border border-neutral-200 hover:bg-neutral-50 transition-all duration-300 flex items-center justify-center gap-2 shadow-sm hover:shadow-[0_10px_25px_rgba(0,0,0,0.08)] cursor-pointer"
+            >
+              <span>Case Study</span>
+            </button>
           </div>
         </div>
       </div>
@@ -622,7 +631,19 @@ function BentoCard({
 export default function Portfolio() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [activeFilter, setActiveFilter] = useState<FilterCategory>("All");
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
+
+  const handleOpenProjectDetails = (project: Project) => {
+    setSelectedProject(project);
+    setIsProjectModalOpen(true);
+  };
+
+  const handleCloseProjectDetails = () => {
+    setIsProjectModalOpen(false);
+    setSelectedProject(null);
+  };
 
   const filteredProjects = projects.filter((p) => {
     if (activeFilter === "All") return true;
@@ -715,6 +736,7 @@ export default function Portfolio() {
                 project={project}
                 index={idx}
                 onOpenDemoCredentials={() => setIsDemoModalOpen(true)}
+                onOpenProjectDetails={handleOpenProjectDetails}
               />
             ))}
           </AnimatePresence>
@@ -810,6 +832,15 @@ export default function Portfolio() {
 
       {/* Demo Credentials Modal */}
       <AnimatePresence>
+        {isProjectModalOpen && selectedProject && (
+          <ProjectDetailsModal
+            key={selectedProject.id}
+            project={selectedProject}
+            isOpen={isProjectModalOpen}
+            onClose={handleCloseProjectDetails}
+            onOpenDemoCredentials={() => setIsDemoModalOpen(true)}
+          />
+        )}
         {isDemoModalOpen && (
           <DemoCredentialsModal
             isOpen={isDemoModalOpen}

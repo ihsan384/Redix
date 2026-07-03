@@ -8,12 +8,14 @@ import type { Project } from "./Portfolio";
 
 interface ProjectDetailsModalProps {
   project: Project | null;
+  isOpen: boolean;
   onClose: () => void;
   onOpenDemoCredentials?: () => void;
 }
 
 export default function ProjectDetailsModal({
   project,
+  isOpen,
   onClose,
   onOpenDemoCredentials,
 }: ProjectDetailsModalProps) {
@@ -21,7 +23,7 @@ export default function ProjectDetailsModal({
 
   // Disable body scroll when modal is open
   useEffect(() => {
-    if (project) {
+    if (isOpen && project) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -29,7 +31,7 @@ export default function ProjectDetailsModal({
     return () => {
       document.body.style.overflow = "";
     };
-  }, [project]);
+  }, [isOpen, project]);
 
   // Handle ESC key press
   useEffect(() => {
@@ -48,7 +50,7 @@ export default function ProjectDetailsModal({
     };
   }, [onClose, lightboxImage]);
 
-  if (!project) return null;
+  if (!isOpen || !project) return null;
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
@@ -66,7 +68,7 @@ export default function ProjectDetailsModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 lg:p-12 overflow-hidden">
+    <div className="fixed inset-0 z-[80] flex items-center justify-center p-4 md:p-8 lg:p-12 overflow-hidden">
       {/* Backdrop */}
       <motion.div
         initial={{ opacity: 0 }}
