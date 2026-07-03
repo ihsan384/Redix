@@ -37,8 +37,7 @@ interface Project {
   caseStudyUrl: string;
   client: string;
   year: string;
-  rating: number;
-  metrics: string[];
+  
   size: "large" | "small" | "wide";
 }
 
@@ -55,8 +54,8 @@ const projects: Project[] = [
     caseStudyUrl: "#",
     client: "Gym RRP Ltd.",
     year: "2026",
-    rating: 5,
-    metrics: ["Fast Load", "SEO 100", "99% Uptime"],
+    
+    
     size: "large",
   },
   {
@@ -71,8 +70,7 @@ const projects: Project[] = [
     caseStudyUrl: "#",
     client: "Aroma Bistro",
     year: "2025",
-    rating: 5,
-    metrics: ["Interactive", "Fluid", "GSAP Orbit"],
+    
     size: "small",
   },
   {
@@ -87,8 +85,7 @@ const projects: Project[] = [
     caseStudyUrl: "#",
     client: "Elixir Coffee",
     year: "2025",
-    rating: 5,
-    metrics: ["Lightweight", "Custom SVG", "SEO Opt"],
+    
     size: "small",
   },
   {
@@ -103,8 +100,7 @@ const projects: Project[] = [
     caseStudyUrl: "#",
     client: "Ayan Graphics",
     year: "2026",
-    rating: 5,
-    metrics: ["Ultra Smooth", "GSAP Scroll", "High Perf"],
+
     size: "wide",
   },
   {
@@ -119,8 +115,7 @@ const projects: Project[] = [
     caseStudyUrl: "#",
     client: "Paws & Claws Co.",
     year: "2025",
-    rating: 5,
-    metrics: ["Accessible", "Clean UI", "Responsive"],
+    
     size: "small",
   },
   {
@@ -134,9 +129,8 @@ const projects: Project[] = [
     demoUrl: "https://demo-website-19.netlify.app/",
     caseStudyUrl: "#",
     client: "Brew & Bites Corp.",
-    year: "2026",
-    rating: 5,
-    metrics: ["Single Page App", "100% Flex", "Vite Speed"],
+    year: "2024",
+    
     size: "large",
   },
   {
@@ -151,8 +145,7 @@ const projects: Project[] = [
     caseStudyUrl: "#",
     client: "Hearth Studio",
     year: "2025",
-    rating: 5,
-    metrics: ["Minimalist", "Hi-Res Asset", "Layout Fluid"],
+
     size: "small",
   },
   {
@@ -166,9 +159,8 @@ const projects: Project[] = [
     demoUrl: "https://cocoicafe.in/",
     caseStudyUrl: "#",
     client: "Coco Cafe India",
-    year: "2026",
-    rating: 5,
-    metrics: ["Live Brand", "SEO Top 3", "Fluid Grid"],
+    year: "2022",
+
     size: "wide",
   },
 ];
