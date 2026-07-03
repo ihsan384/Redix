@@ -6,6 +6,8 @@ import { ArrowUpRight, Sparkles, ArrowRight, Star, Zap, Eye } from "lucide-react
 import Image from "next/image";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import ProjectDetailsModal from "./ProjectDetailsModal";
+import DemoCredentialsModal from "./DemoCredentialsModal";
+
 
 type FilterCategory =
   | "All"
@@ -70,7 +72,7 @@ const projects: Project[] = [
     image: "/assets/gymrrp.png",
     description: "Enterprise resource planning system for gyms with active attendance matrixes, automated membership tier subscriptions, payment analytics dashboards, and trainer-scheduling APIs.",
     tech: ["React", "Typescript", "Tailwind CSS", "Supabase", "Framer Motion", "Lucide"],
-    demoUrl: "https://gymrrp.vercel.app/",
+    demoUrl: "https://fusionfitgym.vercel.app",
     caseStudyUrl: "#",
     client: "Fusion Fit Gym",
     year: "2026",
@@ -462,10 +464,12 @@ function BentoCard({
   project,
   index,
   onSelectProject,
+  onOpenDemoCredentials,
 }: {
   project: Project;
   index: number;
   onSelectProject: (project: Project) => void;
+  onOpenDemoCredentials: () => void;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
@@ -604,17 +608,27 @@ function BentoCard({
           {/* Strictly Aligned Buttons */}
           <div className="flex items-center gap-3">
             {/* Primary Button */}
-            <a
-              href={project.demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 py-3.5 px-5 rounded-full text-center text-xs font-bold uppercase tracking-wider bg-black text-white hover:bg-neutral-900 transition-all duration-300 flex items-center justify-center gap-2 shadow-sm hover:shadow-[0_10px_25px_rgba(0,0,0,0.12)] group/btn"
-            >
-              <span>
-                Live Preview →
-              </span>
-              <ArrowUpRight size={13} className="transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-            </a>
+            {project.id === "gym-rrp" ? (
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  onOpenDemoCredentials();
+                }}
+                className="flex-1 py-3.5 px-5 rounded-full text-center text-xs font-bold uppercase tracking-wider bg-black text-white hover:bg-neutral-900 transition-all duration-300 flex items-center justify-center gap-2 shadow-sm hover:shadow-[0_10px_25px_rgba(0,0,0,0.12)] group/btn cursor-pointer"
+              >
+                <span>🚀 Explore Live Demo</span>
+              </button>
+            ) : (
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 py-3.5 px-5 rounded-full text-center text-xs font-bold uppercase tracking-wider bg-black text-white hover:bg-neutral-900 transition-all duration-300 flex items-center justify-center gap-2 shadow-sm hover:shadow-[0_10px_25px_rgba(0,0,0,0.12)] group/btn"
+              >
+                <span>Live Preview →</span>
+                <ArrowUpRight size={13} className="transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+              </a>
+            )}
 
             {/* Secondary Button */}
             <button
@@ -635,6 +649,7 @@ export default function Portfolio() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [activeFilter, setActiveFilter] = useState<FilterCategory>("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
 
   const filteredProjects = projects.filter((p) => {
     if (activeFilter === "All") return true;
@@ -727,6 +742,7 @@ export default function Portfolio() {
                 project={project}
                 index={idx}
                 onSelectProject={setSelectedProject}
+                onOpenDemoCredentials={() => setIsDemoModalOpen(true)}
               />
             ))}
           </AnimatePresence>
@@ -826,6 +842,17 @@ export default function Portfolio() {
           <ProjectDetailsModal
             project={selectedProject}
             onClose={() => setSelectedProject(null)}
+            onOpenDemoCredentials={() => setIsDemoModalOpen(true)}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Demo Credentials Modal */}
+      <AnimatePresence>
+        {isDemoModalOpen && (
+          <DemoCredentialsModal
+            isOpen={isDemoModalOpen}
+            onClose={() => setIsDemoModalOpen(false)}
           />
         )}
       </AnimatePresence>

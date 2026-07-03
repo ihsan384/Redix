@@ -9,9 +9,14 @@ import type { Project } from "./Portfolio";
 interface ProjectDetailsModalProps {
   project: Project | null;
   onClose: () => void;
+  onOpenDemoCredentials?: () => void;
 }
 
-export default function ProjectDetailsModal({ project, onClose }: ProjectDetailsModalProps) {
+export default function ProjectDetailsModal({
+  project,
+  onClose,
+  onOpenDemoCredentials,
+}: ProjectDetailsModalProps) {
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
 
   // Disable body scroll when modal is open
@@ -183,6 +188,74 @@ export default function ProjectDetailsModal({ project, onClose }: ProjectDetails
                 </div>
               </motion.div>
 
+              {/* Special Live Demo Section for Fusion Fit ERP */}
+              {project.id === "gym-rrp" && (
+                <motion.div
+                  variants={fadeInUp}
+                  className="space-y-5 p-6 bg-[#FFFDF5] border border-[#FFC107]/20 rounded-[28px] text-left shadow-sm relative overflow-hidden"
+                >
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-[#FFC107]/5 rounded-full blur-xl pointer-events-none" />
+                  
+                  <div className="space-y-1">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FFC107]/10 text-[9px] font-extrabold uppercase tracking-[0.2em] text-[#B78A00]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#FFC107] animate-pulse" />
+                      Live Demo
+                    </span>
+                    <h4 className="text-base font-extrabold text-neutral-900 leading-tight">
+                      Explore the complete Fusion Fit ERP with sample data.
+                    </h4>
+                  </div>
+
+                  {/* Demo Features list */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                    {[
+                      "Dashboard",
+                      "Member Management",
+                      "Attendance",
+                      "Billing",
+                      "Personal Training",
+                      "Reports",
+                      "Analytics"
+                    ].map((item) => (
+                      <div key={item} className="flex items-center gap-2">
+                        <span className="text-[#FFC107] font-bold text-[10px]">✔</span>
+                        <span className="text-xs font-bold text-neutral-800">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Yellow Notice */}
+                  <div className="p-4 bg-yellow-50 border border-yellow-200/80 rounded-[20px] text-xs font-semibold text-yellow-800 leading-relaxed">
+                    No signup required.
+                    <br />
+                    You&apos;ll automatically enter the demo environment.
+                  </div>
+
+                  {/* Action buttons inside the section */}
+                  <div className="flex flex-col sm:flex-row gap-3 pt-1">
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (onOpenDemoCredentials) onOpenDemoCredentials();
+                      }}
+                      className="flex-1 py-3 px-5 rounded-full text-center text-xs font-bold uppercase tracking-wider bg-[#FFC107] hover:bg-[#e0a800] text-black transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:shadow-md active:scale-95"
+                    >
+                      🚀 Launch Live Demo
+                    </button>
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 py-3 px-5 rounded-full text-center text-xs font-bold uppercase tracking-wider bg-white hover:bg-neutral-50 border border-[#ECECEC] text-[#111111] transition-all duration-300 flex items-center justify-center gap-2 active:scale-95"
+                      >
+                        View Source
+                      </a>
+                    )}
+                  </div>
+                </motion.div>
+              )}
+
               {/* Image Gallery */}
               <motion.div variants={fadeInUp} className="space-y-4">
                 <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-400">
@@ -208,26 +281,28 @@ export default function ProjectDetailsModal({ project, onClose }: ProjectDetails
               </motion.div>
 
               {/* Features Section */}
-              <motion.div variants={fadeInUp} className="space-y-4">
-                <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-400">
-                  Key Features
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {project.features.map((feature) => (
-                    <motion.div
-                      key={feature}
-                      whileHover={{ y: -6 }}
-                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                      className="flex items-center gap-3.5 p-4.5 bg-white border border-black/[0.05] rounded-[28px] shadow-[0_4px_20px_rgba(0,0,0,0.01)]"
-                    >
-                      <div className="flex-shrink-0 w-7 h-7 rounded-full bg-[#FFC107]/10 flex items-center justify-center">
-                        <span className="text-[#FFC107] font-bold text-xs">✔</span>
-                      </div>
-                      <span className="text-xs font-bold text-neutral-800">{feature}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
+              {project.id !== "gym-rrp" && (
+                <motion.div variants={fadeInUp} className="space-y-4">
+                  <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-400">
+                    Key Features
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {project.features.map((feature) => (
+                      <motion.div
+                        key={feature}
+                        whileHover={{ y: -6 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                        className="flex items-center gap-3.5 p-4.5 bg-white border border-black/[0.05] rounded-[28px] shadow-[0_4px_20px_rgba(0,0,0,0.01)]"
+                      >
+                        <div className="flex-shrink-0 w-7 h-7 rounded-full bg-[#FFC107]/10 flex items-center justify-center">
+                          <span className="text-[#FFC107] font-bold text-xs">✔</span>
+                        </div>
+                        <span className="text-xs font-bold text-neutral-800">{feature}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
 
               {/* Tech Stack */}
               <motion.div variants={fadeInUp} className="space-y-4">
@@ -309,18 +384,30 @@ export default function ProjectDetailsModal({ project, onClose }: ProjectDetails
                     rel="noopener noreferrer"
                     className="w-full sm:w-auto px-8 py-3.5 rounded-full text-center text-[11px] font-bold uppercase tracking-widest bg-white hover:bg-neutral-50 border border-[#ECECEC] text-[#111111] transition-all duration-300 flex items-center justify-center gap-2"
                   >
-                    Visit Github
+                    {project.id === "gym-rrp" ? "View Source" : "Visit Github"}
                   </a>
                 )}
                 
-                <a
-                  href={project.demoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto px-8 py-3.5 rounded-full text-center text-[11px] font-bold uppercase tracking-widest bg-[#FFC107] hover:bg-[#e0a800] text-black transition-all duration-300 flex items-center justify-center gap-2"
-                >
-                  View Live Website
-                </a>
+                {project.id === "gym-rrp" ? (
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (onOpenDemoCredentials) onOpenDemoCredentials();
+                    }}
+                    className="w-full sm:w-auto px-8 py-3.5 rounded-full text-center text-[11px] font-bold uppercase tracking-widest bg-[#FFC107] hover:bg-[#e0a800] text-black transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-sm active:scale-[0.98]"
+                  >
+                    🚀 Launch Live Demo
+                  </button>
+                ) : (
+                  <a
+                    href={project.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto px-8 py-3.5 rounded-full text-center text-[11px] font-bold uppercase tracking-widest bg-[#FFC107] hover:bg-[#e0a800] text-black transition-all duration-300 flex items-center justify-center gap-2"
+                  >
+                    View Live Website
+                  </a>
+                )}
               </div>
             </div>
           </div>
