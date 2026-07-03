@@ -187,7 +187,7 @@ function ProjectImage({ src, alt, heightClass }: { src: string; alt: string; hei
         alt={alt}
         fill
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-106"
+        className="object-cover object-top transition-all duration-700 ease-out group-hover:scale-110"
         onLoad={() => setLoading(false)}
         onError={() => {
           if (src.includes("gym")) {
@@ -213,10 +213,10 @@ function BentoCard({ project, index }: { project: Project; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
-  
+
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  
+
   const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [6, -6]), { stiffness: 200, damping: 25 });
   const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-6, 6]), { stiffness: 200, damping: 25 });
 
@@ -227,7 +227,7 @@ function BentoCard({ project, index }: { project: Project; index: number }) {
       x: e.clientX - rect.left,
       y: e.clientY - rect.top,
     });
-    
+
     const width = rect.width;
     const height = rect.height;
     const mouseX = e.clientX - rect.left - width / 2;
@@ -251,21 +251,21 @@ function BentoCard({ project, index }: { project: Project; index: number }) {
     project.size === "large"
       ? "md:col-span-8 lg:col-span-8"
       : project.size === "wide"
-      ? "md:col-span-8 lg:col-span-8"
-      : "md:col-span-4 lg:col-span-4";
+        ? "md:col-span-8 lg:col-span-8"
+        : "md:col-span-4 lg:col-span-4";
 
   // Aspect ratio/height adjustments for cards
   const imageContainerHeight =
     project.size === "large"
-      ? "h-[260px] sm:h-[340px] lg:h-[420px]"
+      ? "h-[320px] sm:h-[420px] lg:h-[520px]"
       : project.size === "wide"
-      ? "h-[220px] sm:h-[280px] lg:h-[320px]"
-      : "h-[200px] sm:h-[240px] lg:h-[260px]";
+        ? "h-[220px] sm:h-[280px] lg:h-[320px]"
+        : "h-[200px] sm:h-[240px] lg:h-[260px]";
 
   const cardEntryVariants = {
     hidden: { opacity: 0, y: 40 },
-    show: { 
-      opacity: 1, 
+    show: {
+      opacity: 1,
       y: 0,
       transition: {
         type: "spring" as const,
@@ -288,23 +288,8 @@ function BentoCard({ project, index }: { project: Project; index: number }) {
         rotateY: rotateY,
         transformStyle: "preserve-3d"
       }}
-      className={`group relative flex flex-col bg-white rounded-[28px] overflow-hidden border border-black/[0.05] p-8 transition-all duration-500 ease-out shadow-[0_20px_60px_rgba(15,23,42,0.08)] hover:shadow-[0_40px_100px_rgba(0,0,0,0.14)] hover:-translate-y-[10px] hover:scale-[1.015] cursor-pointer ${colSpanClass}`}
+      className={`group relative flex flex-col bg-white rounded-[32px] overflow-hidden border border-neutral-200 p-6 transition-all duration-500 ease-out hover:-translate-y-3 hover:border-[#FFC107] hover:shadow-[0_35px_80px_rgba(0,0,0,0.08)] ${colSpanClass}`}
     >
-      {/* Floating custom cursor */}
-      <motion.div
-        className="absolute pointer-events-none z-30 bg-[#111111] text-white font-bold text-[11px] uppercase tracking-[0.15em] px-4 py-2 rounded-full shadow-lg flex items-center gap-1.5 border border-white/10"
-        animate={{
-          x: cursorPos.x - 55,
-          y: cursorPos.y - 18,
-          scale: isHovered ? 1 : 0,
-          opacity: isHovered ? 1 : 0,
-        }}
-        transition={{ type: "spring", stiffness: 350, damping: 28, mass: 0.5 }}
-      >
-        <span>View Demo</span>
-        <Eye size={12} className="text-[#FFC107]" />
-      </motion.div>
-
       {/* Image Wrap */}
       <div className="relative w-full overflow-hidden rounded-[20px] mb-6">
         <ProjectImage src={project.image} alt={project.title} heightClass={imageContainerHeight} />
@@ -312,7 +297,7 @@ function BentoCard({ project, index }: { project: Project; index: number }) {
 
         {/* Top-Left Category Badge (Glassmorphic) */}
         <div className="absolute top-4 left-4 z-20 pointer-events-none">
-          <span className="inline-flex items-center px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-wider bg-white/70 backdrop-blur-md text-neutral-900 border border-white/40 shadow-sm">
+          <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-black/80 text-white text-[10px] font-semibold uppercase tracking-[0.2em] backdrop-blur-xl">
             {project.categoryBadge}
           </span>
         </div>
@@ -336,12 +321,12 @@ function BentoCard({ project, index }: { project: Project; index: number }) {
           </div>
 
           {/* Card Title */}
-          <h3 className="text-xl sm:text-2xl lg:text-[26px] font-bold tracking-tight text-[#111111] mb-3 group-hover:text-[#FFC107] transition-colors duration-300">
+          <h3 className="text-3xl font-black tracking-tight text-neutral-900 mb-2 group-hover:text-black transition-all duration-300">
             {project.title}
           </h3>
 
           {/* Standardized description height */}
-          <p className="text-neutral-500 text-sm leading-[1.8] mb-5 font-normal h-[50px] line-clamp-2 overflow-hidden">
+          <p className="text-neutral-500 text-[15px] leading-7 mb-6 line-clamp-2">
             {project.description}
           </p>
 
@@ -368,49 +353,26 @@ function BentoCard({ project, index }: { project: Project; index: number }) {
               rel="noopener noreferrer"
               className="flex-1 py-3.5 px-5 rounded-full text-center text-xs font-bold uppercase tracking-wider bg-black text-white hover:bg-neutral-900 transition-all duration-300 flex items-center justify-center gap-2 shadow-sm hover:shadow-[0_10px_25px_rgba(0,0,0,0.12)] group/btn"
             >
-              <span>View Live</span>
+              <span>
+                Live Preview →
+              </span>
               <ArrowUpRight size={13} className="transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
             </a>
-            
+
             {/* Secondary Button */}
             <a
               href={project.caseStudyUrl}
               onClick={(e) => {
                 if (project.caseStudyUrl === "#") {
                   e.preventDefault();
-                  alert(`Case study for ${project.title} is coming soon!`);
+                  alert(`Project Details for ${project.title} is coming soon!`);
                 }
               }}
               className="flex-1 py-3.5 px-5 rounded-full text-center text-xs font-bold uppercase tracking-wider bg-white hover:bg-neutral-50 border border-[#ECECEC] text-[#111111] transition-all duration-300 flex items-center justify-center gap-2"
             >
-              <span>Case Study</span>
+              <span>Project Details</span>
               <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-1" />
             </a>
-          </div>
-
-          {/* Card Metrics Footer */}
-          <div className="mt-6 pt-4 border-t border-black/[0.05] flex flex-wrap items-center justify-between gap-3 text-[11px] text-neutral-400 font-medium">
-            <div className="flex items-center gap-0.5">
-              <span className="text-[#FFC107] flex">
-                <Star size={11} fill="#FFC107" strokeWidth={0} />
-                <Star size={11} fill="#FFC107" strokeWidth={0} />
-                <Star size={11} fill="#FFC107" strokeWidth={0} />
-                <Star size={11} fill="#FFC107" strokeWidth={0} />
-                <Star size={11} fill="#FFC107" strokeWidth={0} />
-              </span>
-              <span className="text-neutral-500 font-extrabold ml-1">5.0</span>
-            </div>
-
-            <div className="flex items-center gap-1.5 uppercase tracking-widest text-[10px]">
-              <span>Completed</span>
-              <span className="w-1 h-1 rounded-full bg-neutral-300" />
-              <span className="text-neutral-600 font-bold">{project.year}</span>
-            </div>
-
-            <div className="flex items-center gap-1.5">
-              <span className="px-2 py-0.5 rounded-full bg-green-50 text-green-600 border border-green-100 text-[9px] font-bold uppercase tracking-wider">Responsive</span>
-              <span className="px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 border border-amber-100 text-[9px] font-bold uppercase tracking-wider">Fast</span>
-            </div>
           </div>
         </div>
       </div>
@@ -444,7 +406,7 @@ export default function Portfolio() {
       className="py-[140px] bg-[#FAFAF8] text-[#111111] relative overflow-hidden noise-overlay grid-overlay"
     >
       {/* Gradient 1: Faint Large Radial Gradient Behind Header */}
-      <div 
+      <div
         className="absolute top-0 left-0 w-full h-[600px] pointer-events-none opacity-[0.08]"
         style={{
           background: "radial-gradient(circle at 20% 20%, rgba(255,196,0,0.12), transparent 60%)"
@@ -452,7 +414,7 @@ export default function Portfolio() {
       />
 
       <div className="max-w-[1440px] 2xl:max-w-[1560px] mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
-        
+
         {/* Left Aligned Section Header */}
         <div className="mb-[140px] flex flex-col items-start text-left max-w-3xl">
           {/* Badge */}
@@ -473,7 +435,7 @@ export default function Portfolio() {
 
           {/* Subtitle */}
           <p className="text-neutral-500 text-lg leading-[1.8] font-normal max-w-2xl">
-            Premium websites, ERP systems and digital products engineered for ambitious businesses.
+            Every project is handcrafted to deliver exceptional design, outstanding performance, and measurable business growth.
           </p>
         </div>
 
@@ -486,11 +448,10 @@ export default function Portfolio() {
                 <button
                   key={category}
                   onClick={() => setActiveFilter(category)}
-                  className={`relative px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all duration-300 cursor-pointer overflow-hidden ${
-                    isActive
-                      ? "text-[#FFC107] bg-[#111111] shadow-md"
-                      : "text-neutral-500 hover:bg-[#FFC107] hover:text-black hover:shadow-sm"
-                  }`}
+                  className={`relative px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all duration-300 cursor-pointer overflow-hidden ${isActive
+                    ? "bg-[#FFC107] text-black shadow-md"
+                    : "text-neutral-500 hover:bg-[#FFC107] hover:text-black hover:shadow-sm"
+                    }`}
                 >
                   <span className="relative z-10">{category}</span>
                 </button>
@@ -517,7 +478,7 @@ export default function Portfolio() {
         {/* Gradient 2: CTA Split Layout Section */}
         <div className="mt-[140px] relative rounded-[32px] overflow-hidden bg-[#111827] text-white p-8 sm:p-14 lg:p-20 shadow-2xl border border-white/5">
           {/* Subtle Radial Gradient behind CTA (5% opacity) */}
-          <div 
+          <div
             className="absolute inset-0 pointer-events-none opacity-[0.05]"
             style={{
               background: "radial-gradient(circle at 50% 50%, rgba(255,196,0,0.1), transparent 70%)"
