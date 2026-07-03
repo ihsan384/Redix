@@ -14,7 +14,7 @@ export default function DemoCredentialsModal({ isOpen, onClose }: DemoCredential
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPassword, setCopiedPassword] = useState(false);
 
-  const emailVal = "demo@fusionfitgym.com";
+  const emailVal = "demo@redix.media";
   const passwordVal = "demo123";
   const demoUrl = "https://fusionfitgym.vercel.app";
 
@@ -83,7 +83,7 @@ export default function DemoCredentialsModal({ isOpen, onClose }: DemoCredential
               Live Demo Access
             </div>
             <h3 className="text-2xl sm:text-3xl font-black text-neutral-900 tracking-tight leading-none flex items-center gap-2">
-              🚀 Fusion Fit ERP Live Demo
+              Fusion Fit ERP Live Demo
             </h3>
             <p className="text-neutral-500 text-sm leading-relaxed font-normal font-sans">
               Explore the complete Gym ERP using our public demo account.
@@ -200,7 +200,7 @@ export default function DemoCredentialsModal({ isOpen, onClose }: DemoCredential
               onClick={onClose}
               className="flex-1 py-3.5 px-6 rounded-full text-center text-xs font-bold uppercase tracking-wider bg-[#FFC107] hover:bg-[#e0a800] text-black transition-all duration-300 flex items-center justify-center gap-2 shadow-sm hover:shadow-[0_10px_20px_rgba(255,193,7,0.15)] active:scale-[0.98] cursor-pointer"
             >
-              <span>🚀 Open Live Demo</span>
+              <span>Open Live Demo</span>
               <ExternalLink size={13} />
             </a>
           </div>
