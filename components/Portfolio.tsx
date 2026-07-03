@@ -2,10 +2,8 @@
 
 import { useRef, useState } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ArrowUpRight, Sparkles, ArrowRight, Star, Zap, Eye } from "lucide-react";
+import { ArrowUpRight, Sparkles, ArrowRight, Zap } from "lucide-react";
 import Image from "next/image";
-import AnimatedCounter from "@/components/AnimatedCounter";
-import ProjectDetailsModal from "./ProjectDetailsModal";
 import DemoCredentialsModal from "./DemoCredentialsModal";
 
 
@@ -463,18 +461,13 @@ function ProjectImage({ src, alt, heightClass }: { src: string; alt: string; hei
 function BentoCard({
   project,
   index,
-  onSelectProject,
   onOpenDemoCredentials,
 }: {
   project: Project;
   index: number;
-  onSelectProject: (project: Project) => void;
   onOpenDemoCredentials: () => void;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -484,11 +477,6 @@ function BentoCard({
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
-    setCursorPos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-
     const width = rect.width;
     const height = rect.height;
     const mouseX = e.clientX - rect.left - width / 2;
@@ -498,13 +486,8 @@ function BentoCard({
   };
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
     x.set(0);
     y.set(0);
-  };
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
   };
 
   // 12-column grid spans for layout
@@ -542,7 +525,6 @@ function BentoCard({
       ref={cardRef}
       variants={cardEntryVariants}
       onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{
         rotateX: rotateX,
@@ -630,14 +612,6 @@ function BentoCard({
               </a>
             )}
 
-            {/* Secondary Button */}
-            <button
-              onClick={() => onSelectProject(project)}
-              className="flex-1 py-3.5 px-5 rounded-full text-center text-xs font-bold uppercase tracking-wider bg-white hover:bg-neutral-50 border border-[#ECECEC] text-[#111111] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <span>Project Details</span>
-              <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-1" />
-            </button>
           </div>
         </div>
       </div>
@@ -648,7 +622,6 @@ function BentoCard({
 export default function Portfolio() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [activeFilter, setActiveFilter] = useState<FilterCategory>("All");
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
 
   const filteredProjects = projects.filter((p) => {
@@ -741,7 +714,6 @@ export default function Portfolio() {
                 key={project.id}
                 project={project}
                 index={idx}
-                onSelectProject={setSelectedProject}
                 onOpenDemoCredentials={() => setIsDemoModalOpen(true)}
               />
             ))}
@@ -835,17 +807,6 @@ export default function Portfolio() {
         </div>
 
       </div>
-
-      {/* Premium Case Study Modal */}
-      <AnimatePresence>
-        {selectedProject && (
-          <ProjectDetailsModal
-            project={selectedProject}
-            onClose={() => setSelectedProject(null)}
-            onOpenDemoCredentials={() => setIsDemoModalOpen(true)}
-          />
-        )}
-      </AnimatePresence>
 
       {/* Demo Credentials Modal */}
       <AnimatePresence>

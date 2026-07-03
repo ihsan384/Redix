@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Copy, Check, ExternalLink, X, ShieldAlert } from "lucide-react";
+import { Copy, Check, ExternalLink, X, ShieldAlert, Info } from "lucide-react";
 
 interface DemoCredentialsModalProps {
   isOpen: boolean;
@@ -14,8 +14,8 @@ export default function DemoCredentialsModal({ isOpen, onClose }: DemoCredential
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPassword, setCopiedPassword] = useState(false);
 
-  const emailVal = "demo@fusionfit.com";
-  const passwordVal = "Demo@123";
+  const emailVal = "demo@fusionfitgym.com";
+  const passwordVal = "demo123";
   const demoUrl = "https://fusionfitgym.vercel.app";
 
   const triggerToast = (setter: (val: boolean) => void) => {
@@ -90,11 +90,19 @@ export default function DemoCredentialsModal({ isOpen, onClose }: DemoCredential
             </p>
           </div>
 
-          {/* Credentials Display Panel */}
-          <div className="p-5 bg-white border border-black/[0.05] rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.01)] space-y-4">
-            <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-400 mb-2 text-left">
-              Demo Credentials
-            </h4>
+          {/* Demo account card */}
+          <div className="relative p-5 bg-[#FFF9E6] border border-[#FFC107]/35 rounded-[24px] shadow-[0_12px_35px_rgba(183,138,0,0.10)] space-y-4">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2 text-[#7A5C00]">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#FFC107]/20">
+                  <Info size={16} aria-hidden="true" />
+                </span>
+                <h4 className="text-sm font-extrabold tracking-tight text-neutral-900">Demo Account</h4>
+              </div>
+              <span className="rounded-full bg-[#FFC107] px-3 py-1 text-[9px] font-extrabold uppercase tracking-[0.16em] text-black shadow-sm">
+                Demo Account
+              </span>
+            </div>
             
             {/* Email Field */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 bg-neutral-50 border border-neutral-200/50 rounded-[18px] transition-colors duration-300 hover:border-[#FFC107]/30">
@@ -110,6 +118,10 @@ export default function DemoCredentialsModal({ isOpen, onClose }: DemoCredential
                 <span>{copiedEmail ? "Copied" : "Copy"}</span>
               </button>
             </div>
+
+            <p className="border-t border-[#FFC107]/20 pt-3 text-left text-xs leading-relaxed text-[#6B550B]">
+              Use these credentials to explore all ERP features without creating an account.
+            </p>
 
             {/* Password Field */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 bg-neutral-50 border border-neutral-200/50 rounded-[18px] transition-colors duration-300 hover:border-[#FFC107]/30">
@@ -197,7 +209,7 @@ export default function DemoCredentialsModal({ isOpen, onClose }: DemoCredential
 
       {/* Toast Notification Container */}
       <AnimatePresence>
-        {copiedAll && (
+        {(copiedAll || copiedEmail || copiedPassword) && (
           <motion.div
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -205,7 +217,7 @@ export default function DemoCredentialsModal({ isOpen, onClose }: DemoCredential
             className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] px-5 py-3 bg-[#111111] text-white rounded-full flex items-center gap-2 border border-white/10 shadow-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap"
           >
             <Check size={14} className="text-[#FFC107]" />
-            <span>Demo credentials copied successfully.</span>
+            <span>Copied!</span>
           </motion.div>
         )}
       </AnimatePresence>
