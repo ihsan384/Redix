@@ -71,7 +71,7 @@ const jsonLd = {
     "Creative digital studio specializing in branding, website development, video editing, social media management, and digital marketing.",
   url: "https://www.redix.in",
   logo: "https://www.redix.in/logo.svg",
-  foundingDate: "2022",
+  foundingDate: "2024",
   areaServed: "Worldwide",
   serviceType: [
     "Website Development",

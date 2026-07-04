@@ -9,7 +9,7 @@ const stats = [
   { value: 50, suffix: "+", label: "Projects Delivered", icon: Briefcase },
   { value: 100, suffix: "%", label: "Client Satisfaction", icon: Heart },
   { label: "< 24hr Response", isText: true, textValue: "< 24hr", icon: Clock },
-  { label: "Since 2022", isText: true, textValue: "Since 2022", icon: Calendar },
+  { label: "Since 2024", isText: true, textValue: "Since 2024", icon: Calendar },
 ];
 
 export default function TrustStrip() {
@@ -57,8 +57,8 @@ export default function TrustStrip() {
                       color: "var(--text-primary)",
                     }}
                   >
-                    {stat.label === "Since 2022" ? (
-                      <>Since <span style={{ color: "var(--yellow)" }}>2022</span></>
+                    {stat.label === "Since 2024" ? (
+                      <>Since <span style={{ color: "var(--yellow)" }}>2024</span></>
                     ) : (
                       <>
                         <span style={{ color: "var(--yellow)" }}>&lt;</span> 24hr
@@ -84,7 +84,7 @@ export default function TrustStrip() {
                     fontFamily: "var(--font-space)",
                   }}
                 >
-                  {stat.isText ? (stat.label === "Since 2022" ? "Established" : "Response Time") : stat.label}
+                  {stat.isText ? (stat.label === "Since 2024" ? "Established" : "Response Time") : stat.label}
                 </div>
               </motion.div>
             );
