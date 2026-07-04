@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import "./globals.css";
 import PWARegistration from "@/components/PWARegistration";
@@ -56,6 +56,12 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 // JSON-LD Structured Data for Organization/LocalBusiness
 const jsonLd = {
   "@context": "https://schema.org",
@@ -97,7 +103,6 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <meta name="theme-color" content="#FFFFFF" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
 
         {/* DNS Prefetch & Preconnect for performance */}
         <link rel="dns-prefetch" href="https://api.fontshare.com" />
