@@ -68,7 +68,7 @@ const projects: Project[] = [
     title: "Gym RRP Management ERP",
     categoryBadge: "ERP Software",
     filterCategories: ["All", "ERP", "Business"],
-    image: "/assets/gymrrp.png",
+    image: "/assets/2.png",
     description: "Enterprise resource planning system for gyms with active attendance matrixes, automated membership tier subscriptions, payment analytics dashboards, and trainer-scheduling APIs.",
     tech: ["React", "Typescript", "Tailwind CSS", "Supabase", "Framer Motion", "Lucide"],
     demoUrl: "https://fusionfitgym.vercel.app",
@@ -601,7 +601,7 @@ function BentoCard({
                 }}
                 className="flex-1 py-3.5 px-5 rounded-full text-center text-xs font-bold uppercase tracking-wider bg-black text-white hover:bg-neutral-900 transition-all duration-300 flex items-center justify-center gap-2 shadow-sm hover:shadow-[0_10px_25px_rgba(0,0,0,0.12)] group/btn cursor-pointer"
               >
-                <span>🚀 Explore Live Demo</span>
+                <span>Explore Live Demo</span>
               </button>
             ) : (
               <a

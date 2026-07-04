@@ -242,7 +242,7 @@ export default function ProjectDetailsModal({
                       }}
                       className="flex-1 py-3 px-5 rounded-full text-center text-xs font-bold uppercase tracking-wider bg-[#FFC107] hover:bg-[#e0a800] text-black transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-sm hover:shadow-md active:scale-95"
                     >
-                      🚀 Launch Live Demo
+                      Launch Live Demo
                     </button>
                     {project.githubUrl && (
                       <a
@@ -398,7 +398,7 @@ export default function ProjectDetailsModal({
                     }}
                     className="w-full sm:w-auto px-8 py-3.5 rounded-full text-center text-[11px] font-bold uppercase tracking-widest bg-[#FFC107] hover:bg-[#e0a800] text-black transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-sm active:scale-[0.98]"
                   >
-                    🚀 Launch Live Demo
+                    Launch Live Demo
                   </button>
                 ) : (
                   <a
