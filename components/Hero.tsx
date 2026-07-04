@@ -54,7 +54,7 @@ export default function Hero() {
 
             <h1
               className="display-title mb-0"
-              style={{ fontSize: "clamp(2.5rem, 6.2vw, 5.75rem)", lineHeight: 1.05, maxWidth: "760px" }}
+              style={{ fontSize: "clamp(2.5rem, 1.5rem + 4vw, 5.5rem)", lineHeight: 1.05, maxWidth: "760px" }}
               aria-label="We don't just market. We make brands impossible to ignore."
             >
               {/* Line 1 */}

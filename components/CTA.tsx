@@ -54,7 +54,7 @@ export default function CTA() {
 
             <div
               className="display-title"
-              style={{ fontSize: "clamp(2.8rem, 6vw, 6rem)", color: "#FFFFFF" }}
+              style={{ fontSize: "clamp(2.5rem, 1.5rem + 4vw, 5.5rem)", color: "#FFFFFF" }}
             >
               {["READY TO GROW", "YOUR BRAND?"].map((line, i) => (
                 <div key={i} className="overflow-hidden">
