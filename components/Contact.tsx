@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Mail, MessageCircle, Phone, MapPin, Send, CheckCircle2, Sparkles } from "lucide-react";
+import { Mail, MessageCircle, Phone, MapPin, Send, CheckCircle2, Sparkles, AlertCircle } from "lucide-react";
 
 const contactLinks = [
   { Icon: MessageCircle, label: "WhatsApp", value: "Chat with us", href: "https://wa.me/919744206583", color: "#25d366" },
@@ -12,52 +12,71 @@ const contactLinks = [
 ];
 
 const services = [
-  "Social Media Management", "Website Development", "Video Editing",
-  "Branding & Design", "Digital Marketing", "Content Creation", "Other",
+  "Custom Website",
+  "Custom CRM (One-Time)",
+  "Custom ERP (One-Time)",
+  "ERP + CRM Solution",
+  "Social Media Posters",
+  "Video Editing",
+  "Social Media Management",
+  "Branding & Design",
+  "Other",
 ];
 
 const serviceBudgets: Record<string, string[]> = {
-  "Social Media Management": [
-    "Under $300 / mo",
-    "$300 – $600 / mo",
-    "$600 – $1,200 / mo",
-    "$1,200+ / mo"
+  "Custom Website": [
+    "₹3,000 – ₹5,000",
+    "₹5,000 – ₹10,000",
+    "₹10,000 – ₹25,000",
+    "₹25,000+"
   ],
-  "Website Development": [
-    "Under $1,000",
-    "$1,000 – $3,500",
-    "$3,500 – $7,500",
-    "$7,500+"
+  "Custom CRM (One-Time)": [
+    "₹5,000 – ₹10,000",
+    "₹10,000 – ₹20,000",
+    "₹20,000 – ₹35,000",
+    "₹35,000+"
+  ],
+  "Custom ERP (One-Time)": [
+    "₹4,000 – ₹10,000",
+    "₹10,000 – ₹20,000",
+    "₹20,000 – ₹35,000",
+    "₹35,000+"
+  ],
+  "ERP + CRM Solution": [
+    "Custom Quote",
+    "₹10,000 – ₹25,000",
+    "₹25,000 – ₹50,000",
+    "₹50,000+"
+  ],
+  "Social Media Posters": [
+    "₹299 / design",
+    "₹1,000 – ₹3,000 (Pack)",
+    "₹3,000 – ₹5,000",
+    "₹5,000+"
   ],
   "Video Editing": [
-    "Under $200 / video",
-    "$200 – $500 / video",
-    "$500 – $1,500 / video",
-    "$1,500+"
+    "₹499 – ₹1,500 / video",
+    "₹1,500 – ₹3,500 / video",
+    "₹3,500 – ₹7,500 / video",
+    "₹7,500+"
+  ],
+  "Social Media Management": [
+    "Under ₹3,000 / mo",
+    "₹3,000 – ₹7,000 / mo",
+    "₹7,000 – ₹15,000 / mo",
+    "₹15,000+ / mo"
   ],
   "Branding & Design": [
-    "Under $500",
-    "$500 – $1,500",
-    "$1,500 – $3,000",
-    "$3,000+"
-  ],
-  "Digital Marketing": [
-    "Under $500 / mo",
-    "$500 – $1,500 / mo",
-    "$1,500 – $3,000 / mo",
-    "$3,000+ / mo"
-  ],
-  "Content Creation": [
-    "Under $400 / mo",
-    "$400 – $1,000 / mo",
-    "$1,000 – $2,500 / mo",
-    "$2,500+ / mo"
+    "Under ₹3,000",
+    "₹3,000 – ₹7,000",
+    "₹7,000 – ₹15,000",
+    "₹15,000+"
   ],
   "Other": [
-    "Under $500",
-    "$500 – $1,500",
-    "$1,500 – $3,000",
-    "$3,000+"
+    "Under ₹3,000",
+    "₹3,000 – ₹7,000",
+    "₹7,000 – ₹15,000",
+    "₹15,000+"
   ]
 };
 
@@ -67,6 +86,7 @@ export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", service: "", budget: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleServiceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFormData({
@@ -79,9 +99,28 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1500));
-    setLoading(false);
-    setSubmitted(true);
+    setError(null);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to submit form.");
+      }
+
+      setSubmitted(true);
+      setFormData({ name: "", email: "", service: "", budget: "", message: "" });
+    } catch (err: any) {
+      setError(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -249,6 +288,16 @@ export default function Contact() {
                   borderRadius: "var(--radius-md)",
                 }}
               >
+                {error && (
+                  <div
+                    className="p-4 flex items-start gap-3 text-sm text-red-400 bg-red-950/30 border border-red-500/30 rounded-md"
+                    style={{ borderRadius: "var(--radius-sm)" }}
+                  >
+                    <AlertCircle size={18} className="flex-shrink-0 mt-0.5" />
+                    <div>{error}</div>
+                  </div>
+                )}
+
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider mb-2" style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}>Name *</label>

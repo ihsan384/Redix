@@ -43,7 +43,41 @@ const socialLinks = [
   { Icon: LinkedInIcon,  href: "https://linkedin.com/company/redixmedia", label: "LinkedIn" },
 ];
 
+import { useState } from "react";
+
 export default function Footer() {
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterStatus, setNewsletterStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [newsletterMsg, setNewsletterMsg] = useState("");
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newsletterEmail) return;
+
+    setNewsletterStatus("loading");
+    setNewsletterMsg("");
+
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: newsletterEmail }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Subscription failed");
+      }
+
+      setNewsletterStatus("success");
+      setNewsletterMsg(data.message || "Subscribed successfully!");
+      setNewsletterEmail("");
+    } catch (err: any) {
+      setNewsletterStatus("error");
+      setNewsletterMsg(err.message || "Failed to subscribe");
+    }
+  };
+
   const goto = (href: string) => {
     const el = document.querySelector(href);
     if (el) {
@@ -58,6 +92,7 @@ export default function Footer() {
   };
 
   return (
+
     <footer className="footer-dark">
       {/* Mini CTA Row */}
       <div
@@ -222,16 +257,44 @@ export default function Footer() {
                 <p className="text-xs font-semibold mb-1" style={{ color: "#FFFFFF", fontFamily: "var(--font-space)" }}>
                   Available Worldwide
                 </p>
-                <p className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
-                  Mon–Sat: 9 AM – 8 PM IST
-                  <br />
-                  Response within 24 hours
+                <p className="text-xs mb-3" style={{ color: "rgba(255,255,255,0.4)" }}>
+                  Mon–Sat: 9 AM – 8 PM IST · Response within 24h
                 </p>
+
+                {/* Newsletter Form */}
+                <div className="pt-2 border-t border-white/10">
+                  <p className="text-xs font-bold uppercase tracking-wider mb-1.5" style={{ color: "var(--yellow)", fontFamily: "var(--font-space)" }}>
+                    Newsletter Signup
+                  </p>
+                  <form onSubmit={handleNewsletterSubmit} className="flex flex-col gap-2">
+                    <input
+                      type="email"
+                      required
+                      placeholder="Your email address"
+                      value={newsletterEmail}
+                      onChange={(e) => setNewsletterEmail(e.target.value)}
+                      className="w-full px-3 py-1.5 text-xs rounded bg-black/50 border border-white/10 text-white placeholder-zinc-500 focus:outline-none focus:border-yellow-400"
+                    />
+                    <button
+                      type="submit"
+                      disabled={newsletterStatus === "loading"}
+                      className="px-3 py-1.5 text-xs font-bold rounded bg-yellow-400 text-black hover:bg-yellow-300 transition flex items-center justify-center gap-1"
+                    >
+                      {newsletterStatus === "loading" ? "Subscribing..." : "Subscribe"}
+                    </button>
+                    {newsletterMsg && (
+                      <p className={`text-[10px] ${newsletterStatus === "error" ? "text-red-400" : "text-green-400"}`}>
+                        {newsletterMsg}
+                      </p>
+                    )}
+                  </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
 
       {/* Bottom bar */}
       <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
