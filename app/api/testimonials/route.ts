@@ -32,10 +32,10 @@ export async function GET() {
       configured: true,
       data: data || [],
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("API testimonials error:", err);
     return NextResponse.json(
-      { error: err.message || "Failed to fetch testimonials" },
+      { error: (err as Error).message || "Failed to fetch testimonials" },
       { status: 500 }
     );
   }

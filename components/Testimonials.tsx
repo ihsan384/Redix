@@ -108,11 +108,11 @@ export default function Testimonials() {
         const res = await fetch("/api/testimonials");
         const json = await res.json();
         if (json.configured && Array.isArray(json.data) && json.data.length > 0) {
-          const dbItems: TestimonialItem[] = json.data.map((row: any) => ({
-            id: row.id || `db-${Math.random()}`,
+          const dbItems: TestimonialItem[] = json.data.map((row: Record<string, unknown>) => ({
+            id: (row.id as string) || `db-${Math.random()}`,
             initials:
-              row.initials ||
-              (row.name
+              (row.initials as string) ||
+              (typeof row.name === 'string'
                 ? row.name
                     .split(" ")
                     .map((n: string) => n[0])
@@ -120,16 +120,16 @@ export default function Testimonials() {
                     .slice(0, 2)
                     .toUpperCase()
                 : "CL"),
-            name: row.name || "Verified Client",
-            role: row.role || "Business Client",
-            company: row.company || "",
-            location: row.location || "Kerala, India",
-            rating: row.rating || 5,
-            service: row.service || "Digital Solution",
-            text: row.review_text || row.text || "",
-            result: row.result || "Verified Growth Impact",
-            verified: row.verified ?? true,
-            avatar_url: row.avatar_url,
+            name: (row.name as string) || "Verified Client",
+            role: (row.role as string) || "Business Client",
+            company: (row.company as string) || "",
+            location: (row.location as string) || "Kerala, India",
+            rating: (row.rating as number) || 5,
+            service: (row.service as string) || "Digital Solution",
+            text: (row.review_text as string) || (row.text as string) || "",
+            result: (row.result as string) || "Verified Growth Impact",
+            verified: (row.verified as boolean) ?? true,
+            avatar_url: row.avatar_url as string | undefined,
           }));
 
           setItems(dbItems);
@@ -355,6 +355,7 @@ export default function Testimonials() {
               {/* Client Info */}
               <div className="flex items-center gap-4 flex-wrap">
                 {activeTestimonial.avatar_url ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
                   <img
                     src={activeTestimonial.avatar_url}
                     alt={activeTestimonial.name}

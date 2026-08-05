@@ -38,8 +38,8 @@ export default function CareersPage() {
       }
 
       setSubmitted(true);
-    } catch (err: any) {
-      setError(err.message || "Something went wrong. Please try again.");
+    } catch (err: unknown) {
+      setError((err as Error).message || "Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }

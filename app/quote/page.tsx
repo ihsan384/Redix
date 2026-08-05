@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Quote, Send, CheckCircle2, AlertCircle, User, Mail, Phone, DollarSign, FileText } from "lucide-react";
+import { Quote, Send, CheckCircle2, AlertCircle, User, Mail, Phone, DollarSign } from "lucide-react";
 
 export default function QuotePage() {
   const [formData, setFormData] = useState({
@@ -39,8 +39,8 @@ export default function QuotePage() {
 
       setSubmitted(true);
       setQuoteNumber(data.quote_number || "");
-    } catch (err: any) {
-      setError(err.message || "Something went wrong. Please try again.");
+    } catch (err: unknown) {
+      setError((err as Error).message || "Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }

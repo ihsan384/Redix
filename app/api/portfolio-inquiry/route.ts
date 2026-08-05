@@ -106,10 +106,10 @@ export async function POST(request: Request) {
       { success: true, message: "Inquiry received! We'll get back to you with details." },
       { status: 200 }
     );
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("API portfolio inquiry error:", err);
     return NextResponse.json(
-      { error: err.message || "An unexpected error occurred." },
+      { error: (err as Error).message || "An unexpected error occurred." },
       { status: 500 }
     );
   }

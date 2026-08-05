@@ -108,10 +108,10 @@ export async function POST(request: Request) {
       { success: true, message: "Your application has been received! Our hiring team will review it." },
       { status: 200 }
     );
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("API career error:", err);
     return NextResponse.json(
-      { error: err.message || "An unexpected error occurred." },
+      { error: (err as Error).message || "An unexpected error occurred." },
       { status: 500 }
     );
   }

@@ -95,7 +95,7 @@ export async function POST(request: Request) {
     }
 
     // 3. Insert into Messages Table (Inbox entry)
-    const { data: msgData } = await supabase
+    await supabase
       .from("messages")
       .insert({
         lead_id: leadId,
@@ -107,9 +107,7 @@ export async function POST(request: Request) {
         content: `Service requested: ${service}\nBudget Range: ${budget_range}\n\nProject Details:\n${details}`,
         status: "unread",
         metadata: { quote_id: quoteData.id, quote_number: quoteNumber, service, budget_range },
-      })
-      .select("id")
-      .single();
+      });
 
     // 4. Create Notification
     await supabase.from("notifications").insert({
@@ -128,10 +126,10 @@ export async function POST(request: Request) {
       },
       { status: 200 }
     );
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("API quote error:", err);
     return NextResponse.json(
-      { error: err.message || "An unexpected error occurred." },
+      { error: (err as Error).message || "An unexpected error occurred." },
       { status: 500 }
     );
   }

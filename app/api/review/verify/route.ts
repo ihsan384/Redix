@@ -89,10 +89,10 @@ export async function GET(request: Request) {
     }
 
     return NextResponse.json({ valid: false, error: "Invalid request parameters." }, { status: 400 });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("API review verify error:", err);
     return NextResponse.json(
-      { valid: false, error: err.message || "Failed to verify review invitation." },
+      { valid: false, error: (err as Error).message || "Failed to verify review invitation." },
       { status: 500 }
     );
   }

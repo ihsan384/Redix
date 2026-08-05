@@ -72,9 +72,9 @@ export default function Footer() {
       setNewsletterStatus("success");
       setNewsletterMsg(data.message || "Subscribed successfully!");
       setNewsletterEmail("");
-    } catch (err: any) {
+    } catch (err: unknown) {
       setNewsletterStatus("error");
-      setNewsletterMsg(err.message || "Failed to subscribe");
+      setNewsletterMsg((err as Error).message || "Failed to subscribe");
     }
   };
 
@@ -131,6 +131,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-5">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/logo.svg"
                 alt="Redix Media Logo"

@@ -68,10 +68,10 @@ export async function POST(request: Request) {
       { success: true, message: "Successfully subscribed to REDIX newsletter!" },
       { status: 200 }
     );
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("API newsletter error:", err);
     return NextResponse.json(
-      { error: err.message || "An unexpected error occurred." },
+      { error: (err as Error).message || "An unexpected error occurred." },
       { status: 500 }
     );
   }

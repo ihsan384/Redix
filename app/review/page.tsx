@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { Star, ShieldCheck, CheckCircle2, AlertCircle, Send, Building, User, Briefcase, Image as ImageIcon } from "lucide-react";
 
 function ReviewContent() {
@@ -57,7 +58,7 @@ function ReviewContent() {
           setValidToken(false);
           setErrorMessage(data.error || "This review invitation link is invalid or expired.");
         }
-      } catch (err: any) {
+      } catch {
         setValidToken(false);
         setErrorMessage("Failed to verify invitation link. Please try again.");
       } finally {
@@ -103,8 +104,8 @@ function ReviewContent() {
       }
 
       setSubmitted(true);
-    } catch (err: any) {
-      setSubmitError(err.message || "An unexpected error occurred.");
+    } catch (err: unknown) {
+      setSubmitError((err as Error).message || "An unexpected error occurred.");
     } finally {
       setLoading(false);
     }
@@ -140,9 +141,9 @@ function ReviewContent() {
             <AlertCircle size={40} className="text-red-400 mx-auto mb-4" />
             <h3 className="text-xl font-bold text-red-200 mb-2">Review Invitation Invalid</h3>
             <p className="text-sm text-red-300/80 mb-6">{errorMessage}</p>
-            <a href="/" className="inline-flex items-center justify-center px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-bold transition">
+            <Link href="/" className="inline-flex items-center justify-center px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-bold transition">
               Return to Website
-            </a>
+            </Link>
           </div>
         )}
 
@@ -156,9 +157,9 @@ function ReviewContent() {
             <p className="text-sm text-zinc-400 mb-6">
               Your review has been submitted to REDIX ERP moderation. Once approved by our team, it will be showcased on our public website.
             </p>
-            <a href="/" className="inline-flex items-center justify-center px-8 py-3 rounded-xl bg-yellow-400 text-black font-bold text-sm hover:bg-yellow-300 transition">
+            <Link href="/" className="inline-flex items-center justify-center px-8 py-3 rounded-xl bg-yellow-400 text-black font-bold text-sm hover:bg-yellow-300 transition">
               Back to Home
-            </a>
+            </Link>
           </motion.div>
         )}
 

@@ -100,6 +100,7 @@ export default function Navbar() {
             onClick={(e) => { e.preventDefault(); goto("#home"); }}
             className="flex items-center gap-3 group"
           >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/logo.svg"
               alt="Redix Media Logo"
