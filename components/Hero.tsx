@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Check, Sparkles, TrendingUp, Code2, Palette, ShieldCheck, Zap } from "lucide-react";
+import { ArrowRight, Check, Sparkles, Play, Code2, Palette, MousePointer2, Layers, Video, Sliders, MessageSquare } from "lucide-react";
 
 const TICKER_ITEMS = [
   "Social Media Management",
@@ -189,168 +189,168 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right — Creative & Professional Studio Showcase Visual */}
+          {/* Right — Creative Live Canvas & Project Showcase Visual */}
           <motion.div
             className="lg:col-span-5 hidden lg:flex relative flex-col justify-center items-center"
-            style={{ minHeight: "500px" }}
+            style={{ minHeight: "520px" }}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           >
-            {/* Ambient subtle glow background */}
+            {/* Ambient creative yellow radial glow */}
             <div
-              className="absolute w-72 h-72 rounded-full blur-3xl pointer-events-none"
+              className="absolute w-80 h-80 rounded-full blur-3xl pointer-events-none opacity-40"
               style={{
-                background: "radial-gradient(circle, rgba(255, 214, 10, 0.18) 0%, rgba(0,0,0,0) 70%)",
-                top: "10%",
-                right: "10%",
+                background: "radial-gradient(circle, var(--yellow) 0%, rgba(0,0,0,0) 70%)",
+                top: "5%",
+                right: "5%",
                 zIndex: 0,
               }}
             />
 
-            {/* Main Studio Dashboard Card */}
+            {/* Creative Canvas Card */}
             <motion.div
-              className="w-full relative z-10 p-6 overflow-hidden"
+              className="w-full relative z-10 p-5 overflow-hidden"
               style={{
                 background: "var(--bg-card)",
                 border: "1px solid var(--border-strong)",
                 borderRadius: "var(--radius-md)",
-                boxShadow: "var(--shadow-xl)",
-                maxWidth: "460px",
+                boxShadow: "0 20px 50px rgba(0, 0, 0, 0.15)",
+                maxWidth: "480px",
               }}
               whileHover={{ y: -4 }}
               transition={{ duration: 0.3 }}
             >
-              {/* Browser/Card Window Controls Header */}
+              {/* Studio Canvas Toolbar Header */}
               <div
-                className="flex items-center justify-between pb-4 mb-4 border-b border-[var(--border)]"
+                className="flex items-center justify-between pb-3 mb-3 border-b border-[var(--border)]"
               >
+                {/* Canvas tools */}
+                <div className="flex items-center gap-1.5 p-1 rounded-lg" style={{ background: "var(--bg-secondary)", border: "1px solid var(--border)" }}>
+                  <div className="p-1.5 rounded bg-[var(--yellow)] text-black">
+                    <MousePointer2 size={13} />
+                  </div>
+                  <div className="p-1.5 rounded text-[var(--text-muted)] hover:text-[var(--text-primary)] transition">
+                    <Palette size={13} />
+                  </div>
+                  <div className="p-1.5 rounded text-[var(--text-muted)] hover:text-[var(--text-primary)] transition">
+                    <Video size={13} />
+                  </div>
+                  <div className="p-1.5 rounded text-[var(--text-muted)] hover:text-[var(--text-primary)] transition">
+                    <Code2 size={13} />
+                  </div>
+                  <div className="p-1.5 rounded text-[var(--text-muted)] hover:text-[var(--text-primary)] transition">
+                    <Sliders size={13} />
+                  </div>
+                </div>
+
                 <div className="flex items-center gap-2">
-                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#FF5F57" }} />
-                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#FFBD2E" }} />
-                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#27CA40" }} />
-                  <span
-                    className="ml-2 text-[11px] px-2.5 py-0.5 rounded-full font-mono font-medium"
-                    style={{ background: "var(--bg-secondary)", color: "var(--text-muted)" }}
-                  >
-                    redix.media/studio
+                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded" style={{ background: "var(--bg-secondary)", color: "var(--text-muted)", fontFamily: "var(--font-space)" }}>
+                    REDIX ARTBOARD v2.4
                   </span>
-                </div>
-                <div className="flex items-center gap-1.5 text-[11px] font-semibold text-emerald-500 bg-emerald-500/10 px-2.5 py-0.5 rounded-full">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  Live Hub
+                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 </div>
               </div>
 
-              {/* Studio Card Header */}
-              <div className="mb-4">
-                <div className="flex items-center gap-2 mb-1">
-                  <Sparkles size={14} style={{ color: "var(--yellow)" }} />
-                  <span className="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]" style={{ fontFamily: "var(--font-space)" }}>
-                    Digital Product & Brand Studio
-                  </span>
-                </div>
-                <h3 className="text-lg font-extrabold text-[var(--text-primary)]" style={{ fontFamily: "var(--font-space)" }}>
-                  High-Impact Digital Experiences
-                </h3>
-              </div>
-
-              {/* Performance Curve Graph Representation */}
-              <div className="p-4 rounded-lg mb-4 relative overflow-hidden" style={{ background: "var(--bg-secondary)", border: "1px solid var(--border)" }}>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-semibold text-[var(--text-secondary)]">Brand Growth & Reach</span>
-                  <span className="text-xs font-bold text-[var(--text-primary)] flex items-center gap-1">
-                    <TrendingUp size={12} className="text-emerald-500" /> +310%
-                  </span>
-                </div>
+              {/* Real Project Visual Preview Frame */}
+              <div className="relative rounded-lg overflow-hidden mb-4 group" style={{ border: "1px solid var(--border)", background: "var(--bg-secondary)" }}>
+                {/* Visual Image */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/projects/brew_lab.png"
+                  alt="Brew Lab Project Preview"
+                  className="w-full h-44 object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                />
                 
-                {/* SVG Curve Line */}
-                <div className="h-16 w-full relative">
-                  <svg className="w-full h-full overflow-visible" viewBox="0 0 300 60" preserveAspectRatio="none">
-                    <defs>
-                      <linearGradient id="growthGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="var(--yellow)" stopOpacity="0.35" />
-                        <stop offset="100%" stopColor="var(--yellow)" stopOpacity="0" />
-                      </linearGradient>
-                    </defs>
-                    <path
-                      d="M0,50 Q40,45 80,30 T160,25 T240,10 T300,5 L300,60 L0,60 Z"
-                      fill="url(#growthGrad)"
-                    />
-                    <path
-                      d="M0,50 Q40,45 80,30 T160,25 T240,10 T300,5"
-                      fill="none"
-                      stroke="var(--yellow)"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </div>
-              </div>
-
-              {/* Core Deliverable Pills */}
-              <div className="grid grid-cols-2 gap-2.5 mb-4">
-                <div className="p-3 rounded-md flex items-center gap-3" style={{ background: "var(--bg-secondary)", border: "1px solid var(--border)" }}>
-                  <div className="w-8 h-8 rounded flex items-center justify-center bg-[var(--yellow)]/15 text-[var(--yellow)]">
-                    <Code2 size={16} />
-                  </div>
-                  <div>
-                    <div className="text-xs font-bold text-[var(--text-primary)]">Custom Web & ERP</div>
-                    <div className="text-[10px] text-[var(--text-muted)]">Full-Stack Solutions</div>
-                  </div>
-                </div>
-
-                <div className="p-3 rounded-md flex items-center gap-3" style={{ background: "var(--bg-secondary)", border: "1px solid var(--border)" }}>
-                  <div className="w-8 h-8 rounded flex items-center justify-center bg-amber-500/15 text-amber-500">
-                    <Palette size={16} />
-                  </div>
-                  <div>
-                    <div className="text-xs font-bold text-[var(--text-primary)]">Brand Identity</div>
-                    <div className="text-[10px] text-[var(--text-muted)]">Visual Storytelling</div>
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-3.5">
+                  <div className="flex items-center justify-between text-white">
+                    <div>
+                      <div className="text-xs font-extrabold text-white tracking-wide" style={{ fontFamily: "var(--font-space)" }}>
+                        Brew &amp; Lab — Specialty Coffee
+                      </div>
+                      <div className="text-[10px] text-white/70">
+                        Brand Identity &amp; E-Commerce Web App
+                      </div>
+                    </div>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[var(--yellow)] text-black">
+                      4.9 ★★★★★
+                    </span>
                   </div>
                 </div>
               </div>
 
-              {/* Bottom Stat Footer */}
-              <div className="flex items-center justify-between pt-3 border-t border-[var(--border)] text-xs">
-                <span className="text-[var(--text-muted)] flex items-center gap-1.5">
-                  <ShieldCheck size={14} className="text-emerald-500" /> Guaranteed Quality
+              {/* Creative Palette & Workflow Info */}
+              <div className="grid grid-cols-2 gap-3 mb-3">
+                {/* Brand Color Swatches */}
+                <div className="p-3 rounded-md" style={{ background: "var(--bg-secondary)", border: "1px solid var(--border)" }}>
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--text-muted)] mb-2" style={{ fontFamily: "var(--font-space)" }}>
+                    Brand Palette
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-5 h-5 rounded-full border border-white/20 shadow-sm" style={{ background: "#FFD60A" }} title="#FFD60A" />
+                    <div className="w-5 h-5 rounded-full border border-white/20 shadow-sm" style={{ background: "#09090B" }} title="#09090B" />
+                    <div className="w-5 h-5 rounded-full border border-white/20 shadow-sm" style={{ background: "#27272A" }} title="#27272A" />
+                    <div className="w-5 h-5 rounded-full border border-white/20 shadow-sm" style={{ background: "#F4F4F5" }} title="#F4F4F5" />
+                  </div>
+                </div>
+
+                {/* Video & Motion Reel Tag */}
+                <div className="p-3 rounded-md flex flex-col justify-between" style={{ background: "var(--bg-secondary)", border: "1px solid var(--border)" }}>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--text-muted)]" style={{ fontFamily: "var(--font-space)" }}>
+                      Motion &amp; Video
+                    </span>
+                    <span className="text-[9px] font-mono text-[var(--yellow)]">4K • 60fps</span>
+                  </div>
+                  <div className="flex items-center gap-2 mt-1">
+                    <div className="w-5 h-5 rounded-full bg-[var(--yellow)] text-black flex items-center justify-center">
+                      <Play size={10} className="fill-black ml-0.5" />
+                    </div>
+                    <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: "var(--border)" }}>
+                      <div className="w-3/4 h-full bg-[var(--yellow)]" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom Creator Footer */}
+              <div className="flex items-center justify-between pt-2.5 border-t border-[var(--border)] text-[11px]">
+                <div className="flex items-center gap-1.5 text-[var(--text-muted)] font-medium">
+                  <Layers size={13} style={{ color: "var(--yellow)" }} /> 50+ Custom Assets Created
+                </div>
+                <span className="font-bold text-[var(--text-primary)]" style={{ fontFamily: "var(--font-space)" }}>
+                  No Templates. Pure Craft.
                 </span>
-                <span className="font-bold text-[var(--yellow)]">100% Bespoke</span>
               </div>
             </motion.div>
 
-            {/* Floating Overlay Badge 1 - Top Right */}
+            {/* Floating Live Collaborator Cursor 1 - Top Left */}
             <motion.div
-              className="absolute -top-3 -right-2 z-20 p-3.5 rounded-lg flex items-center gap-3 animate-float-slow"
+              className="absolute top-2 -left-6 z-20 animate-float-slow hidden md:flex items-center gap-1.5"
+              style={{ pointerEvents: "none" }}
+            >
+              <MousePointer2 size={18} className="text-[var(--yellow)] fill-[var(--yellow)] drop-shadow-md" />
+              <div className="px-2.5 py-1 rounded-md text-[11px] font-bold bg-[var(--yellow)] text-black shadow-lg" style={{ fontFamily: "var(--font-space)" }}>
+                Ihsan (Lead Studio)
+              </div>
+            </motion.div>
+
+            {/* Floating Feedback Pill 2 - Bottom Right Overlay */}
+            <motion.div
+              className="absolute -bottom-3 -right-3 z-20 p-3 rounded-lg flex items-center gap-2.5 animate-float-reverse shadow-xl"
               style={{
                 background: "var(--bg-primary)",
                 border: "1px solid var(--yellow)",
-                boxShadow: "0 12px 30px rgba(0, 0, 0, 0.15)",
+                boxShadow: "0 14px 35px rgba(0, 0, 0, 0.18)",
               }}
             >
-              <div className="w-8 h-8 rounded-full flex items-center justify-center bg-[var(--yellow)] text-black font-bold">
-                <Zap size={16} />
+              <div className="w-7 h-7 rounded-full bg-emerald-500/15 text-emerald-500 flex items-center justify-center">
+                <MessageSquare size={14} />
               </div>
               <div>
-                <div className="text-xs font-bold text-[var(--text-primary)]">Fast Delivery</div>
-                <div className="text-[10px] text-[var(--text-muted)]">Rapid Execution</div>
-              </div>
-            </motion.div>
-
-            {/* Floating Overlay Badge 2 - Bottom Left */}
-            <motion.div
-              className="absolute -bottom-4 -left-4 z-20 p-3.5 rounded-lg flex items-center gap-3 animate-float-reverse"
-              style={{
-                background: "var(--bg-primary)",
-                border: "1px solid var(--border-strong)",
-                boxShadow: "0 12px 30px rgba(0, 0, 0, 0.12)",
-              }}
-            >
-              <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
-              <div className="text-xs">
-                <span className="font-bold text-[var(--text-primary)] block">Accepting Projects</span>
-                <span className="text-[10px] text-[var(--text-muted)]">Direct Founder Contact</span>
+                <div className="text-xs font-extrabold text-[var(--text-primary)]">Client Review</div>
+                <div className="text-[10px] text-emerald-500 font-semibold">“Revenues tripled in Month 1! 🔥”</div>
               </div>
             </motion.div>
           </motion.div>
