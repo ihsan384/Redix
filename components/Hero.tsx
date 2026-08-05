@@ -1,8 +1,71 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Check, Sparkles, Play, Code2, Palette, MousePointer2, Layers, Video, Sliders, MessageSquare } from "lucide-react";
+
+const STUDIO_PROJECTS = [
+  {
+    id: "web",
+    toolName: "Web Development",
+    icon: MousePointer2,
+    image: "/projects/brew_lab.png",
+    title: "Brew & Lab — Specialty Coffee",
+    subtitle: "Brand Identity & E-Commerce Web App",
+    rating: "4.9 ★★★★★",
+    colors: ["#FFD60A", "#09090B", "#27272A", "#F4F4F5"],
+    type: "E-Commerce",
+    tag: "Next.js & Tailwind",
+  },
+  {
+    id: "branding",
+    toolName: "Branding & Design",
+    icon: Palette,
+    image: "/projects/solitude.png",
+    title: "Solitude — Luxury Living",
+    subtitle: "Minimalist Brand System & Visual Identity",
+    rating: "5.0 ★★★★★",
+    colors: ["#E2E8F0", "#0F172A", "#334155", "#94A3B8"],
+    type: "Branding",
+    tag: "Brand Guidelines",
+  },
+  {
+    id: "video",
+    toolName: "Video & Motion Reels",
+    icon: Video,
+    image: "/projects/vaporwave.png",
+    title: "Neon Pulse — 4K Motion Reel",
+    subtitle: "Social Media Promo & Commercial Video",
+    rating: "4.9 ★★★★★",
+    colors: ["#EC4899", "#8B5CF6", "#3B82F6", "#09090B"],
+    type: "Video Reel",
+    tag: "4K • 60fps Edit",
+  },
+  {
+    id: "erp",
+    toolName: "Custom ERP & CRM",
+    icon: Code2,
+    image: "/projects/gym_erp.png",
+    title: "Fusion Fit — Gym & Enterprise ERP",
+    subtitle: "Biometric Check-in & Subscription Billing",
+    rating: "5.0 ★★★★★",
+    colors: ["#10B981", "#064E3B", "#111827", "#374151"],
+    type: "Enterprise ERP",
+    tag: "Full-Stack System",
+  },
+  {
+    id: "tech",
+    toolName: "Tech & UI Engineering",
+    icon: Sliders,
+    image: "/projects/zeta_tech.png",
+    title: "Zeta Tech — AI Platform Portal",
+    subtitle: "High-Performance Dashboard & Analytics UI",
+    rating: "4.8 ★★★★★",
+    colors: ["#3B82F6", "#1E3A8A", "#18181B", "#E4E4E7"],
+    type: "Web Portal",
+    tag: "Interactive UI",
+  },
+];
 
 const TICKER_ITEMS = [
   "Social Media Management",
@@ -20,6 +83,7 @@ const TRUST_INDICATORS = [
 ];
 
 export default function Hero() {
+  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
   const y      = useTransform(scrollYProgress, [0, 1], [0, 60]);
@@ -225,23 +289,27 @@ export default function Hero() {
               <div
                 className="flex items-center justify-between pb-3 mb-3 border-b border-[var(--border)]"
               >
-                {/* Canvas tools */}
+                {/* Canvas interactive tool selector */}
                 <div className="flex items-center gap-1.5 p-1 rounded-lg" style={{ background: "var(--bg-secondary)", border: "1px solid var(--border)" }}>
-                  <div className="p-1.5 rounded bg-[var(--yellow)] text-black">
-                    <MousePointer2 size={13} />
-                  </div>
-                  <div className="p-1.5 rounded text-[var(--text-muted)] hover:text-[var(--text-primary)] transition">
-                    <Palette size={13} />
-                  </div>
-                  <div className="p-1.5 rounded text-[var(--text-muted)] hover:text-[var(--text-primary)] transition">
-                    <Video size={13} />
-                  </div>
-                  <div className="p-1.5 rounded text-[var(--text-muted)] hover:text-[var(--text-primary)] transition">
-                    <Code2 size={13} />
-                  </div>
-                  <div className="p-1.5 rounded text-[var(--text-muted)] hover:text-[var(--text-primary)] transition">
-                    <Sliders size={13} />
-                  </div>
+                  {STUDIO_PROJECTS.map((item, idx) => {
+                    const ToolIcon = item.icon;
+                    const isActive = idx === activeProjectIndex;
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => setActiveProjectIndex(idx)}
+                        title={`${item.toolName} — View ${item.title}`}
+                        className={`p-1.5 rounded transition-all duration-200 cursor-pointer ${
+                          isActive
+                            ? "bg-[var(--yellow)] text-black shadow-sm font-bold scale-105"
+                            : "text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-primary)]"
+                        }`}
+                      >
+                        <ToolIcon size={14} />
+                      </button>
+                    );
+                  })}
                 </div>
 
                 <div className="flex items-center gap-2">
@@ -254,27 +322,38 @@ export default function Hero() {
 
               {/* Real Project Visual Preview Frame */}
               <div className="relative rounded-lg overflow-hidden mb-4 group" style={{ border: "1px solid var(--border)", background: "var(--bg-secondary)" }}>
-                {/* Visual Image */}
+                {/* Visual Image with smooth transition */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/projects/brew_lab.png"
-                  alt="Brew Lab Project Preview"
+                <motion.img
+                  key={STUDIO_PROJECTS[activeProjectIndex].image}
+                  initial={{ opacity: 0.6, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3 }}
+                  src={STUDIO_PROJECTS[activeProjectIndex].image}
+                  alt={STUDIO_PROJECTS[activeProjectIndex].title}
                   className="w-full h-44 object-cover object-top transition-transform duration-500 group-hover:scale-105"
                 />
                 
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-3.5">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex flex-col justify-end p-3.5">
                   <div className="flex items-center justify-between text-white">
                     <div>
-                      <div className="text-xs font-extrabold text-white tracking-wide" style={{ fontFamily: "var(--font-space)" }}>
-                        Brew &amp; Lab — Specialty Coffee
-                      </div>
+                      <motion.div
+                        key={STUDIO_PROJECTS[activeProjectIndex].title}
+                        initial={{ opacity: 0, y: 4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="text-xs font-extrabold text-white tracking-wide"
+                        style={{ fontFamily: "var(--font-space)" }}
+                      >
+                        {STUDIO_PROJECTS[activeProjectIndex].title}
+                      </motion.div>
                       <div className="text-[10px] text-white/70">
-                        Brand Identity &amp; E-Commerce Web App
+                        {STUDIO_PROJECTS[activeProjectIndex].subtitle}
                       </div>
                     </div>
                     <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[var(--yellow)] text-black">
-                      4.9 ★★★★★
+                      {STUDIO_PROJECTS[activeProjectIndex].rating}
                     </span>
                   </div>
                 </div>
@@ -288,20 +367,24 @@ export default function Hero() {
                     Brand Palette
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <div className="w-5 h-5 rounded-full border border-white/20 shadow-sm" style={{ background: "#FFD60A" }} title="#FFD60A" />
-                    <div className="w-5 h-5 rounded-full border border-white/20 shadow-sm" style={{ background: "#09090B" }} title="#09090B" />
-                    <div className="w-5 h-5 rounded-full border border-white/20 shadow-sm" style={{ background: "#27272A" }} title="#27272A" />
-                    <div className="w-5 h-5 rounded-full border border-white/20 shadow-sm" style={{ background: "#F4F4F5" }} title="#F4F4F5" />
+                    {STUDIO_PROJECTS[activeProjectIndex].colors.map((c, i) => (
+                      <div
+                        key={i}
+                        className="w-5 h-5 rounded-full border border-white/20 shadow-sm transition-transform hover:scale-110"
+                        style={{ background: c }}
+                        title={c}
+                      />
+                    ))}
                   </div>
                 </div>
 
-                {/* Video & Motion Reel Tag */}
+                {/* Service Tag */}
                 <div className="p-3 rounded-md flex flex-col justify-between" style={{ background: "var(--bg-secondary)", border: "1px solid var(--border)" }}>
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--text-muted)]" style={{ fontFamily: "var(--font-space)" }}>
-                      Motion &amp; Video
+                      {STUDIO_PROJECTS[activeProjectIndex].type}
                     </span>
-                    <span className="text-[9px] font-mono text-[var(--yellow)]">4K • 60fps</span>
+                    <span className="text-[9px] font-mono text-[var(--yellow)]">{STUDIO_PROJECTS[activeProjectIndex].tag}</span>
                   </div>
                   <div className="flex items-center gap-2 mt-1">
                     <div className="w-5 h-5 rounded-full bg-[var(--yellow)] text-black flex items-center justify-center">
@@ -322,35 +405,6 @@ export default function Hero() {
                 <span className="font-bold text-[var(--text-primary)]" style={{ fontFamily: "var(--font-space)" }}>
                   No Templates. Pure Craft.
                 </span>
-              </div>
-            </motion.div>
-
-            {/* Floating Live Collaborator Cursor 1 - Top Left */}
-            <motion.div
-              className="absolute top-2 -left-6 z-20 animate-float-slow hidden md:flex items-center gap-1.5"
-              style={{ pointerEvents: "none" }}
-            >
-              <MousePointer2 size={18} className="text-[var(--yellow)] fill-[var(--yellow)] drop-shadow-md" />
-              <div className="px-2.5 py-1 rounded-md text-[11px] font-bold bg-[var(--yellow)] text-black shadow-lg" style={{ fontFamily: "var(--font-space)" }}>
-                Ihsan (Lead Studio)
-              </div>
-            </motion.div>
-
-            {/* Floating Feedback Pill 2 - Bottom Right Overlay */}
-            <motion.div
-              className="absolute -bottom-3 -right-3 z-20 p-3 rounded-lg flex items-center gap-2.5 animate-float-reverse shadow-xl"
-              style={{
-                background: "var(--bg-primary)",
-                border: "1px solid var(--yellow)",
-                boxShadow: "0 14px 35px rgba(0, 0, 0, 0.18)",
-              }}
-            >
-              <div className="w-7 h-7 rounded-full bg-emerald-500/15 text-emerald-500 flex items-center justify-center">
-                <MessageSquare size={14} />
-              </div>
-              <div>
-                <div className="text-xs font-extrabold text-[var(--text-primary)]">Client Review</div>
-                <div className="text-[10px] text-emerald-500 font-semibold">“Revenues tripled in Month 1! 🔥”</div>
               </div>
             </motion.div>
           </motion.div>
