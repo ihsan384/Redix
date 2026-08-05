@@ -7,7 +7,7 @@ import { Mail, MessageCircle, Phone, MapPin, Send, CheckCircle2, Sparkles, Alert
 const contactLinks = [
   { Icon: MessageCircle, label: "WhatsApp", value: "Chat with us", href: "https://wa.me/919744206583", color: "#25d366" },
   { Icon: Mail, label: "Email", value: "[EMAIL_ADDRESS]", href: "mailto:[EMAIL_ADDRESS]", color: "var(--text-primary)" },
-  { Icon: Phone, label: "Call", value: "+91 8075 511 982", href: "tel:+918075511982", color: "var(--text-primary)" },
+  { Icon: Phone, label: "Call", value: "+91 99465 91260", href: "tel:+919946591260", color: "var(--text-primary)" },
   { Icon: MapPin, label: "Location", value: "Based in India · Serving Remotly", href: "#", color: "var(--text-muted)" },
 ];
 

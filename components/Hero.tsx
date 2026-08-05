@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, Sparkles, TrendingUp, Code2, Palette, ShieldCheck, Zap } from "lucide-react";
 
 const TICKER_ITEMS = [
   "Social Media Management",
@@ -189,153 +189,170 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right — Floating creative visual elements */}
+          {/* Right — Creative & Professional Studio Showcase Visual */}
           <motion.div
-            className="lg:col-span-5 hidden lg:flex relative"
-            style={{ minHeight: "480px" }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            className="lg:col-span-5 hidden lg:flex relative flex-col justify-center items-center"
+            style={{ minHeight: "500px" }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           >
-            {/* Website mockup frame 1 */}
-            <motion.div
-              className="absolute animate-float-slow"
+            {/* Ambient subtle glow background */}
+            <div
+              className="absolute w-72 h-72 rounded-full blur-3xl pointer-events-none"
               style={{
+                background: "radial-gradient(circle, rgba(255, 214, 10, 0.18) 0%, rgba(0,0,0,0) 70%)",
                 top: "10%",
-                right: "5%",
-                width: "260px",
-                height: "180px",
-                background: "var(--bg-secondary)",
-                border: "1px solid var(--border)",
-                borderRadius: "var(--radius-md)",
-                boxShadow: "var(--shadow-lg)",
-                overflow: "hidden",
+                right: "10%",
+                zIndex: 0,
               }}
-            >
-              {/* Browser bar */}
-              <div
-                className="flex items-center gap-1.5 px-3 py-2"
-                style={{ borderBottom: "1px solid var(--border)", background: "var(--bg-primary)" }}
-              >
-                <div className="w-2 h-2 rounded-full" style={{ background: "#FF5F57" }} />
-                <div className="w-2 h-2 rounded-full" style={{ background: "#FFBD2E" }} />
-                <div className="w-2 h-2 rounded-full" style={{ background: "#27CA40" }} />
-                <div
-                  className="ml-2 h-3 rounded flex-1 max-w-20"
-                  style={{ background: "var(--bg-secondary)" }}
-                />
-              </div>
-              {/* Content placeholder */}
-              <div className="p-3 space-y-2">
-                <div className="h-3 rounded" style={{ background: "var(--border)", width: "70%" }} />
-                <div className="h-2 rounded" style={{ background: "var(--border)", width: "100%" }} />
-                <div className="h-2 rounded" style={{ background: "var(--border)", width: "85%" }} />
-                <div className="flex gap-2 mt-3">
-                  <div className="h-6 rounded" style={{ background: "var(--yellow)", width: "60px" }} />
-                  <div className="h-6 rounded" style={{ background: "var(--border)", width: "50px" }} />
-                </div>
-              </div>
-            </motion.div>
+            />
 
-            {/* Website mockup frame 2 */}
+            {/* Main Studio Dashboard Card */}
             <motion.div
-              className="absolute animate-float-reverse"
+              className="w-full relative z-10 p-6 overflow-hidden"
               style={{
-                top: "40%",
-                left: "0%",
-                width: "220px",
-                height: "160px",
-                background: "var(--bg-primary)",
-                border: "1px solid var(--border)",
+                background: "var(--bg-card)",
+                border: "1px solid var(--border-strong)",
                 borderRadius: "var(--radius-md)",
                 boxShadow: "var(--shadow-xl)",
-                overflow: "hidden",
+                maxWidth: "460px",
               }}
+              whileHover={{ y: -4 }}
+              transition={{ duration: 0.3 }}
             >
-              {/* Browser bar */}
+              {/* Browser/Card Window Controls Header */}
               <div
-                className="flex items-center gap-1.5 px-3 py-2"
-                style={{ borderBottom: "1px solid var(--border)" }}
+                className="flex items-center justify-between pb-4 mb-4 border-b border-[var(--border)]"
               >
-                <div className="w-2 h-2 rounded-full" style={{ background: "#FF5F57" }} />
-                <div className="w-2 h-2 rounded-full" style={{ background: "#FFBD2E" }} />
-                <div className="w-2 h-2 rounded-full" style={{ background: "#27CA40" }} />
+                <div className="flex items-center gap-2">
+                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#FF5F57" }} />
+                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#FFBD2E" }} />
+                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#27CA40" }} />
+                  <span
+                    className="ml-2 text-[11px] px-2.5 py-0.5 rounded-full font-mono font-medium"
+                    style={{ background: "var(--bg-secondary)", color: "var(--text-muted)" }}
+                  >
+                    redix.media/studio
+                  </span>
+                </div>
+                <div className="flex items-center gap-1.5 text-[11px] font-semibold text-emerald-500 bg-emerald-500/10 px-2.5 py-0.5 rounded-full">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  Live Hub
+                </div>
               </div>
-              <div className="p-3 space-y-2">
-                <div className="h-8 rounded" style={{ background: "var(--yellow)", opacity: 0.2 }} />
-                <div className="h-2 rounded" style={{ background: "var(--border)", width: "90%" }} />
-                <div className="h-2 rounded" style={{ background: "var(--border)", width: "60%" }} />
+
+              {/* Studio Card Header */}
+              <div className="mb-4">
+                <div className="flex items-center gap-2 mb-1">
+                  <Sparkles size={14} style={{ color: "var(--yellow)" }} />
+                  <span className="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]" style={{ fontFamily: "var(--font-space)" }}>
+                    Digital Product & Brand Studio
+                  </span>
+                </div>
+                <h3 className="text-lg font-extrabold text-[var(--text-primary)]" style={{ fontFamily: "var(--font-space)" }}>
+                  High-Impact Digital Experiences
+                </h3>
+              </div>
+
+              {/* Performance Curve Graph Representation */}
+              <div className="p-4 rounded-lg mb-4 relative overflow-hidden" style={{ background: "var(--bg-secondary)", border: "1px solid var(--border)" }}>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-semibold text-[var(--text-secondary)]">Brand Growth & Reach</span>
+                  <span className="text-xs font-bold text-[var(--text-primary)] flex items-center gap-1">
+                    <TrendingUp size={12} className="text-emerald-500" /> +310%
+                  </span>
+                </div>
+                
+                {/* SVG Curve Line */}
+                <div className="h-16 w-full relative">
+                  <svg className="w-full h-full overflow-visible" viewBox="0 0 300 60" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="growthGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="var(--yellow)" stopOpacity="0.35" />
+                        <stop offset="100%" stopColor="var(--yellow)" stopOpacity="0" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      d="M0,50 Q40,45 80,30 T160,25 T240,10 T300,5 L300,60 L0,60 Z"
+                      fill="url(#growthGrad)"
+                    />
+                    <path
+                      d="M0,50 Q40,45 80,30 T160,25 T240,10 T300,5"
+                      fill="none"
+                      stroke="var(--yellow)"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Core Deliverable Pills */}
+              <div className="grid grid-cols-2 gap-2.5 mb-4">
+                <div className="p-3 rounded-md flex items-center gap-3" style={{ background: "var(--bg-secondary)", border: "1px solid var(--border)" }}>
+                  <div className="w-8 h-8 rounded flex items-center justify-center bg-[var(--yellow)]/15 text-[var(--yellow)]">
+                    <Code2 size={16} />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-[var(--text-primary)]">Custom Web & ERP</div>
+                    <div className="text-[10px] text-[var(--text-muted)]">Full-Stack Solutions</div>
+                  </div>
+                </div>
+
+                <div className="p-3 rounded-md flex items-center gap-3" style={{ background: "var(--bg-secondary)", border: "1px solid var(--border)" }}>
+                  <div className="w-8 h-8 rounded flex items-center justify-center bg-amber-500/15 text-amber-500">
+                    <Palette size={16} />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-[var(--text-primary)]">Brand Identity</div>
+                    <div className="text-[10px] text-[var(--text-muted)]">Visual Storytelling</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom Stat Footer */}
+              <div className="flex items-center justify-between pt-3 border-t border-[var(--border)] text-xs">
+                <span className="text-[var(--text-muted)] flex items-center gap-1.5">
+                  <ShieldCheck size={14} className="text-emerald-500" /> Guaranteed Quality
+                </span>
+                <span className="font-bold text-[var(--yellow)]">100% Bespoke</span>
               </div>
             </motion.div>
 
-            {/* Instagram-style card */}
+            {/* Floating Overlay Badge 1 - Top Right */}
             <motion.div
-              className="absolute animate-float"
+              className="absolute -top-3 -right-2 z-20 p-3.5 rounded-lg flex items-center gap-3 animate-float-slow"
               style={{
-                bottom: "8%",
-                right: "10%",
-                width: "140px",
-                height: "170px",
                 background: "var(--bg-primary)",
-                border: "1px solid var(--border)",
-                borderRadius: "var(--radius-md)",
-                boxShadow: "var(--shadow-lg)",
-                overflow: "hidden",
+                border: "1px solid var(--yellow)",
+                boxShadow: "0 12px 30px rgba(0, 0, 0, 0.15)",
               }}
             >
-              <div className="h-20" style={{ background: "linear-gradient(135deg, #FFD60A22, #FFD60A44)" }} />
-              <div className="p-2.5 space-y-1.5">
-                <div className="flex items-center gap-1.5">
-                  <div className="w-4 h-4 rounded-full" style={{ background: "var(--yellow)" }} />
-                  <div className="h-1.5 rounded" style={{ background: "var(--border)", width: "50px" }} />
-                </div>
-                <div className="h-1.5 rounded" style={{ background: "var(--border)", width: "100%" }} />
-                <div className="h-1.5 rounded" style={{ background: "var(--border)", width: "70%" }} />
+              <div className="w-8 h-8 rounded-full flex items-center justify-center bg-[var(--yellow)] text-black font-bold">
+                <Zap size={16} />
+              </div>
+              <div>
+                <div className="text-xs font-bold text-[var(--text-primary)]">Fast Delivery</div>
+                <div className="text-[10px] text-[var(--text-muted)]">Rapid Execution</div>
               </div>
             </motion.div>
 
-            {/* Floating yellow accent — circle */}
+            {/* Floating Overlay Badge 2 - Bottom Left */}
             <motion.div
-              className="absolute animate-float-slow"
+              className="absolute -bottom-4 -left-4 z-20 p-3.5 rounded-lg flex items-center gap-3 animate-float-reverse"
               style={{
-                top: "5%",
-                left: "15%",
-                width: "40px",
-                height: "40px",
-                background: "var(--yellow)",
-                borderRadius: "50%",
-                opacity: 0.6,
+                background: "var(--bg-primary)",
+                border: "1px solid var(--border-strong)",
+                boxShadow: "0 12px 30px rgba(0, 0, 0, 0.12)",
               }}
-            />
-
-            {/* Floating yellow accent — rectangle */}
-            <motion.div
-              className="absolute animate-float-reverse"
-              style={{
-                bottom: "25%",
-                left: "20%",
-                width: "24px",
-                height: "24px",
-                background: "var(--yellow)",
-                borderRadius: "4px",
-                opacity: 0.4,
-                transform: "rotate(45deg)",
-              }}
-            />
-
-            {/* Small dot accent */}
-            <motion.div
-              className="absolute animate-float"
-              style={{
-                top: "35%",
-                right: "0%",
-                width: "12px",
-                height: "12px",
-                background: "var(--text-primary)",
-                borderRadius: "50%",
-                opacity: 0.15,
-              }}
-            />
+            >
+              <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
+              <div className="text-xs">
+                <span className="font-bold text-[var(--text-primary)] block">Accepting Projects</span>
+                <span className="text-[10px] text-[var(--text-muted)]">Direct Founder Contact</span>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </motion.div>
