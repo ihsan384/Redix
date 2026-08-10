@@ -11,6 +11,7 @@ import ProjectDetailsModal from "./ProjectDetailsModal";
 type FilterCategory =
   | "All"
   | "ERP"
+  | "E-Commerce"
   | "Restaurant"
   | "Business"
   | "Landing Page"
@@ -20,6 +21,7 @@ type FilterCategory =
 const filterCategories: FilterCategory[] = [
   "All",
   "ERP",
+  "E-Commerce",
   "Restaurant",
   "Business",
   "Landing Page",
@@ -63,6 +65,50 @@ export interface Project {
 }
 
 const projects: Project[] = [
+  {
+    id: "cloth-studio",
+    title: "Cloth Studio — Fashion Storefront",
+    categoryBadge: "Fashion E-Commerce",
+    filterCategories: ["All", "E-Commerce", "Business", "Landing Page"],
+    image: "/projects/cloth_studio.png",
+    description: "A conversion-focused digital storefront designed for a modern fashion brand featuring clean product visual hierarchy, curated collections (Ladies Wear, Kids Wear, Custom Tailoring), and direct WhatsApp order channels.",
+    tech: ["Next.js", "React", "Tailwind CSS", "TypeScript", "Vercel"],
+    demoUrl: "https://clothstudio.vercel.app/",
+    caseStudyUrl: "#",
+    client: "Cloth Studio",
+    year: "2026",
+    size: "large",
+    duration: "3 Weeks",
+    industry: "Fashion & Retail",
+    overview: {
+      problem: "Local clothing brands and small boutiques often struggle with Instagram-only selling or basic catalog sites that fail to convey brand quality, build credibility, or provide an organized visual shopping experience.",
+      solution: "We designed and developed Cloth Studio—a fashion-first digital storefront built with minimalist visual language, structured product discovery, tailored category showcases (Ladies Wear, Kids Wear, Custom Tailoring), and seamless WhatsApp ordering flow.",
+      result: "Transformed the brand into a polished digital storefront, boosting brand authority and enabling frictionless mobile & desktop customer orders."
+    },
+    features: [
+      "Product-First Experience & Hierarchy",
+      "Shop by Category (Ladies Wear, Kids Wear, Custom Tailoring)",
+      "Direct WhatsApp Order Integration",
+      "Bespoke Fitting & Stitching Guide",
+      "100% Mobile & Desktop Responsive UX",
+      "Vercel High-Performance Deployment"
+    ],
+    metrics: [
+      { value: "99%", label: "Mobile UX Score" },
+      { value: "1.0s", label: "Page Load Time" },
+      { value: "Direct", label: "WhatsApp Order Conversion" },
+      { value: "100%", label: "Responsive Layout" }
+    ],
+    gallery: [
+      "/projects/cloth_studio.png",
+      "/projects/cloth_studio_categories.png"
+    ],
+    testimonial: {
+      rating: 5,
+      text: "Cloth Studio transformed our local boutique into a high-end digital storefront. Our customers love the clean presentation and instant WhatsApp ordering!",
+      author: "Cloth Studio — Pathanapuram, Kerala"
+    }
+  },
   {
     id: "gym-rrp",
     title: "Gym RRP Management ERP",
@@ -450,6 +496,8 @@ function ProjectImage({ src, alt, heightClass }: { src: string; alt: string; hei
             setImgSrc("https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80");
           } else if (src.includes("interior")) {
             setImgSrc("https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80");
+          } else if (src.includes("cloth")) {
+            setImgSrc("https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80");
           } else {
             setImgSrc("https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80");
           }
