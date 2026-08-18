@@ -129,7 +129,7 @@ export default function QuotePage() {
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    placeholder="+91 97442 06583"
+                    placeholder="+91 94970 13275"
                     className="w-full pl-10 pr-4 py-3 bg-black/40 border border-white/10 rounded-xl text-sm focus:outline-none focus:border-yellow-400/50 text-white"
                   />
                 </div>

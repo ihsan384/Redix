@@ -54,7 +54,7 @@ export default function WhatsAppButton() {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleServiceClick = (msg: string) => {
-    window.open(`https://wa.me/919744206583?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
+    window.open(`https://wa.me/919497013275?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
     setIsOpen(false);
   };
 

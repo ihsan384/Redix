@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { Mail, MessageCircle, Phone, MapPin, Send, CheckCircle2, Sparkles, AlertCircle } from "lucide-react";
 
 const contactLinks = [
-  { Icon: MessageCircle, label: "WhatsApp", value: "Chat with us", href: "https://wa.me/919744206583", color: "#25d366" },
+  { Icon: MessageCircle, label: "WhatsApp", value: "Chat with us", href: "https://wa.me/919497013275", color: "#25d366" },
   { Icon: Mail, label: "Email", value: "[EMAIL_ADDRESS]", href: "mailto:[EMAIL_ADDRESS]", color: "var(--text-primary)" },
   { Icon: Phone, label: "Call", value: "+91 99465 91260", href: "tel:+919946591260", color: "var(--text-primary)" },
   { Icon: MapPin, label: "Location", value: "Based in India · Serving Remotly", href: "#", color: "var(--text-muted)" },
@@ -212,7 +212,7 @@ export default function Contact() {
 
             {/* WhatsApp CTA */}
             <a
-              href="https://wa.me/919744206583"
+              href="https://wa.me/919497013275"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-4 p-5 transition-all duration-300"

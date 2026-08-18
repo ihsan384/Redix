@@ -204,7 +204,7 @@ export default function FAQ() {
           </div>
           <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
             <a
-              href="https://wa.me/919744206583"
+              href="https://wa.me/919497013275"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-outline text-xs"

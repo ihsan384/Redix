@@ -236,7 +236,7 @@ export default function Footer() {
                 hello@redix.media
               </a>
               <a
-                href="https://wa.me/919744206583"
+                href="https://wa.me/919497013275"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block transition-colors duration-200"
@@ -244,7 +244,7 @@ export default function Footer() {
                 onMouseEnter={(e) => (e.currentTarget.style.color = "#25d366")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
               >
-                WhatsApp: +91 97442 06583
+                WhatsApp: +91 94970 13275
               </a>
               <div
                 className="p-4 mt-2"
