@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowUpRight, Sparkles, ArrowRight, Zap } from "lucide-react";
 import Image from "next/image";
@@ -114,7 +114,7 @@ const projects: Project[] = [
     title: "Gym RRP Management ERP",
     categoryBadge: "ERP Software",
     filterCategories: ["All", "ERP", "Business"],
-    image: "/assets/2.png",
+    image: "/projects/gym_erp.png",
     description: "Enterprise resource planning system for gyms with active attendance matrixes, automated membership tier subscriptions, payment analytics dashboards, and trainer-scheduling APIs.",
     tech: ["React", "Typescript", "Tailwind CSS", "Supabase", "Framer Motion", "Lucide"],
     demoUrl: "https://fusionfitgym.vercel.app",
@@ -145,9 +145,7 @@ const projects: Project[] = [
       { value: "Responsive", label: "Desktop • Tablet • Mobile" }
     ],
     gallery: [
-      "/assets/1.png",
-      "/assets/2.png",
-      "/assets/3.png"
+      "/projects/gym_erp.png"
     ],
     testimonial: {
       rating: 5,
@@ -205,7 +203,7 @@ const projects: Project[] = [
     title: "Elixir Coffee Storefront",
     categoryBadge: "Cafe Website",
     filterCategories: ["All", "Restaurant", "Business"],
-    image: "/assets/cafe-demo.png",
+    image: "/assets/cafedemo.png",
     description: "Bespoke café digital storefront with integrated online ordering systems, gallery matrices, and responsive map locators.",
     tech: ["HTML", "CSS", "Vanilla JS", "Netlify"],
     demoUrl: "https://cafe-demo-17.netlify.app/",
@@ -249,7 +247,7 @@ const projects: Project[] = [
     title: "Ayan Creative Portfolio",
     categoryBadge: "Portfolio",
     filterCategories: ["All", "Portfolio", "Business"],
-    image: "/assets/ayan portfolio.png",
+    image: "/projects/solitude.png",
     description: "Award-winning portfolio for a graphic designer, built with buttery-smooth scroll physics and custom layout grids.",
     tech: ["HTML", "CSS", "GSAP", "Vanilla JS"],
     demoUrl: "https://ayan-graphics-portfolio.netlify.app/",
@@ -294,7 +292,7 @@ const projects: Project[] = [
     title: "Paws & Claws Storefront",
     categoryBadge: "Business Website",
     filterCategories: ["All", "Business"],
-    image: "/assets/petshop.png",
+    image: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=800&q=80",
     description: "Charming digital storefront designed for a modern veterinary and premium pet supplies shop detailing appointments and care plans.",
     tech: ["HTML", "CSS", "JavaScript"],
     demoUrl: "https://petshop-demo.netlify.app/",
@@ -338,7 +336,7 @@ const projects: Project[] = [
     title: "Brew & Bites Portal V2",
     categoryBadge: "React Web App",
     filterCategories: ["All", "Restaurant", "Business"],
-    image: "/assets/cafedemo.png",
+    image: "/projects/brew_lab.png",
     description: "Next-gen café portal featuring reactive state filters, online payment gateways, and lightweight motion templates.",
     tech: ["React", "Tailwind CSS", "Vite", "Framer Motion"],
     demoUrl: "https://demo-website-19.netlify.app/",
@@ -383,7 +381,7 @@ const projects: Project[] = [
     title: "Hearth Design Studio",
     categoryBadge: "Architecture Portfolio",
     filterCategories: ["All", "Portfolio", "Business"],
-    image: "/assets/interior studio.png",
+    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80",
     description: "An elegant minimal portfolio displaying high-resolution interior layouts, project metrics, and client review panels.",
     tech: ["HTML", "CSS", "Vanilla JS"],
     demoUrl: "https://demo-website-17.netlify.app/",
@@ -473,6 +471,11 @@ function ProjectImage({ src, alt, heightClass }: { src: string; alt: string; hei
   const [loading, setLoading] = useState(true);
   const [imgSrc, setImgSrc] = useState(src);
 
+  useEffect(() => {
+    setImgSrc(src);
+    setLoading(true);
+  }, [src]);
+
   return (
     <div className={`relative w-full overflow-hidden ${heightClass} bg-neutral-50`}>
       {loading && (
@@ -486,13 +489,14 @@ function ProjectImage({ src, alt, heightClass }: { src: string; alt: string; hei
         className="object-cover object-top transition-all duration-700 ease-out group-hover:scale-110"
         onLoad={() => setLoading(false)}
         onError={() => {
+          setLoading(false);
           if (src.includes("gym")) {
             setImgSrc("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80");
-          } else if (src.includes("cafe") || src.includes("coco")) {
+          } else if (src.includes("cafe") || src.includes("coco") || src.includes("brew")) {
             setImgSrc("https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&q=80");
           } else if (src.includes("pet")) {
             setImgSrc("https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=800&q=80");
-          } else if (src.includes("portfolio")) {
+          } else if (src.includes("portfolio") || src.includes("solitude")) {
             setImgSrc("https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80");
           } else if (src.includes("interior")) {
             setImgSrc("https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80");

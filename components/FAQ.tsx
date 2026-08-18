@@ -8,17 +8,12 @@ const faqs = [
   {
     question: "How much does a website cost?",
     answer:
-      "Our website packages start from ₹15,000 for a clean landing page and go up depending on complexity. A standard business website typically ranges from ₹25,000 to ₹75,000. We'll provide a detailed quote after understanding your specific needs during our free consultation.",
+      "Our website packages start from ₹3,000 for a clean landing page and typically range from ₹3,000 to ₹15,000 depending on complexity. We'll provide a detailed quote after understanding your specific needs during our free consultation.",
   },
   {
     question: "How long does a project take?",
     answer:
-      "Timelines depend on the scope. A landing page can be delivered in 5–7 days, a full website in 2–4 weeks, and branding packages in 1–2 weeks. Social media management is an ongoing monthly service. We always agree on deadlines upfront and deliver on time.",
-  },
-  {
-    question: "Do you provide social media management?",
-    answer:
-      "Absolutely! Social media management is one of our core services. We handle content creation, scheduling, community management, analytics, and growth strategy across platforms like Instagram, Facebook, LinkedIn, and more. Our packages are designed to grow your following and engagement consistently.",
+      "Timelines depend on the scope. A landing page can be delivered in 5–7 days, a full website in 2–4 weeks, and branding packages in 1–2 weeks. We always agree on deadlines upfront and deliver on time.",
   },
   {
     question: "Can you redesign an existing website?",
