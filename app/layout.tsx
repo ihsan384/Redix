@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import "./globals.css";
 import PWARegistration from "@/components/PWARegistration";
+import AnalyticsTracker from "@/components/AnalyticsTracker";
 
 export const metadata: Metadata = {
   title: "REDIX.MEDIA — Creative Digital Studio | Branding, Web & Content",
@@ -122,6 +123,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased overflow-x-hidden">
         <PWARegistration />
+        <AnalyticsTracker />
         {children}
 
         {/* ─── Analytics (placeholder — replace IDs with actual values) ─────── */}
