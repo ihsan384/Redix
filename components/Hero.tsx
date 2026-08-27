@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Check, Sparkles, Play, Code2, Palette, MousePointer2, Layers, Video, Sliders, MessageSquare } from "lucide-react";
+import { ArrowRight, Check, Sparkles, Play, Code2, Palette, MousePointer2, Layers, Video, Sliders, MessageSquare, MessageCircle } from "lucide-react";
 
 const STUDIO_PROJECTS = [
   {
@@ -101,7 +101,7 @@ export default function Hero() {
       {/* Main content — vertically centered */}
       <motion.div
         style={{ y, opacity }}
-        className="flex-1 flex flex-col justify-center max-w-7xl mx-auto w-full px-6 pt-24 pb-12"
+        className="flex-1 flex flex-col justify-center max-w-7xl mx-auto w-full px-4 sm:px-6 pt-20 sm:pt-24 pb-8 sm:pb-12"
       >
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
@@ -111,14 +111,14 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="mb-6"
+              className="mb-4 sm:mb-6"
             >
-              <div className="badge">Creative Studio for Ambitious Brands</div>
+              <div className="badge text-[10px] sm:text-xs">Creative Studio for Ambitious Brands</div>
             </motion.div>
 
             <h1
               className="display-title mb-0"
-              style={{ fontSize: "clamp(2.5rem, 1.5rem + 4vw, 5.5rem)", lineHeight: 1.05, maxWidth: "760px" }}
+              style={{ fontSize: "clamp(2rem, 1.25rem + 3.6vw, 5.5rem)", lineHeight: 1.06, maxWidth: "760px" }}
               aria-label="We don't just market. We make brands impossible to ignore."
             >
               {/* Line 1 */}
@@ -147,7 +147,7 @@ export default function Hero() {
                     Market.
                     <span
                       className="absolute bottom-1 left-0 w-full"
-                      style={{ height: "8px", background: "var(--yellow)", zIndex: -1, opacity: 0.8 }}
+                      style={{ height: "6px", background: "var(--yellow)", zIndex: -1, opacity: 0.8 }}
                     />
                   </span>
                 </motion.span>
@@ -198,32 +198,35 @@ export default function Hero() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
-              className="mt-8 lg:mt-10"
+              className="mt-6 sm:mt-8 lg:mt-10"
             >
               <p
-                className="leading-relaxed mb-6 text-base md:text-lg"
+                className="leading-relaxed mb-6 text-sm sm:text-base md:text-lg"
                 style={{ color: "var(--text-secondary)", maxWidth: "480px" }}
               >
                 We help startups and growing businesses build brand identities, websites,
                 and content strategies that drive real revenue.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-3">
-                <motion.button
+              <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                <motion.a
                   id="hero-start-project-btn"
-                  onClick={() => goto("#contact")}
-                  className="btn-yellow group"
+                  href="https://wa.me/919497013275?text=Hi%20REDIX%20Media%2C%20I%27m%20interested%20in%20discussing%20a%20project%20for%20my%20business%20and%20would%20like%20to%20get%20started."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-yellow group w-full sm:w-auto justify-center text-center text-xs sm:text-sm flex items-center gap-2"
                   whileHover={{ y: -2, scale: 1.01 }}
                   whileTap={{ scale: 0.97 }}
                   data-analytics="hero-cta-primary"
                 >
-                  Start Your Project
+                  <MessageCircle size={15} />
+                  Chat on WhatsApp
                   <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
-                </motion.button>
+                </motion.a>
                 <motion.button
                   id="hero-view-work-btn"
                   onClick={() => goto("#portfolio")}
-                  className="btn-outline"
+                  className="btn-outline w-full sm:w-auto justify-center text-center text-xs sm:text-sm"
                   whileHover={{ y: -2, scale: 1.01 }}
                   whileTap={{ scale: 0.97 }}
                   data-analytics="hero-cta-secondary"
@@ -237,12 +240,12 @@ export default function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.1, duration: 0.5 }}
-                className="flex flex-wrap gap-x-5 gap-y-2 mt-6"
+                className="flex flex-wrap gap-x-4 sm:gap-x-5 gap-y-2 mt-5 sm:mt-6"
               >
                 {TRUST_INDICATORS.map((item) => (
                   <span
                     key={item}
-                    className="flex items-center gap-1.5 text-xs"
+                    className="flex items-center gap-1.5 text-[11px] sm:text-xs"
                     style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}
                   >
                     <Check size={12} style={{ color: "var(--yellow)" }} />

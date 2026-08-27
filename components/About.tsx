@@ -22,7 +22,7 @@ export default function About() {
           </span>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-24 items-start">
 
           {/* Left */}
           <div>
@@ -30,7 +30,7 @@ export default function About() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="section-title mb-8"
+              className="section-title mb-6 sm:mb-8"
             >
               Built by Creators.{" "}
               <br />
@@ -56,12 +56,12 @@ export default function About() {
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
             >
-              <p className="leading-relaxed mb-5" style={{ color: "var(--text-secondary)" }}>
+              <p className="text-sm sm:text-base leading-relaxed mb-4 sm:mb-5" style={{ color: "var(--text-secondary)" }}>
                 REDIX.MEDIA was founded by a team of young creators passionate about helping
                 businesses stand out online. What started as freelance creative work evolved into a
                 full-service creative studio.
               </p>
-              <p className="leading-relaxed mb-10" style={{ color: "var(--text-secondary)" }}>
+              <p className="text-sm sm:text-base leading-relaxed mb-6 sm:mb-10" style={{ color: "var(--text-secondary)" }}>
                 Today, we combine design, technology, and strategy to help brands build a memorable
                 digital presence — from branding and websites to social media, content creation, and
                 digital marketing.
@@ -70,7 +70,7 @@ export default function About() {
               <a
                 href="#contact"
                 onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
-                className="btn-primary"
+                className="btn-primary w-full sm:w-auto text-center justify-center"
               >
                 Work With Us
               </a>
@@ -85,7 +85,7 @@ export default function About() {
           >
             {/* Mission box */}
             <div
-              className="p-8 mb-6"
+              className="p-5 sm:p-8 mb-5 sm:mb-6"
               style={{
                 background: "var(--bg-card)",
                 border: "1px solid var(--border)",
@@ -94,23 +94,23 @@ export default function About() {
               }}
             >
               <p
-                className="font-bold text-sm mb-2 uppercase tracking-wider"
+                className="font-bold text-xs sm:text-sm mb-2 uppercase tracking-wider"
                 style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}
               >
                 Our Mission
               </p>
-              <p style={{ color: "var(--text-primary)", lineHeight: 1.8 }}>
+              <p className="text-sm sm:text-base" style={{ color: "var(--text-primary)", lineHeight: 1.8 }}>
                 To help every business build a powerful digital presence that drives real growth.
                 We don&apos;t just make things look good — we make them work.
               </p>
             </div>
 
             {/* Service tags */}
-            <div className="flex flex-wrap gap-2 mb-8">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-6 sm:mb-8">
               {["Branding", "Web Dev", "Social Media", "Video", "Marketing", "Content"].map((t) => (
                 <span
                   key={t}
-                  className="text-xs font-semibold px-3 py-1.5"
+                  className="text-[11px] sm:text-xs font-semibold px-2.5 sm:px-3 py-1 sm:py-1.5"
                   style={{
                     border: "1px solid var(--border-strong)",
                     color: "var(--text-secondary)",
@@ -127,7 +127,7 @@ export default function About() {
 
             {/* Large decorative quote */}
             <div
-              className="p-8 relative"
+              className="p-5 sm:p-8 relative"
               style={{
                 background: "var(--bg-primary)",
                 border: "1px solid var(--border)",
@@ -135,7 +135,7 @@ export default function About() {
               }}
             >
               <span
-                className="absolute -top-4 left-6 text-6xl font-black leading-none"
+                className="absolute -top-4 left-5 sm:left-6 text-5xl sm:text-6xl font-black leading-none"
                 style={{
                   color: "var(--yellow)",
                   fontFamily: "var(--font-space)",
@@ -145,7 +145,7 @@ export default function About() {
                 &ldquo;
               </span>
               <p
-                className="text-lg font-medium leading-relaxed mt-4"
+                className="text-base sm:text-lg font-medium leading-relaxed mt-3 sm:mt-4"
                 style={{
                   color: "var(--text-primary)",
                   fontFamily: "var(--font-space)",

@@ -68,7 +68,7 @@ export default function ProjectDetailsModal({
   };
 
   return (
-    <div className="fixed inset-0 z-[80] flex items-center justify-center p-4 md:p-8 lg:p-12 overflow-hidden">
+    <div className="fixed inset-0 z-[80] flex items-center justify-center p-2 sm:p-4 md:p-8 lg:p-12 overflow-hidden">
       {/* Backdrop */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -86,22 +86,22 @@ export default function ProjectDetailsModal({
         exit={{ scale: 0.95, opacity: 0 }}
         transition={{ type: "spring", damping: 25, stiffness: 220 }}
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-7xl h-[90vh] md:h-[85vh] lg:h-[90vh] bg-[#FAFAF8] rounded-[28px] border border-black/5 shadow-[0_30px_80px_rgba(0,0,0,0.15)] flex flex-col overflow-hidden text-[#111111]"
+        className="relative w-full max-w-7xl h-[94vh] md:h-[85vh] lg:h-[90vh] bg-[#FAFAF8] rounded-2xl sm:rounded-[28px] border border-black/5 shadow-[0_30px_80px_rgba(0,0,0,0.15)] flex flex-col overflow-hidden text-[#111111]"
       >
         {/* Top Right Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 text-neutral-400 hover:text-neutral-900 p-2.5 rounded-full hover:bg-neutral-100 transition-all duration-300 z-30 cursor-pointer"
+          className="absolute top-3.5 right-3.5 sm:top-6 sm:right-6 text-neutral-400 hover:text-neutral-900 p-2 sm:p-2.5 rounded-full hover:bg-neutral-100 transition-all duration-300 z-30 cursor-pointer bg-white/80 sm:bg-transparent shadow-sm sm:shadow-none"
           aria-label="Close modal"
         >
-          <span className="text-xl font-light block leading-none w-4 h-4 flex items-center justify-center">✕</span>
+          <span className="text-lg sm:text-xl font-light block leading-none w-4 h-4 flex items-center justify-center">✕</span>
         </button>
 
         {/* Outer Split Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-[55%_45%] h-full overflow-y-auto lg:overflow-hidden">
           
           {/* Left Column (Image) */}
-          <div className="relative w-full h-[280px] sm:h-[400px] lg:h-full bg-neutral-100 border-b lg:border-b-0 lg:border-r border-black/5 overflow-hidden group select-none">
+          <div className="relative w-full h-[220px] sm:h-[360px] lg:h-full bg-neutral-100 border-b lg:border-b-0 lg:border-r border-black/5 overflow-hidden group select-none flex-shrink-0">
             <Image
               src={project.image}
               alt={project.title}
@@ -120,16 +120,16 @@ export default function ProjectDetailsModal({
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="flex-1 p-6 md:p-10 lg:p-12 space-y-12 text-left"
+              className="flex-1 p-4 sm:p-8 md:p-10 lg:p-12 space-y-8 sm:space-y-12 text-left"
             >
               {/* Header Details */}
-              <motion.div variants={fadeInUp} className="space-y-4 pt-4">
+              <motion.div variants={fadeInUp} className="space-y-3 sm:space-y-4 pt-2 sm:pt-4">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="inline-block px-3 py-1 rounded-full bg-neutral-200/50 border border-black/5 text-[9px] font-bold uppercase tracking-[0.2em] text-neutral-600">
+                  <span className="inline-block px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-neutral-200/50 border border-black/5 text-[9px] font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] text-neutral-600">
                     {project.categoryBadge}
                   </span>
                   {project.projectType && (
-                    <span className={`inline-block px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-[0.2em] ${
+                    <span className={`inline-block px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[9px] font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] ${
                       project.projectType === "Client Project"
                         ? "bg-emerald-100 text-emerald-800 border border-emerald-200"
                         : project.projectType === "Demo Project"
@@ -141,7 +141,7 @@ export default function ProjectDetailsModal({
                   )}
                 </div>
                 
-                <h2 className="text-3xl md:text-4xl lg:text-[40px] font-black tracking-tight leading-tight text-neutral-900">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-black tracking-tight leading-tight text-neutral-900">
                   {project.title}
                 </h2>
 
@@ -383,21 +383,21 @@ export default function ProjectDetailsModal({
             </motion.div>
 
             {/* Bottom Sticky Footer */}
-            <div className="sticky bottom-0 left-0 right-0 bg-[#FAFAF8] border-t border-black/5 p-4.5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-3 z-20">
+            <div className="sticky bottom-0 left-0 right-0 bg-[#FAFAF8] border-t border-black/5 p-3.5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-3 z-20">
               <button
                 onClick={onClose}
-                className="w-full sm:w-auto order-3 sm:order-1 px-8 py-3.5 rounded-full text-center text-[11px] font-bold uppercase tracking-widest border border-neutral-200 hover:bg-neutral-50 text-[#111111] transition-all duration-300 cursor-pointer"
+                className="w-full sm:w-auto order-3 sm:order-1 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full text-center text-[11px] font-bold uppercase tracking-widest border border-neutral-200 hover:bg-neutral-50 text-[#111111] transition-all duration-300 cursor-pointer min-h-[44px]"
               >
                 Close
               </button>
               
-              <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto order-1 sm:order-2">
+              <div className="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3 w-full sm:w-auto order-1 sm:order-2">
                 {project.githubUrl && (
                   <a
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full sm:w-auto px-8 py-3.5 rounded-full text-center text-[11px] font-bold uppercase tracking-widest bg-white hover:bg-neutral-50 border border-[#ECECEC] text-[#111111] transition-all duration-300 flex items-center justify-center gap-2"
+                    className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-3.5 rounded-full text-center text-[11px] font-bold uppercase tracking-widest bg-white hover:bg-neutral-50 border border-[#ECECEC] text-[#111111] transition-all duration-300 flex items-center justify-center gap-2 min-h-[44px]"
                   >
                     {project.id === "gym-rrp" ? "View Source" : "Visit Github"}
                   </a>
@@ -409,7 +409,7 @@ export default function ProjectDetailsModal({
                       e.preventDefault();
                       if (onOpenDemoCredentials) onOpenDemoCredentials();
                     }}
-                    className="w-full sm:w-auto px-8 py-3.5 rounded-full text-center text-[11px] font-bold uppercase tracking-widest bg-[#FFC107] hover:bg-[#e0a800] text-black transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-sm active:scale-[0.98]"
+                    className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-3.5 rounded-full text-center text-[11px] font-bold uppercase tracking-widest bg-[#FFC107] hover:bg-[#e0a800] text-black transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-sm active:scale-[0.98] min-h-[44px]"
                   >
                     Launch Live Demo
                   </button>
@@ -418,7 +418,7 @@ export default function ProjectDetailsModal({
                     href={project.demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full sm:w-auto px-8 py-3.5 rounded-full text-center text-[11px] font-bold uppercase tracking-widest bg-[#FFC107] hover:bg-[#e0a800] text-black transition-all duration-300 flex items-center justify-center gap-2"
+                    className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-3.5 rounded-full text-center text-[11px] font-bold uppercase tracking-widest bg-[#FFC107] hover:bg-[#e0a800] text-black transition-all duration-300 flex items-center justify-center gap-2 min-h-[44px]"
                   >
                     View Live Website
                   </a>

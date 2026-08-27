@@ -165,28 +165,28 @@ export default function Testimonials() {
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
           transition={{ duration: 0.5 }}
-          className="flex flex-wrap items-center justify-center gap-6 md:gap-10 mb-12 pb-8"
+          className="grid grid-cols-2 md:flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-10 mb-8 sm:mb-12 pb-6 sm:pb-8"
           style={{ borderBottom: "1px solid var(--border)" }}
         >
           {socialProofStats.map((stat) => {
             const Icon = stat.icon;
             return (
-              <div key={stat.label} className="flex items-center gap-2.5">
+              <div key={stat.label} className="flex items-center gap-2 sm:gap-2.5">
                 <div
-                  className="w-8 h-8 flex items-center justify-center"
+                  className="w-7 h-7 sm:w-8 sm:h-8 flex-shrink-0 flex items-center justify-center"
                   style={{ background: "var(--yellow-dim)", borderRadius: "var(--radius-sm)" }}
                 >
                   <Icon size={14} style={{ color: "var(--text-primary)" }} />
                 </div>
                 <div>
                   <span
-                    className="font-black text-lg"
+                    className="font-black text-base sm:text-lg"
                     style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}
                   >
                     {stat.value}
                   </span>
                   <span
-                    className="text-xs ml-1.5 uppercase tracking-wider"
+                    className="text-[10px] sm:text-xs ml-1 sm:ml-1.5 uppercase tracking-wider block sm:inline"
                     style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}
                   >
                     {stat.label}
@@ -199,13 +199,13 @@ export default function Testimonials() {
 
         {/* Header */}
         <div
-          className="flex flex-wrap items-center justify-between gap-4 mb-12"
-          style={{ borderBottom: "1px solid var(--border)", paddingBottom: "1.5rem" }}
+          className="flex flex-wrap items-center justify-between gap-3 sm:gap-4 mb-8 sm:mb-12"
+          style={{ borderBottom: "1px solid var(--border)", paddingBottom: "1.25rem" }}
         >
-          <div className="flex items-center gap-3">
-            <div className="badge">Client Love</div>
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            <div className="badge text-[10px] sm:text-xs">Client Love</div>
             <span
-              className="text-xs uppercase tracking-widest"
+              className="text-[11px] sm:text-xs uppercase tracking-widest"
               style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}
             >
               Client Reviews & Feedback
@@ -237,14 +237,14 @@ export default function Testimonials() {
                 key={label}
                 onClick={fn}
                 aria-label={label}
-                className="w-11 h-11 flex items-center justify-center transition-all duration-300"
+                className="w-9 h-9 sm:w-11 sm:h-11 flex items-center justify-center transition-all duration-300 cursor-pointer"
                 style={{
                   background: "var(--bg-secondary)",
                   border: "1px solid var(--border-strong)",
                   borderRadius: "var(--radius-sm)",
                   color: "var(--text-secondary)",
-                  minWidth: "44px",
-                  minHeight: "44px",
+                  minWidth: "36px",
+                  minHeight: "36px",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = "var(--yellow)";
@@ -257,7 +257,7 @@ export default function Testimonials() {
                   e.currentTarget.style.color = "var(--text-secondary)";
                 }}
               >
-                {i === 0 ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
+                {i === 0 ? <ChevronLeft size={16} /> : <ChevronRight size={16} />}
               </button>
             ))}
           </div>
@@ -271,7 +271,7 @@ export default function Testimonials() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -30 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="grid lg:grid-cols-12 gap-0 mb-8"
+            className="grid lg:grid-cols-12 gap-0 mb-6 sm:mb-8"
             style={{
               border: "1px solid var(--border)",
               borderRadius: "var(--radius-md)",
@@ -287,19 +287,19 @@ export default function Testimonials() {
             </div>
 
             {/* Content */}
-            <div className="lg:col-span-8 p-8 md:p-12 lg:p-14">
-              <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+            <div className="lg:col-span-8 p-5 sm:p-8 md:p-12 lg:p-14">
+              <div className="flex flex-wrap items-center justify-between gap-2.5 sm:gap-3 mb-4 sm:mb-6">
                 {/* Stars */}
                 <div className="flex gap-1">
                   {Array.from({ length: activeTestimonial.rating }).map((_, i) => (
-                    <Star key={i} size={18} fill="var(--yellow)" style={{ color: "var(--yellow)" }} />
+                    <Star key={i} size={15} fill="var(--yellow)" style={{ color: "var(--yellow)" }} />
                   ))}
                 </div>
 
                 {/* Verified badge + location */}
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                   <span
-                    className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1"
+                    className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold px-2 sm:px-2.5 py-0.5 sm:py-1"
                     style={{
                       background: "rgba(34, 197, 94, 0.1)",
                       color: "#22c55e",
@@ -308,12 +308,12 @@ export default function Testimonials() {
                       fontFamily: "var(--font-space)",
                     }}
                   >
-                    <CheckCircle2 size={12} />
+                    <CheckCircle2 size={11} />
                     Verified Client
                   </span>
 
                   <span
-                    className="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1"
+                    className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-medium px-2 sm:px-2.5 py-0.5 sm:py-1"
                     style={{
                       background: "var(--bg-secondary)",
                       color: "var(--text-secondary)",
@@ -322,7 +322,7 @@ export default function Testimonials() {
                       fontFamily: "var(--font-space)",
                     }}
                   >
-                    <MapPin size={11} style={{ color: "var(--yellow)" }} />
+                    <MapPin size={10} style={{ color: "var(--yellow)" }} />
                     {activeTestimonial.location}
                   </span>
                 </div>
@@ -330,16 +330,16 @@ export default function Testimonials() {
 
               {/* Quote text */}
               <p
-                className="text-xl lg:text-2xl font-medium leading-relaxed mb-6"
+                className="text-base sm:text-xl lg:text-2xl font-medium leading-relaxed mb-5 sm:mb-6"
                 style={{ color: "var(--text-primary)", fontFamily: "var(--font-space)" }}
               >
                 &ldquo;{activeTestimonial.text}&rdquo;
               </p>
 
               {/* Result badge */}
-              <div className="mb-8">
+              <div className="mb-6 sm:mb-8">
                 <span
-                  className="text-xs font-bold px-3 py-1.5 uppercase tracking-wider inline-flex items-center gap-1.5"
+                  className="text-[11px] sm:text-xs font-bold px-2.5 sm:px-3 py-1 sm:py-1.5 uppercase tracking-wider inline-flex items-center gap-1.5"
                   style={{
                     background: "var(--yellow-dim)",
                     color: "var(--text-primary)",
@@ -503,7 +503,7 @@ export default function Testimonials() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="text-center mt-12"
+          className="text-center mt-8 sm:mt-12"
         >
           <a
             href="#contact"
@@ -511,7 +511,7 @@ export default function Testimonials() {
               e.preventDefault();
               document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
             }}
-            className="btn-primary group"
+            className="btn-primary group w-full sm:w-auto text-center justify-center text-xs sm:text-sm"
             data-analytics="testimonials-cta"
           >
             Join Our Happy Clients

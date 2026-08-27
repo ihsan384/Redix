@@ -2,16 +2,16 @@
 
 import { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Mail, MessageCircle, Phone, MapPin, Send, CheckCircle2, Sparkles, AlertCircle } from "lucide-react";
+import { Mail, MessageCircle, MapPin, Send, CheckCircle2, Sparkles, AlertCircle } from "lucide-react";
 
 const contactLinks = [
-  { Icon: MessageCircle, label: "WhatsApp", value: "Chat with us", href: "https://wa.me/919497013275", color: "#25d366" },
+  { Icon: MessageCircle, label: "WhatsApp", value: "+91 94970 13275", href: "https://wa.me/919497013275?text=Hi%20REDIX%20Media%2C%20I%27d%20like%20to%20inquire%20about%20your%20services.", color: "#25d366" },
   { Icon: Mail, label: "Email", value: "hello@redix.media", href: "mailto:hello@redix.media", color: "var(--text-primary)" },
-  { Icon: Phone, label: "Call", value: "+91 94970 13275", href: "tel:+919497013275", color: "var(--text-primary)" },
   { Icon: MapPin, label: "Location", value: "Based in India · Serving Remotely", href: "#", color: "var(--text-muted)" },
 ];
 
 const services = [
+  "Website Development",
   "Custom Website",
   "Custom CRM (One-Time)",
   "Custom ERP (One-Time)",
@@ -20,10 +20,19 @@ const services = [
   "Video Editing",
   "Social Media Management",
   "Branding & Design",
+  "Digital Marketing",
+  "Content Creation",
   "Other",
 ];
 
 const serviceBudgets: Record<string, string[]> = {
+  "Website Development": [
+    "₹3,000 – ₹5,000",
+    "₹5,000 – ₹10,000",
+    "₹10,000 – ₹25,000",
+    "₹25,000+",
+    "Custom (Let's Talk)",
+  ],
   "Custom Website": [
     "₹3,000 – ₹5,000",
     "₹5,000 – ₹10,000",
@@ -73,6 +82,20 @@ const serviceBudgets: Record<string, string[]> = {
     "Custom (Let's Talk)",
   ],
   "Branding & Design": [
+    "Under ₹3,000",
+    "₹3,000 – ₹7,000",
+    "₹7,000 – ₹15,000",
+    "₹15,000+",
+    "Custom (Let's Talk)",
+  ],
+  "Digital Marketing": [
+    "Under ₹5,000",
+    "₹5,000 – ₹15,000",
+    "₹15,000 – ₹30,000",
+    "₹30,000+",
+    "Custom (Let's Talk)",
+  ],
+  "Content Creation": [
     "Under ₹3,000",
     "₹3,000 – ₹7,000",
     "₹7,000 – ₹15,000",
@@ -176,14 +199,14 @@ export default function Contact() {
             </p>
 
             {/* Contact cards */}
-            <div className="grid grid-cols-2 gap-3 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 mb-6 sm:mb-8">
               {contactLinks.map(({ Icon, label, value, href, color }) => (
                 <a
                   key={label}
                   href={href}
                   target={href.startsWith("http") ? "_blank" : undefined}
                   rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="flex items-center gap-3 p-4 transition-all duration-300 group"
+                  className="flex items-center gap-3 p-3.5 sm:p-4 transition-all duration-300 group"
                   style={{
                     background: "var(--bg-card)",
                     border: "1px solid var(--border)",
@@ -201,18 +224,18 @@ export default function Contact() {
                   }}
                 >
                   <div
-                    className="w-10 h-10 flex items-center justify-center flex-shrink-0 transition-all duration-300"
+                    className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center flex-shrink-0 transition-all duration-300"
                     style={{
                       background: "var(--bg-secondary)",
                       borderRadius: "var(--radius-sm)",
                       border: "1px solid var(--border)",
                     }}
                   >
-                    <Icon size={16} style={{ color }} />
+                    <Icon size={15} style={{ color }} />
                   </div>
-                  <div>
-                    <div className="text-xs font-bold uppercase tracking-wider" style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}>{label}</div>
-                    <div className="text-xs" style={{ color: "var(--text-secondary)" }}>{value}</div>
+                  <div className="min-w-0 flex-1">
+                    <div className="text-[10px] sm:text-xs font-bold uppercase tracking-wider" style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}>{label}</div>
+                    <div className="text-xs break-all" style={{ color: "var(--text-secondary)" }}>{value}</div>
                   </div>
                 </a>
               ))}
@@ -223,7 +246,7 @@ export default function Contact() {
               href="https://wa.me/919497013275"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-4 p-5 transition-all duration-300"
+              className="flex items-center gap-3.5 sm:gap-4 p-4 sm:p-5 transition-all duration-300 mb-8 lg:mb-0"
               style={{
                 background: "var(--bg-card)",
                 border: "1px solid var(--border)",
@@ -234,16 +257,16 @@ export default function Contact() {
               onMouseLeave={(e) => { e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.transform = "translateY(0)"; }}
             >
               <div
-                className="w-11 h-11 flex items-center justify-center flex-shrink-0"
+                className="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center flex-shrink-0"
                 style={{ background: "var(--yellow)", borderRadius: "var(--radius-sm)" }}
               >
-                <Sparkles size={20} style={{ color: "var(--text-primary)" }} />
+                <Sparkles size={18} style={{ color: "var(--text-primary)" }} />
               </div>
               <div>
-                <p className="font-bold text-sm mb-0.5" style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}>
+                <p className="font-bold text-xs sm:text-sm mb-0.5" style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}>
                   Free 30-Min Strategy Call
                 </p>
-                <p className="text-xs" style={{ color: "var(--text-muted)" }}>
+                <p className="text-[11px] sm:text-xs" style={{ color: "var(--text-muted)" }}>
                   Book via WhatsApp and get expert advice for your brand.
                 </p>
               </div>
@@ -260,7 +283,7 @@ export default function Contact() {
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="flex flex-col items-center justify-center text-center h-full min-h-[400px] p-10"
+                className="flex flex-col items-center justify-center text-center h-full min-h-[360px] sm:min-h-[400px] p-6 sm:p-10"
                 style={{
                   background: "var(--bg-card)",
                   border: "1px solid var(--border)",
@@ -269,18 +292,18 @@ export default function Contact() {
                 }}
               >
                 <div
-                  className="w-16 h-16 flex items-center justify-center mb-6"
+                  className="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center mb-5 sm:mb-6"
                   style={{ background: "var(--yellow)", borderRadius: "var(--radius-md)" }}
                 >
-                  <CheckCircle2 size={28} style={{ color: "var(--text-primary)" }} />
+                  <CheckCircle2 size={26} style={{ color: "var(--text-primary)" }} />
                 </div>
-                <h3 className="text-2xl font-bold mb-3" style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}>
+                <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3" style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}>
                   Message Sent!
                 </h3>
-                <p className="text-sm mb-6" style={{ color: "var(--text-secondary)" }}>
+                <p className="text-xs sm:text-sm mb-6" style={{ color: "var(--text-secondary)" }}>
                   We&apos;ll get back to you within 24 hours.
                 </p>
-                <button onClick={() => setSubmitted(false)} className="btn-outline text-sm">
+                <button onClick={() => setSubmitted(false)} className="btn-outline text-xs sm:text-sm w-full sm:w-auto">
                   Send Another
                 </button>
               </motion.div>
@@ -288,7 +311,7 @@ export default function Contact() {
               <form
                 id="contact-form"
                 onSubmit={handleSubmit}
-                className="space-y-5 p-8 lg:p-10"
+                className="space-y-4 sm:space-y-5 p-5 sm:p-8 lg:p-10"
                 style={{
                   background: "var(--bg-card)",
                   border: "1px solid var(--border)",
@@ -298,15 +321,15 @@ export default function Contact() {
               >
                 {error && (
                   <div
-                    className="p-4 flex items-start gap-3 text-sm text-red-400 bg-red-950/30 border border-red-500/30 rounded-md"
+                    className="p-3.5 sm:p-4 flex items-start gap-2.5 sm:gap-3 text-xs sm:text-sm text-red-400 bg-red-950/30 border border-red-500/30 rounded-md"
                     style={{ borderRadius: "var(--radius-sm)" }}
                   >
-                    <AlertCircle size={18} className="flex-shrink-0 mt-0.5" />
+                    <AlertCircle size={16} className="flex-shrink-0 mt-0.5" />
                     <div>{error}</div>
                   </div>
                 )}
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider mb-2" style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}>Name *</label>
                     <input id="contact-name" type="text" required placeholder="John Smith" className="form-input"

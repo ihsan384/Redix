@@ -46,43 +46,43 @@ export default function CareersPage() {
   };
 
   return (
-    <div className="min-h-screen py-24 px-6 flex flex-col items-center justify-center" style={{ background: "var(--bg-primary, #0B0F17)", color: "var(--text-primary, #FFFFFF)" }}>
+    <div className="min-h-screen py-14 sm:py-24 px-4 sm:px-6 flex flex-col items-center justify-center" style={{ background: "var(--bg-primary, #0B0F17)", color: "var(--text-primary, #FFFFFF)" }}>
       <div className="w-full max-w-2xl">
-        <div className="text-center mb-10">
+        <div className="text-center mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-4" style={{ background: "rgba(255,215,0,0.1)", border: "1px solid rgba(255,215,0,0.3)", color: "var(--yellow, #FFD700)" }}>
             <Briefcase size={14} /> Join REDIX Team
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3" style={{ fontFamily: "var(--font-space)" }}>
+          <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight mb-3" style={{ fontFamily: "var(--font-space)" }}>
             Careers & Application Form
           </h1>
-          <p className="text-sm text-zinc-400 max-w-md mx-auto">
+          <p className="text-xs sm:text-sm text-zinc-400 max-w-md mx-auto">
             Build state-of-the-art web products and enterprise software with our talented engineering team.
           </p>
         </div>
 
         {submitted ? (
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="p-10 bg-white/5 border border-yellow-500/30 rounded-2xl text-center">
-            <div className="w-16 h-16 bg-yellow-400 text-black rounded-2xl flex items-center justify-center mx-auto mb-6">
-              <CheckCircle2 size={32} />
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="p-6 sm:p-10 bg-white/5 border border-yellow-500/30 rounded-2xl text-center">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-yellow-400 text-black rounded-2xl flex items-center justify-center mx-auto mb-5 sm:mb-6">
+              <CheckCircle2 size={28} />
             </div>
-            <h3 className="text-2xl font-bold text-white mb-2">Application Received!</h3>
-            <p className="text-sm text-zinc-400 mb-6">
+            <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">Application Received!</h3>
+            <p className="text-xs sm:text-sm text-zinc-400 mb-6">
               Thank you for applying to REDIX. Your details have been submitted directly to our HR team in REDIX ERP.
             </p>
-            <button onClick={() => setSubmitted(false)} className="px-6 py-2.5 rounded-xl bg-white/10 text-white font-bold text-sm hover:bg-white/20 transition">
+            <button onClick={() => setSubmitted(false)} className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-white/10 text-white font-bold text-xs sm:text-sm hover:bg-white/20 transition">
               Submit Another Application
             </button>
           </motion.div>
         ) : (
-          <form onSubmit={handleSubmit} className="p-8 sm:p-10 bg-white/5 border border-white/10 rounded-2xl space-y-6">
+          <form onSubmit={handleSubmit} className="p-5 sm:p-10 bg-white/5 border border-white/10 rounded-2xl space-y-4 sm:space-y-6">
             {error && (
-              <div className="p-4 bg-red-950/40 border border-red-500/30 rounded-xl flex items-center gap-3 text-sm text-red-300">
-                <AlertCircle size={18} className="shrink-0 text-red-400" />
+              <div className="p-3.5 sm:p-4 bg-red-950/40 border border-red-500/30 rounded-xl flex items-center gap-2.5 sm:gap-3 text-xs sm:text-sm text-red-300">
+                <AlertCircle size={16} className="shrink-0 text-red-400" />
                 <span>{error}</span>
               </div>
             )}
 
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Full Name *</label>
                 <div className="relative">

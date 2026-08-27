@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ArrowUpRight, Sparkles, ArrowRight, Zap } from "lucide-react";
+import { ArrowUpRight, Sparkles, ArrowRight, Zap, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import DemoCredentialsModal from "./DemoCredentialsModal";
 import ProjectDetailsModal from "./ProjectDetailsModal";
@@ -596,19 +596,19 @@ function BentoCard({
         rotateY: rotateY,
         transformStyle: "preserve-3d"
       }}
-      className={`group relative flex flex-col bg-white rounded-[32px] overflow-hidden border border-neutral-200 p-6 transition-all duration-500 ease-out hover:-translate-y-3 hover:border-[#FFC107] hover:shadow-[0_35px_80px_rgba(0,0,0,0.08)] ${colSpanClass}`}
+      className={`group relative flex flex-col bg-white rounded-2xl sm:rounded-[32px] overflow-hidden border border-neutral-200 p-4 sm:p-6 transition-all duration-500 ease-out hover:-translate-y-2 sm:hover:-translate-y-3 hover:border-[#FFC107] hover:shadow-[0_35px_80px_rgba(0,0,0,0.08)] ${colSpanClass}`}
     >
       {/* Image Wrap */}
-      <div className="relative w-full overflow-hidden rounded-[20px] mb-6">
+      <div className="relative w-full overflow-hidden rounded-xl sm:rounded-[20px] mb-4 sm:mb-6">
         <ProjectImage src={project.image} alt={project.title} heightClass={imageContainerHeight} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
 
         {/* Top-Left Category & Project Type Badges (Glassmorphic) */}
-        <div className="absolute top-4 left-4 z-20 pointer-events-none flex flex-wrap items-center gap-1.5">
-          <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-black/80 text-white text-[10px] font-semibold uppercase tracking-[0.2em] backdrop-blur-xl">
+        <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-20 pointer-events-none flex flex-wrap items-center gap-1.5 max-w-[calc(100%-80px)]">
+          <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-black/80 text-white text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.16em] sm:tracking-[0.2em] backdrop-blur-xl">
             {project.categoryBadge}
           </span>
-          <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.16em] backdrop-blur-xl ${
+          <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.12em] sm:tracking-[0.16em] backdrop-blur-xl ${
             project.projectType === "Client Project"
               ? "bg-emerald-950/85 text-emerald-300 border border-emerald-400/30"
               : project.projectType === "Demo Project"
@@ -620,8 +620,8 @@ function BentoCard({
         </div>
 
         {/* Top-Right Year Badge */}
-        <div className="absolute top-4 right-4 z-20 pointer-events-none">
-          <span className="inline-flex items-center px-3.5 py-1.5 rounded-full text-[11px] font-bold tracking-widest uppercase bg-black/75 backdrop-blur-sm text-[#FFC107] border border-white/10 shadow-sm">
+        <div className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 pointer-events-none">
+          <span className="inline-flex items-center px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-[11px] font-bold tracking-widest uppercase bg-black/75 backdrop-blur-sm text-[#FFC107] border border-white/10 shadow-sm">
             {project.year}
           </span>
         </div>
@@ -631,30 +631,30 @@ function BentoCard({
       <div className="flex flex-col justify-between flex-grow" style={{ transform: "translateZ(10px)" }}>
         <div>
           {/* Metadata Row */}
-          <div className="flex items-center gap-2 mb-2 text-xs text-neutral-400 font-medium">
-            <span className="font-bold text-neutral-600 uppercase tracking-widest">{project.client}</span>
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-2 text-xs text-neutral-400 font-medium">
+            <span className="font-bold text-neutral-600 uppercase tracking-widest text-[11px] sm:text-xs">{project.client}</span>
             <span className="w-1.5 h-1.5 rounded-full bg-neutral-300" />
-            <span className="font-semibold text-neutral-500">{project.projectType}</span>
+            <span className="font-semibold text-neutral-500 text-[11px] sm:text-xs">{project.projectType}</span>
             <span className="w-1.5 h-1.5 rounded-full bg-neutral-300" />
-            <span className="font-normal">{project.categoryBadge}</span>
+            <span className="font-normal text-[11px] sm:text-xs">{project.categoryBadge}</span>
           </div>
 
           {/* Card Title */}
-          <h3 className="text-3xl font-black tracking-tight text-neutral-900 mb-2 group-hover:text-black transition-all duration-300">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-neutral-900 mb-2 group-hover:text-black transition-all duration-300">
             {project.title}
           </h3>
 
           {/* Standardized description height */}
-          <p className="text-neutral-500 text-[15px] leading-7 mb-6 line-clamp-2">
+          <p className="text-neutral-500 text-sm sm:text-[15px] leading-6 sm:leading-7 mb-4 sm:mb-6 line-clamp-2">
             {project.description}
           </p>
 
           {/* Tech Pills */}
-          <div className="flex flex-wrap gap-1.5 mb-6">
+          <div className="flex flex-wrap gap-1.5 mb-5 sm:mb-6">
             {project.tech.map((t) => (
               <span
                 key={t}
-                className="text-[12px] font-medium px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 border border-transparent transition-colors duration-300 group-hover:bg-neutral-50 group-hover:border-black/5"
+                className="text-[11px] sm:text-[12px] font-medium px-2.5 sm:px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 border border-transparent transition-colors duration-300 group-hover:bg-neutral-50 group-hover:border-black/5"
               >
                 {t}
               </span>
@@ -663,8 +663,8 @@ function BentoCard({
         </div>
 
         <div className="mt-auto">
-          {/* Strictly Aligned Buttons */}
-          <div className="flex items-center gap-3">
+          {/* Strictly Aligned Responsive Buttons */}
+          <div className="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3">
             {/* Primary Button */}
             {project.id === "gym-rrp" ? (
               <button
@@ -672,7 +672,7 @@ function BentoCard({
                   e.preventDefault();
                   onOpenDemoCredentials();
                 }}
-                className="flex-1 py-3.5 px-5 rounded-full text-center text-xs font-bold uppercase tracking-wider bg-black text-white hover:bg-neutral-900 transition-all duration-300 flex items-center justify-center gap-2 shadow-sm hover:shadow-[0_10px_25px_rgba(0,0,0,0.12)] group/btn cursor-pointer"
+                className="w-full sm:flex-1 py-3 sm:py-3.5 px-4 sm:px-5 rounded-full text-center text-xs font-bold uppercase tracking-wider bg-black text-white hover:bg-neutral-900 transition-all duration-300 flex items-center justify-center gap-2 shadow-sm hover:shadow-[0_10px_25px_rgba(0,0,0,0.12)] group/btn cursor-pointer min-h-[44px]"
               >
                 <span>Explore Live Demo</span>
               </button>
@@ -681,7 +681,7 @@ function BentoCard({
                 href={project.demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-3.5 px-5 rounded-full text-center text-xs font-bold uppercase tracking-wider bg-black text-white hover:bg-neutral-900 transition-all duration-300 flex items-center justify-center gap-2 shadow-sm hover:shadow-[0_10px_25px_rgba(0,0,0,0.12)] group/btn"
+                className="w-full sm:flex-1 py-3 sm:py-3.5 px-4 sm:px-5 rounded-full text-center text-xs font-bold uppercase tracking-wider bg-black text-white hover:bg-neutral-900 transition-all duration-300 flex items-center justify-center gap-2 shadow-sm hover:shadow-[0_10px_25px_rgba(0,0,0,0.12)] group/btn min-h-[44px]"
               >
                 <span>Live Preview →</span>
                 <ArrowUpRight size={13} className="transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
@@ -690,7 +690,7 @@ function BentoCard({
             <button
               type="button"
               onClick={() => onOpenProjectDetails(project)}
-              className="flex-1 py-3.5 px-5 rounded-full text-center text-xs font-bold uppercase tracking-wider bg-white text-[#111111] border border-neutral-200 hover:bg-neutral-50 transition-all duration-300 flex items-center justify-center gap-2 shadow-sm hover:shadow-[0_10px_25px_rgba(0,0,0,0.08)] cursor-pointer"
+              className="w-full sm:flex-1 py-3 sm:py-3.5 px-4 sm:px-5 rounded-full text-center text-xs font-bold uppercase tracking-wider bg-white text-[#111111] border border-neutral-200 hover:bg-neutral-50 transition-all duration-300 flex items-center justify-center gap-2 shadow-sm hover:shadow-[0_10px_25px_rgba(0,0,0,0.08)] cursor-pointer min-h-[44px]"
             >
               <span>Case Study</span>
             </button>
@@ -737,7 +737,7 @@ export default function Portfolio() {
     <section
       id="portfolio"
       ref={sectionRef}
-      className="py-[140px] bg-[#FAFAF8] text-[#111111] relative overflow-hidden noise-overlay grid-overlay"
+      className="py-14 sm:py-20 lg:py-[140px] bg-[#FAFAF8] text-[#111111] relative overflow-hidden noise-overlay grid-overlay"
     >
       {/* Gradient 1: Faint Large Radial Gradient Behind Header */}
       <div
@@ -747,20 +747,20 @@ export default function Portfolio() {
         }}
       />
 
-      <div className="max-w-[1440px] 2xl:max-w-[1560px] mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
+      <div className="max-w-[1440px] 2xl:max-w-[1560px] mx-auto px-4 sm:px-10 lg:px-16 relative z-10">
 
         {/* Left Aligned Section Header */}
-        <div className="mb-[140px] flex flex-col items-start text-left max-w-3xl">
+        <div className="mb-8 sm:mb-14 lg:mb-[140px] flex flex-col items-start text-left max-w-3xl">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-100 border border-black/[0.04] mb-6">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-neutral-100 border border-black/[0.04] mb-4 sm:mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-[#FFC107] animate-pulse" />
-            <span className="text-[11px] uppercase tracking-[0.2em] font-bold text-neutral-600">
+            <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] font-bold text-neutral-600">
               SELECTED PROJECTS
             </span>
           </div>
 
           {/* Section Title */}
-          <h2 className="text-4xl sm:text-5xl lg:text-[56px] font-black tracking-tight text-neutral-900 mb-6 leading-[1.08]">
+          <h2 className="text-3xl sm:text-5xl lg:text-[56px] font-black tracking-tight text-neutral-900 mb-4 sm:mb-6 leading-[1.08]">
             Crafting Digital{" "}
             <span className="inline-block bg-gradient-to-r from-[#111827] to-[#FFC107] bg-clip-text text-transparent">
               Experiences.
@@ -768,21 +768,21 @@ export default function Portfolio() {
           </h2>
 
           {/* Subtitle */}
-          <p className="text-neutral-500 text-lg leading-[1.8] font-normal max-w-2xl">
+          <p className="text-neutral-500 text-sm sm:text-base lg:text-lg leading-[1.7] sm:leading-[1.8] font-normal max-w-2xl">
             Every project is handcrafted to deliver exceptional design, outstanding performance, and measurable business growth.
           </p>
         </div>
 
-        {/* Portfolio Filters - Center Aligned */}
-        <div className="flex justify-center mb-[100px] overflow-x-auto pb-4 pt-1 no-scrollbar border-b border-black/[0.04]">
-          <div className="flex items-center gap-2 p-1.5 rounded-full bg-neutral-100/80 border border-black/[0.03] backdrop-blur-md">
+        {/* Portfolio Filters - Center Aligned & Mobile Swipeable */}
+        <div className="flex justify-start sm:justify-center mb-8 sm:mb-12 lg:mb-[100px] overflow-x-auto pb-3 pt-1 no-scrollbar w-full max-w-full">
+          <div className="flex items-center gap-1.5 sm:gap-2 p-1.5 rounded-full bg-neutral-100/80 border border-black/[0.03] backdrop-blur-md">
             {filterCategories.map((category) => {
               const isActive = activeFilter === category;
               return (
                 <button
                   key={category}
                   onClick={() => setActiveFilter(category)}
-                  className={`relative px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all duration-300 cursor-pointer overflow-hidden ${isActive
+                  className={`relative px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all duration-300 cursor-pointer overflow-hidden min-h-[38px] sm:min-h-[42px] flex items-center justify-center ${isActive
                     ? "bg-[#FFC107] text-black shadow-md"
                     : "text-neutral-500 hover:bg-[#FFC107] hover:text-black hover:shadow-sm"
                     }`}
@@ -800,7 +800,7 @@ export default function Portfolio() {
           variants={containerVariants}
           initial="hidden"
           animate="show"
-          className="grid grid-cols-1 md:grid-cols-8 lg:grid-cols-12 gap-8 auto-rows-max"
+          className="grid grid-cols-1 md:grid-cols-8 lg:grid-cols-12 gap-5 sm:gap-8 auto-rows-max"
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, idx) => (
@@ -816,7 +816,7 @@ export default function Portfolio() {
         </motion.div>
 
         {/* Gradient 2: CTA Split Layout Section */}
-        <div className="mt-[140px] relative rounded-[32px] overflow-hidden bg-[#111827] text-white p-8 sm:p-14 lg:p-20 shadow-2xl border border-white/5">
+        <div className="mt-12 sm:mt-20 lg:mt-[140px] relative rounded-2xl sm:rounded-[32px] overflow-hidden bg-[#111827] text-white p-6 sm:p-12 lg:p-20 shadow-2xl border border-white/5">
           {/* Subtle Radial Gradient behind CTA (5% opacity) */}
           <div
             className="absolute inset-0 pointer-events-none opacity-[0.05]"
@@ -825,32 +825,31 @@ export default function Portfolio() {
             }}
           />
 
-          <div className="relative z-10 grid lg:grid-cols-12 gap-12 items-center">
+          <div className="relative z-10 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Side: Copywriting & Actions */}
             <div className="lg:col-span-7 flex flex-col items-start text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6 text-[11px] uppercase tracking-[0.2em] font-bold text-[#FFC107]">
+              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 mb-4 sm:mb-6 text-[10px] sm:text-[11px] uppercase tracking-[0.2em] font-bold text-[#FFC107]">
                 <Sparkles size={12} />
                 <span>Next Steps</span>
               </div>
 
-              <h3 className="text-3xl sm:text-5xl lg:text-[52px] font-black tracking-tight text-white mb-6 leading-none">
+              <h3 className="text-2xl sm:text-4xl lg:text-[52px] font-black tracking-tight text-white mb-4 sm:mb-6 leading-tight sm:leading-none">
                 Ready to build something amazing?
               </h3>
 
-              <p className="text-neutral-400 text-base leading-relaxed mb-10 max-w-xl font-normal">
+              <p className="text-neutral-400 text-sm sm:text-base leading-relaxed mb-6 sm:mb-10 max-w-xl font-normal">
                 Let&apos;s engineer custom websites, enterprise-grade ERP systems and digital solutions designed to accelerate growth.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto">
                 <a
-                  href="#contact"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
-                  }}
-                  className="group w-full sm:w-auto px-9 py-4.5 rounded-full font-bold uppercase tracking-widest bg-[#FFC107] hover:bg-[#e0a800] text-[#111111] transition-all duration-300 shadow-[0_15px_30px_rgba(255,193,7,0.15)] hover:-translate-y-1 flex items-center justify-center gap-2 text-xs"
+                  href="https://wa.me/919497013275?text=Hi%20REDIX%20Media%2C%20I%27ve%20seen%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group w-full sm:w-auto px-6 sm:px-9 py-3.5 sm:py-4.5 rounded-full font-bold uppercase tracking-widest bg-[#FFC107] hover:bg-[#e0a800] text-[#111111] transition-all duration-300 shadow-[0_15px_30px_rgba(255,193,7,0.15)] hover:-translate-y-1 flex items-center justify-center gap-2 text-xs min-h-[44px]"
                 >
-                  Let&apos;s Start Your Project
+                  <MessageCircle size={15} />
+                  Chat on WhatsApp
                   <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1.5" />
                 </a>
 
@@ -860,7 +859,7 @@ export default function Portfolio() {
                     e.preventDefault();
                     document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" });
                   }}
-                  className="w-full sm:w-auto px-9 py-4.5 rounded-full font-bold uppercase tracking-widest bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-2 text-xs"
+                  className="w-full sm:w-auto px-6 sm:px-9 py-3.5 sm:py-4.5 rounded-full font-bold uppercase tracking-widest bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-2 text-xs min-h-[44px]"
                 >
                   View All Services
                 </a>

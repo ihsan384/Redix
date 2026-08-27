@@ -87,14 +87,14 @@ export default function Services() {
           </span>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-12 mb-16">
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 mb-10 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="lg:col-span-2"
           >
-            <h2 className="section-title mb-5">
+            <h2 className="section-title mb-4 sm:mb-5">
               Services Built for{" "}
               <span className="relative inline-block">
                 Real Growth
@@ -112,7 +112,7 @@ export default function Services() {
                 />
               </span>
             </h2>
-            <p className="text-base md:text-lg leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+            <p className="text-sm sm:text-base md:text-lg leading-relaxed" style={{ color: "var(--text-secondary)" }}>
               Six focused services that work together to build, amplify, and grow your brand across
               every digital touchpoint.
             </p>
@@ -122,12 +122,12 @@ export default function Services() {
             initial={{ opacity: 0, y: 16 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-            className="lg:col-span-3 flex items-end"
+            className="lg:col-span-3 flex items-end w-full sm:w-auto"
           >
             <a
               href="#contact"
               onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
-              className="btn-yellow"
+              className="btn-yellow w-full sm:w-auto text-center justify-center"
               data-analytics="services-cta"
             >
               Book Free Consultation
@@ -142,7 +142,7 @@ export default function Services() {
             borderLeft: "1px solid var(--border)",
           }}
         >
-          <div className="grid md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {services.map((service, i) => {
               const Icon = service.icon;
               const isHov = hovered === service.num;
@@ -152,7 +152,7 @@ export default function Services() {
                   initial={{ opacity: 0 }}
                   animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                   transition={{ duration: 0.5, delay: 0.05 * i }}
-                  className="relative p-8 lg:p-10 cursor-default"
+                  className="relative p-5 sm:p-8 lg:p-10 cursor-default"
                   style={{
                     borderRight: "1px solid var(--border)",
                     borderBottom: "1px solid var(--border)",
@@ -186,9 +186,9 @@ export default function Services() {
                     transition={{ duration: 0.3 }}
                   />
 
-                  <div className="flex items-start justify-between mb-8">
+                  <div className="flex items-start justify-between mb-6 sm:mb-8">
                     <span
-                      className="text-5xl font-black select-none"
+                      className="text-4xl sm:text-5xl font-black select-none"
                       style={{
                         fontFamily: "var(--font-space)",
                         color: isHov ? "var(--text-primary)" : "var(--border-strong)",
@@ -200,7 +200,7 @@ export default function Services() {
                       {service.num}
                     </span>
                     <div
-                      className="w-11 h-11 flex items-center justify-center"
+                      className="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center"
                       style={{
                         background: isHov ? "var(--yellow)" : "var(--bg-secondary)",
                         borderRadius: "var(--radius-sm)",
@@ -219,22 +219,22 @@ export default function Services() {
                   </div>
 
                   <h3
-                    className="font-extrabold text-xl md:text-2xl mb-3"
+                    className="font-extrabold text-lg sm:text-xl md:text-2xl mb-2 sm:mb-3"
                     style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}
                   >
                     {service.title}
                   </h3>
 
-                  <p className="text-base leading-relaxed mb-6" style={{ color: "var(--text-secondary)" }}>
+                  <p className="text-sm sm:text-base leading-relaxed mb-5 sm:mb-6" style={{ color: "var(--text-secondary)" }}>
                     {service.description}
                   </p>
 
                   {/* Outcomes — always visible */}
-                  <div className="flex flex-wrap gap-1.5 mb-6">
+                  <div className="flex flex-wrap gap-1.5 mb-5 sm:mb-6">
                     {service.outcomes.map((o) => (
                       <span
                         key={o}
-                        className="text-xs md:text-[13px] font-semibold px-3.5 py-1.5"
+                        className="text-[11px] sm:text-xs md:text-[13px] font-semibold px-2.5 sm:px-3.5 py-1 sm:py-1.5"
                         style={{
                           background: isHov ? "var(--yellow)" : "var(--bg-secondary)",
                           color: "var(--text-primary)",
@@ -250,7 +250,7 @@ export default function Services() {
 
                   <button
                     onClick={() => scrollToContactWithService(service.title)}
-                    className="flex items-center gap-2 text-xs md:text-sm font-bold uppercase tracking-widest transition-all"
+                    className="flex items-center gap-2 text-xs md:text-sm font-bold uppercase tracking-widest transition-all cursor-pointer"
                     style={{
                       color: isHov ? "var(--text-primary)" : "var(--text-muted)",
                       fontFamily: "var(--font-space)",

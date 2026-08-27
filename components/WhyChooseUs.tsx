@@ -32,7 +32,7 @@ export default function WhyChooseUs() {
           </span>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-12 mb-16">
+        <div className="grid lg:grid-cols-5 gap-6 sm:gap-12 mb-10 sm:mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
@@ -60,7 +60,7 @@ export default function WhyChooseUs() {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-2 self-end text-base md:text-[17px] leading-relaxed"
+            className="lg:col-span-2 self-end text-sm sm:text-base md:text-[17px] leading-relaxed"
             style={{ color: "var(--text-secondary)" }}
           >
             We&apos;re not a typical agency. We&apos;re a creative studio that cares about your results as
@@ -69,7 +69,7 @@ export default function WhyChooseUs() {
         </div>
 
         {/* Feature grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {features.map((f, i) => {
             const Icon = f.icon;
             return (
@@ -78,7 +78,7 @@ export default function WhyChooseUs() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
                 transition={{ duration: 0.5, delay: 0.08 * i, ease: "easeOut" }}
-                className="group p-8 cursor-default relative overflow-hidden"
+                className="group p-5 sm:p-8 cursor-default relative overflow-hidden"
                 style={{
                   background: "var(--bg-card)",
                   border: "1px solid var(--border)",
@@ -101,23 +101,23 @@ export default function WhyChooseUs() {
                 />
 
                 <div
-                  className="w-12 h-12 flex items-center justify-center mb-6 transition-all duration-300"
+                  className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center mb-4 sm:mb-6 transition-all duration-300"
                   style={{
                     background: "var(--bg-secondary)",
                     borderRadius: "var(--radius-sm)",
                     border: "1px solid var(--border)",
                   }}
                 >
-                  <Icon size={20} style={{ color: "var(--text-primary)" }} />
+                  <Icon size={18} style={{ color: "var(--text-primary)" }} />
                 </div>
 
                 <h3
-                  className="font-extrabold text-lg md:text-xl mb-3"
+                  className="font-extrabold text-base sm:text-lg md:text-xl mb-2 sm:mb-3"
                   style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}
                 >
                   {f.title}
                 </h3>
-                <p className="text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                <p className="text-sm sm:text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
                   {f.desc}
                 </p>
 

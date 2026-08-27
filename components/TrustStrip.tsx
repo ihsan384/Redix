@@ -18,8 +18,8 @@ export default function TrustStrip() {
 
   return (
     <section className="trust-strip" ref={ref}>
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-0">
           {stats.map((stat, i) => {
             const Icon = stat.icon;
             return (
@@ -28,7 +28,7 @@ export default function TrustStrip() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
                 transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
-                className="flex flex-col items-center text-center relative"
+                className="flex flex-col items-center text-center relative px-2 sm:px-4"
               >
                 {/* Divider line between stats (desktop only) */}
                 {i > 0 && (
@@ -40,18 +40,18 @@ export default function TrustStrip() {
 
                 {/* Icon */}
                 <div
-                  className="w-9 h-9 flex items-center justify-center mb-3"
+                  className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center mb-2 sm:mb-3"
                   style={{
                     background: "var(--yellow-dim)",
                     borderRadius: "var(--radius-sm)",
                   }}
                 >
-                  <Icon size={16} style={{ color: "var(--text-primary)" }} />
+                  <Icon size={15} style={{ color: "var(--text-primary)" }} />
                 </div>
 
                 {stat.isText ? (
                   <div
-                    className="font-black text-2xl md:text-3xl mb-1"
+                    className="font-black text-xl sm:text-2xl md:text-3xl mb-0.5 sm:mb-1"
                     style={{
                       fontFamily: "var(--font-space)",
                       color: "var(--text-primary)",
@@ -67,7 +67,7 @@ export default function TrustStrip() {
                   </div>
                 ) : (
                   <div
-                    className="font-black text-2xl md:text-3xl mb-1"
+                    className="font-black text-xl sm:text-2xl md:text-3xl mb-0.5 sm:mb-1"
                     style={{
                       fontFamily: "var(--font-space)",
                       color: "var(--text-primary)",
@@ -78,7 +78,7 @@ export default function TrustStrip() {
                 )}
 
                 <div
-                  className="text-xs font-medium uppercase tracking-widest"
+                  className="text-[10px] sm:text-xs font-medium uppercase tracking-wider text-center"
                   style={{
                     color: "var(--text-muted)",
                     fontFamily: "var(--font-space)",

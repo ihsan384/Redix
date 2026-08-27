@@ -96,13 +96,13 @@ export default function Footer() {
     <footer className="footer-dark">
       {/* Mini CTA Row */}
       <div
-        className="px-6 py-8 lg:py-10"
+        className="px-4 sm:px-6 py-6 sm:py-8 lg:py-10"
         style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
       >
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-5">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-5">
           <div>
             <p
-              className="text-lg font-bold mb-1"
+              className="text-base sm:text-lg font-bold mb-1"
               style={{ fontFamily: "var(--font-space)", color: "#FFFFFF" }}
             >
               Ready to grow your brand?
@@ -114,7 +114,7 @@ export default function Footer() {
           <motion.a
             href="#contact"
             onClick={(e) => { e.preventDefault(); goto("#contact"); }}
-            className="btn-yellow group flex-shrink-0"
+            className="btn-yellow group w-full sm:w-auto text-center justify-center flex-shrink-0 text-xs sm:text-sm"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             data-analytics="footer-cta"
@@ -125,12 +125,12 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-16 lg:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-16 lg:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">
 
           {/* Brand */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-5">
+            <div className="flex items-center gap-3 mb-4 sm:mb-5">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/logo.svg"
@@ -143,7 +143,7 @@ export default function Footer() {
               </span>
             </div>
 
-            <p className="text-sm leading-relaxed mb-6" style={{ color: "rgba(255,255,255,0.5)" }}>
+            <p className="text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6" style={{ color: "rgba(255,255,255,0.5)" }}>
               A creative studio helping businesses build a powerful digital presence through
               branding, web, content, and strategy.
             </p>
@@ -156,14 +156,14 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-10 h-10 flex items-center justify-center transition-all duration-300"
+                  className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center transition-all duration-300"
                   style={{
                     background: "rgba(255,255,255,0.08)",
                     border: "1px solid rgba(255,255,255,0.1)",
                     borderRadius: "var(--radius-sm)",
                     color: "rgba(255,255,255,0.5)",
-                    minWidth: "44px",
-                    minHeight: "44px",
+                    minWidth: "40px",
+                    minHeight: "40px",
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.background = "var(--yellow)";
@@ -185,13 +185,13 @@ export default function Footer() {
           {/* Quick Links */}
           <div>
             <h4 className="footer-heading">Quick Links</h4>
-            <ul className="space-y-3">
+            <ul className="space-y-2 sm:space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.label}>
                   <button
                     onClick={() => goto(link.href)}
-                    className="text-sm transition-colors duration-200"
-                    style={{ color: "rgba(255,255,255,0.5)", minHeight: "32px" }}
+                    className="text-xs sm:text-sm transition-colors duration-200"
+                    style={{ color: "rgba(255,255,255,0.5)", minHeight: "28px" }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = "var(--yellow)")}
                     onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
                   >
@@ -205,13 +205,13 @@ export default function Footer() {
           {/* Services */}
           <div>
             <h4 className="footer-heading">Services</h4>
-            <ul className="space-y-3">
+            <ul className="space-y-2 sm:space-y-3">
               {serviceLinks.map((s) => (
                 <li key={s}>
                   <button
                     onClick={() => goto("#services")}
-                    className="text-sm transition-colors duration-200 text-left"
-                    style={{ color: "rgba(255,255,255,0.5)", minHeight: "32px" }}
+                    className="text-xs sm:text-sm transition-colors duration-200 text-left"
+                    style={{ color: "rgba(255,255,255,0.5)", minHeight: "28px" }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = "var(--yellow)")}
                     onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
                   >
@@ -225,10 +225,10 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h4 className="footer-heading">Contact</h4>
-            <div className="space-y-3 text-sm">
+            <div className="space-y-2.5 sm:space-y-3 text-xs sm:text-sm">
               <a
                 href="mailto:hello@redix.media"
-                className="block transition-colors duration-200"
+                className="block transition-colors duration-200 break-all"
                 style={{ color: "rgba(255,255,255,0.5)" }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "var(--yellow)")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
@@ -247,7 +247,7 @@ export default function Footer() {
                 WhatsApp: +91 94970 13275
               </a>
               <div
-                className="p-4 mt-2"
+                className="p-3.5 sm:p-4 mt-2"
                 style={{
                   background: "rgba(255,255,255,0.05)",
                   border: "1px solid rgba(255,255,255,0.08)",
@@ -258,13 +258,13 @@ export default function Footer() {
                 <p className="text-xs font-semibold mb-1" style={{ color: "#FFFFFF", fontFamily: "var(--font-space)" }}>
                   Available Worldwide
                 </p>
-                <p className="text-xs mb-3" style={{ color: "rgba(255,255,255,0.4)" }}>
+                <p className="text-[11px] sm:text-xs mb-3" style={{ color: "rgba(255,255,255,0.4)" }}>
                   Mon–Sat: 9 AM – 8 PM IST · Response within 24h
                 </p>
 
                 {/* Newsletter Form */}
                 <div className="pt-2 border-t border-white/10">
-                  <p className="text-xs font-bold uppercase tracking-wider mb-1.5" style={{ color: "var(--yellow)", fontFamily: "var(--font-space)" }}>
+                  <p className="text-[11px] sm:text-xs font-bold uppercase tracking-wider mb-1.5" style={{ color: "var(--yellow)", fontFamily: "var(--font-space)" }}>
                     Newsletter Signup
                   </p>
                   <form onSubmit={handleNewsletterSubmit} className="flex flex-col gap-2">
@@ -274,12 +274,12 @@ export default function Footer() {
                       placeholder="Your email address"
                       value={newsletterEmail}
                       onChange={(e) => setNewsletterEmail(e.target.value)}
-                      className="w-full px-3 py-1.5 text-xs rounded bg-black/50 border border-white/10 text-white placeholder-zinc-500 focus:outline-none focus:border-yellow-400"
+                      className="w-full px-3 py-1.5 text-xs rounded bg-black/50 border border-white/10 text-white placeholder-zinc-500 focus:outline-none focus:border-yellow-400 min-h-[36px]"
                     />
                     <button
                       type="submit"
                       disabled={newsletterStatus === "loading"}
-                      className="px-3 py-1.5 text-xs font-bold rounded bg-yellow-400 text-black hover:bg-yellow-300 transition flex items-center justify-center gap-1"
+                      className="px-3 py-1.5 text-xs font-bold rounded bg-yellow-400 text-black hover:bg-yellow-300 transition flex items-center justify-center gap-1 min-h-[36px] cursor-pointer"
                     >
                       {newsletterStatus === "loading" ? "Subscribing..." : "Subscribe"}
                     </button>
@@ -299,11 +299,11 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-        <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
           <p className="text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>
             © {new Date().getFullYear()} REDIX.MEDIA. All rights reserved.
           </p>
-          <div className="flex items-center gap-5 text-xs">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-5 text-xs">
             {["Privacy Policy", "Terms of Service"].map((item) => (
               <a
                 key={item}
@@ -318,7 +318,7 @@ export default function Footer() {
             ))}
             <button
               onClick={scrollToTop}
-              className="flex items-center gap-1.5 transition-colors duration-200"
+              className="flex items-center gap-1.5 transition-colors duration-200 cursor-pointer"
               style={{ color: "rgba(255,255,255,0.35)", minHeight: "32px" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "var(--yellow)")}
               onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.35)")}

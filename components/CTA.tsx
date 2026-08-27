@@ -28,7 +28,7 @@ export default function CTA() {
         style={{ background: "var(--yellow)", opacity: 0.06 }}
       />
 
-      <div className="max-w-7xl mx-auto px-6 py-24 lg:py-36" ref={ref}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-14 sm:py-24 lg:py-36" ref={ref}>
         <div className="grid lg:grid-cols-12 gap-8 items-end">
 
           {/* Left — headline */}
@@ -37,10 +37,10 @@ export default function CTA() {
               initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
               transition={{ duration: 0.5 }}
-              className="mb-8"
+              className="mb-4 sm:mb-8"
             >
               <span
-                className="text-xs font-bold uppercase tracking-widest px-3 py-1.5"
+                className="text-[10px] sm:text-xs font-bold uppercase tracking-widest px-2.5 sm:px-3 py-1 sm:py-1.5"
                 style={{
                   background: "var(--yellow)",
                   color: "var(--text-primary)",
@@ -54,7 +54,7 @@ export default function CTA() {
 
             <div
               className="display-title"
-              style={{ fontSize: "clamp(2.5rem, 1.5rem + 4vw, 5.5rem)", color: "#FFFFFF" }}
+              style={{ fontSize: "clamp(2rem, 1.25rem + 3.6vw, 5.5rem)", color: "#FFFFFF" }}
             >
               {["READY TO GROW", "YOUR BRAND?"].map((line, i) => (
                 <div key={i} className="overflow-hidden">
@@ -80,40 +80,40 @@ export default function CTA() {
             transition={{ duration: 0.6, delay: 0.35 }}
             className="lg:col-span-4 lg:pb-2"
           >
-            <p className="text-sm leading-relaxed mb-8" style={{ color: "rgba(255,255,255,0.65)" }}>
+            <p className="text-sm leading-relaxed mb-6 sm:mb-8" style={{ color: "rgba(255,255,255,0.65)" }}>
               Let&apos;s build something people remember. Book a free consultation and let&apos;s
               talk about your brand&apos;s potential.
             </p>
 
             <div className="flex flex-col gap-3">
               <a
-                id="cta-start-project-btn"
-                href="#contact"
-                onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
-                className="btn-yellow group"
+                id="cta-whatsapp-btn"
+                href="https://wa.me/919497013275?text=Hi%20REDIX%20Media%2C%20I%27m%20ready%20to%20grow%20my%20brand.%20Let%27s%20discuss%20a%20project."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-yellow group w-full justify-center text-center text-xs sm:text-sm flex items-center gap-2"
+                data-analytics="cta-whatsapp-primary"
               >
-                Start Your Project
+                <MessageCircle size={16} />
+                Chat on WhatsApp
                 <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
               </a>
               <a
-                href="https://wa.me/919497013275"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm font-bold uppercase tracking-widest flex items-center gap-2 transition-colors"
-                style={{ color: "rgba(255,255,255,0.5)", fontFamily: "var(--font-space)" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--yellow)")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.5)")}
+                href="#contact"
+                onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
+                className="text-xs sm:text-sm font-bold uppercase tracking-widest flex items-center justify-center sm:justify-start gap-2 transition-colors py-2 text-white/50 hover:text-yellow-400"
+                data-analytics="cta-contact-form"
               >
-                <MessageCircle size={16} /> Or Chat on WhatsApp
+                Or Fill Contact Form
               </a>
             </div>
 
             {/* Trust list */}
-            <div className="mt-10 pt-8 flex flex-col gap-3" style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}>
+            <div className="mt-8 sm:mt-10 pt-6 sm:pt-8 flex flex-col gap-2.5 sm:gap-3" style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}>
               {["Free Consultation", "Quick Turnaround", "Direct Communication", "No Hidden Fees"].map((item) => (
                 <span
                   key={item}
-                  className="flex items-center gap-2 text-xs uppercase tracking-widest"
+                  className="flex items-center gap-2 text-[11px] sm:text-xs uppercase tracking-widest"
                   style={{ color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-space)" }}
                 >
                   <Check size={12} style={{ color: "var(--yellow)" }} />

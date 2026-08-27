@@ -64,21 +64,21 @@ export default function FAQ() {
     >
       <div className="max-w-4xl mx-auto" ref={ref}>
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
             transition={{ duration: 0.5 }}
-            className="mb-6"
+            className="mb-4 sm:mb-6"
           >
-            <div className="badge" style={{ margin: "0 auto" }}>FAQ</div>
+            <div className="badge text-[10px] sm:text-xs" style={{ margin: "0 auto" }}>FAQ</div>
           </motion.div>
 
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
             transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-            className="section-title mb-4"
+            className="section-title mb-3 sm:mb-4"
           >
             Frequently Asked{" "}
             <span className="relative inline-block">
@@ -101,7 +101,7 @@ export default function FAQ() {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="section-subtitle"
+            className="section-subtitle text-sm sm:text-base"
           >
             Everything you need to know before getting started.
           </motion.p>
@@ -122,10 +122,10 @@ export default function FAQ() {
               >
                 <button
                   onClick={() => toggle(i)}
-                  className="accordion-trigger"
+                  className="accordion-trigger text-left"
                   aria-expanded={isOpen}
                 >
-                  <span className="flex items-center gap-3">
+                  <span className="flex items-center gap-2.5 sm:gap-3 pr-2">
                     <span
                       className="text-xs font-bold flex-shrink-0"
                       style={{
@@ -136,19 +136,19 @@ export default function FAQ() {
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    {faq.question}
+                    <span className="text-sm sm:text-base font-semibold leading-snug">{faq.question}</span>
                   </span>
                   <div
-                    className="w-8 h-8 flex items-center justify-center flex-shrink-0 transition-all duration-300"
+                    className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center flex-shrink-0 transition-all duration-300"
                     style={{
                       background: isOpen ? "var(--yellow)" : "var(--bg-secondary)",
                       borderRadius: "var(--radius-sm)",
                     }}
                   >
                     {isOpen ? (
-                      <Minus size={14} style={{ color: "var(--text-primary)" }} />
+                      <Minus size={13} style={{ color: "var(--text-primary)" }} />
                     ) : (
-                      <Plus size={14} style={{ color: "var(--text-muted)" }} />
+                      <Plus size={13} style={{ color: "var(--text-muted)" }} />
                     )}
                   </div>
                 </button>
@@ -162,7 +162,7 @@ export default function FAQ() {
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                       style={{ overflow: "hidden" }}
                     >
-                      <div className="accordion-content">
+                      <div className="accordion-content text-xs sm:text-sm leading-relaxed">
                         {faq.answer}
                       </div>
                     </motion.div>
@@ -178,7 +178,7 @@ export default function FAQ() {
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="mt-12 p-6 lg:p-8 flex flex-col sm:flex-row items-center justify-between gap-5"
+          className="mt-8 sm:mt-12 p-5 sm:p-6 lg:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-5"
           style={{
             background: "var(--bg-card)",
             border: "1px solid var(--border)",
@@ -193,16 +193,16 @@ export default function FAQ() {
             >
               Still have questions?
             </p>
-            <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
+            <p className="text-xs sm:text-sm" style={{ color: "var(--text-secondary)" }}>
               Chat with us on WhatsApp or start your project directly.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
+          <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 w-full sm:w-auto flex-shrink-0">
             <a
-              href="https://wa.me/919497013275"
+              href="https://wa.me/919497013275?text=Hi%20REDIX%20Media%2C%20I%20have%20a%20question%20about%20your%20services."
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-outline text-xs"
+              className="btn-outline text-xs w-full sm:w-auto justify-center text-center"
               data-analytics="faq-whatsapp-cta"
             >
               <MessageCircle size={14} />
@@ -211,7 +211,7 @@ export default function FAQ() {
             <a
               href="#contact"
               onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
-              className="btn-yellow text-xs group"
+              className="btn-yellow text-xs group w-full sm:w-auto justify-center text-center"
               data-analytics="faq-start-project-cta"
             >
               Start Your Project

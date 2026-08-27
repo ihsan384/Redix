@@ -112,36 +112,36 @@ function ReviewContent() {
   };
 
   return (
-    <div className="min-h-screen py-20 px-6 flex items-center justify-center" style={{ background: "var(--bg-primary, #0B0F17)", color: "var(--text-primary, #FFFFFF)" }}>
+    <div className="min-h-screen py-14 sm:py-20 px-4 sm:px-6 flex items-center justify-center" style={{ background: "var(--bg-primary, #0B0F17)", color: "var(--text-primary, #FFFFFF)" }}>
       <div className="w-full max-w-2xl">
         {/* Header */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-4" style={{ background: "rgba(255,215,0,0.1)", border: "1px solid rgba(255,215,0,0.3)", color: "var(--yellow, #FFD700)" }}>
             <ShieldCheck size={14} /> Verified Client Review
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-3" style={{ fontFamily: "var(--font-space)" }}>
+          <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight mb-3" style={{ fontFamily: "var(--font-space)" }}>
             Share Your Experience with REDIX
           </h1>
-          <p className="text-sm text-zinc-400 max-w-md mx-auto">
+          <p className="text-xs sm:text-sm text-zinc-400 max-w-md mx-auto">
             Your feedback helps us continuously elevate our creative and engineering standards.
           </p>
         </div>
 
         {/* Loading State */}
         {verifying && (
-          <div className="flex flex-col items-center justify-center p-12 bg-white/5 border border-white/10 rounded-2xl">
-            <div className="w-10 h-10 border-2 border-yellow-500/20 border-t-yellow-500 rounded-full animate-spin mb-4" />
-            <p className="text-sm font-semibold text-zinc-400">Verifying client invitation link...</p>
+          <div className="flex flex-col items-center justify-center p-8 sm:p-12 bg-white/5 border border-white/10 rounded-2xl">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 border-2 border-yellow-500/20 border-t-yellow-500 rounded-full animate-spin mb-4" />
+            <p className="text-xs sm:text-sm font-semibold text-zinc-400">Verifying client invitation link...</p>
           </div>
         )}
 
         {/* Invalid Token Alert */}
         {!verifying && !validToken && (
-          <div className="p-8 bg-red-950/40 border border-red-500/30 rounded-2xl text-center">
-            <AlertCircle size={40} className="text-red-400 mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-red-200 mb-2">Review Invitation Invalid</h3>
-            <p className="text-sm text-red-300/80 mb-6">{errorMessage}</p>
-            <Link href="/" className="inline-flex items-center justify-center px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-bold transition">
+          <div className="p-6 sm:p-8 bg-red-950/40 border border-red-500/30 rounded-2xl text-center">
+            <AlertCircle size={36} className="text-red-400 mx-auto mb-4" />
+            <h3 className="text-lg sm:text-xl font-bold text-red-200 mb-2">Review Invitation Invalid</h3>
+            <p className="text-xs sm:text-sm text-red-300/80 mb-6">{errorMessage}</p>
+            <Link href="/" className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-bold transition">
               Return to Website
             </Link>
           </div>
@@ -149,15 +149,15 @@ function ReviewContent() {
 
         {/* Success State */}
         {!verifying && validToken && submitted && (
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="p-10 bg-white/5 border border-yellow-500/30 rounded-2xl text-center">
-            <div className="w-16 h-16 bg-yellow-400 text-black rounded-2xl flex items-center justify-center mx-auto mb-6">
-              <CheckCircle2 size={32} />
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="p-6 sm:p-10 bg-white/5 border border-yellow-500/30 rounded-2xl text-center">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-yellow-400 text-black rounded-2xl flex items-center justify-center mx-auto mb-5 sm:mb-6">
+              <CheckCircle2 size={28} />
             </div>
-            <h3 className="text-2xl font-bold text-white mb-2">Thank You for Your Review!</h3>
-            <p className="text-sm text-zinc-400 mb-6">
+            <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">Thank You for Your Review!</h3>
+            <p className="text-xs sm:text-sm text-zinc-400 mb-6">
               Your review has been submitted to REDIX ERP moderation. Once approved by our team, it will be showcased on our public website.
             </p>
-            <Link href="/" className="inline-flex items-center justify-center px-8 py-3 rounded-xl bg-yellow-400 text-black font-bold text-sm hover:bg-yellow-300 transition">
+            <Link href="/" className="inline-flex items-center justify-center w-full sm:w-auto px-8 py-3 rounded-xl bg-yellow-400 text-black font-bold text-xs sm:text-sm hover:bg-yellow-300 transition">
               Back to Home
             </Link>
           </motion.div>
@@ -165,18 +165,18 @@ function ReviewContent() {
 
         {/* Review Form */}
         {!verifying && validToken && !submitted && (
-          <form onSubmit={handleSubmit} className="p-8 sm:p-10 bg-white/5 border border-white/10 rounded-2xl space-y-6">
+          <form onSubmit={handleSubmit} className="p-5 sm:p-10 bg-white/5 border border-white/10 rounded-2xl space-y-4 sm:space-y-6">
             {submitError && (
-              <div className="p-4 bg-red-950/40 border border-red-500/30 rounded-xl flex items-center gap-3 text-sm text-red-300">
-                <AlertCircle size={18} className="shrink-0 text-red-400" />
+              <div className="p-3.5 sm:p-4 bg-red-950/40 border border-red-500/30 rounded-xl flex items-center gap-2.5 sm:gap-3 text-xs sm:text-sm text-red-300">
+                <AlertCircle size={16} className="shrink-0 text-red-400" />
                 <span>{submitError}</span>
               </div>
             )}
 
             {/* Rating Stars */}
-            <div className="text-center py-4 bg-white/[0.02] border border-white/5 rounded-xl">
-              <label className="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-3">Overall Rating *</label>
-              <div className="flex items-center justify-center gap-2">
+            <div className="text-center py-3.5 sm:py-4 bg-white/[0.02] border border-white/5 rounded-xl">
+              <label className="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2.5 sm:mb-3">Overall Rating *</label>
+              <div className="flex items-center justify-center gap-1.5 sm:gap-2">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <button
                     key={star}
@@ -184,10 +184,10 @@ function ReviewContent() {
                     onClick={() => setRating(star)}
                     onMouseEnter={() => setHoverRating(star)}
                     onMouseLeave={() => setHoverRating(0)}
-                    className="p-1 text-2xl focus:outline-none transition-transform hover:scale-125"
+                    className="p-1 text-2xl focus:outline-none transition-transform hover:scale-125 cursor-pointer"
                   >
                     <Star
-                      size={28}
+                      size={24}
                       className={
                         (hoverRating || rating) >= star
                           ? "fill-yellow-400 text-yellow-400"
@@ -203,7 +203,7 @@ function ReviewContent() {
             </div>
 
             {/* Name & Company */}
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Full Name *</label>
                 <div className="relative">

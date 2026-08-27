@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, MessageCircle } from "lucide-react";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -73,15 +73,15 @@ export default function Navbar() {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="fixed z-50 transition-all duration-500"
-        style={{
-          top: scrolled ? "12px" : "0",
-          left: scrolled ? "24px" : "0",
-          right: scrolled ? "24px" : "0",
-          borderRadius: scrolled ? "var(--radius-lg)" : "0",
-          ...(scrolled
+        className={`fixed z-50 transition-all duration-500 ${
+          scrolled
+            ? "top-2 sm:top-3 left-2.5 sm:left-6 right-2.5 sm:right-6 rounded-xl sm:rounded-2xl"
+            : "top-0 left-0 right-0 rounded-none"
+        }`}
+        style={
+          scrolled
             ? {
-                background: "rgba(255, 255, 255, 0.82)",
+                background: "rgba(255, 255, 255, 0.85)",
                 backdropFilter: "blur(24px)",
                 WebkitBackdropFilter: "blur(24px)",
                 border: "1px solid rgba(0, 0, 0, 0.06)",
@@ -90,25 +90,25 @@ export default function Navbar() {
             : {
                 background: "transparent",
                 border: "1px solid transparent",
-              }),
-        }}
+              }
+        }
       >
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
           <a
             href="#home"
             onClick={(e) => { e.preventDefault(); goto("#home"); }}
-            className="flex items-center gap-3 group"
+            className="flex items-center gap-2.5 sm:gap-3 group"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/logo.svg"
               alt="Redix Media Logo"
-              className="w-8 h-8 object-cover flex-shrink-0"
+              className="w-7 h-7 sm:w-8 sm:h-8 object-cover flex-shrink-0"
               style={{ borderRadius: "2px" }}
             />
             <span
-              className="font-black text-lg tracking-tight"
+              className="font-black text-base sm:text-lg tracking-tight"
               style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}
             >
               REDIX<span style={{ color: "var(--text-muted)" }}>.MEDIA</span>
@@ -146,8 +146,8 @@ export default function Navbar() {
           {/* Hamburger */}
           <button
             id="nav-menu-toggle"
-            className="lg:hidden p-2 rounded"
-            style={{ color: "var(--text-primary)", minWidth: "44px", minHeight: "44px", display: "flex", alignItems: "center", justifyContent: "center" }}
+            className="lg:hidden p-2 rounded flex items-center justify-center cursor-pointer transition-colors"
+            style={{ color: "var(--text-primary)", minWidth: "44px", minHeight: "44px" }}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
@@ -156,7 +156,7 @@ export default function Navbar() {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu — Full screen overlay */}
+      {/* Mobile Menu — Full screen overlay with safe scroll */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -164,30 +164,30 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 lg:hidden"
+            className="fixed inset-0 z-40 lg:hidden overflow-y-auto"
             style={{
               background: "rgba(255, 255, 255, 0.98)",
               backdropFilter: "blur(20px)",
               WebkitBackdropFilter: "blur(20px)",
             }}
           >
-            <div className="flex flex-col items-center justify-center h-full px-8 gap-2">
+            <div className="flex flex-col items-center justify-center min-h-full py-20 px-6 gap-2">
               {navLinks.map((link, i) => (
                 <motion.a
                   key={link.label}
                   href={link.href}
                   onClick={(e) => { e.preventDefault(); goto(link.href); }}
-                  className="py-3 text-xl font-bold tracking-tight transition-colors"
+                  className="py-2.5 sm:py-3 text-lg sm:text-xl font-bold tracking-tight transition-colors"
                   style={{
                     color: activeSection === link.href ? "var(--yellow-hover)" : "var(--text-primary)",
                     fontFamily: "var(--font-space)",
-                    minHeight: "48px",
+                    minHeight: "44px",
                     display: "flex",
                     alignItems: "center",
                   }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.06 }}
+                  transition={{ delay: i * 0.05 }}
                   whileHover={{ color: "var(--yellow)" }}
                 >
                   {link.label}
@@ -198,15 +198,18 @@ export default function Navbar() {
               <div className="w-12 h-px my-2" style={{ background: "var(--border-strong)" }} />
 
               <motion.a
-                href="#contact"
-                onClick={(e) => { e.preventDefault(); goto("#contact"); }}
-                className="btn-yellow mt-4 text-center justify-center"
+                href="https://wa.me/919497013275?text=Hi%20REDIX%20Media%2C%20I%27d%20like%20to%20discuss%20a%20project%20for%20my%20business."
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMenuOpen(false)}
+                className="btn-yellow mt-3 w-full max-w-xs text-center justify-center text-sm flex items-center gap-2"
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                data-analytics="mobile-nav-cta"
+                transition={{ delay: 0.35 }}
+                data-analytics="mobile-nav-whatsapp-cta"
               >
-                Start Your Project
+                <MessageCircle size={16} />
+                Chat on WhatsApp
               </motion.a>
             </div>
           </motion.div>

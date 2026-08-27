@@ -135,14 +135,14 @@ export default function Process() {
         </div>
 
         {/* Mobile — vertical timeline */}
-        <div className="lg:hidden relative pl-12">
+        <div className="lg:hidden relative pl-14 sm:pl-16">
           {/* Vertical connecting line */}
           <div
-            className="absolute left-[27px] top-0 bottom-0 w-[2px]"
+            className="absolute left-[23px] sm:left-[27px] top-0 bottom-0 w-[2px]"
             style={{ background: "var(--border-strong)" }}
           />
           <motion.div
-            className="absolute left-[27px] top-0 w-[2px]"
+            className="absolute left-[23px] sm:left-[27px] top-0 w-[2px]"
             style={{
               background: "var(--yellow)",
               transformOrigin: "top",
@@ -152,7 +152,7 @@ export default function Process() {
             transition={{ duration: 2, delay: 0.3, ease: "easeOut" }}
           />
 
-          <div className="flex flex-col gap-10">
+          <div className="flex flex-col gap-8 sm:gap-10">
             {steps.map((step, i) => {
               const Icon = step.icon;
               return (
@@ -165,13 +165,13 @@ export default function Process() {
                 >
                   {/* Timeline dot — positioned on the line */}
                   <div
-                    className="absolute -left-12 top-0 timeline-dot"
-                    style={{ width: "56px", height: "56px" }}
+                    className="absolute -left-14 sm:-left-16 top-0 timeline-dot"
+                    style={{ width: "48px", height: "48px" }}
                   >
-                    <Icon size={20} style={{ color: "var(--text-primary)" }} />
+                    <Icon size={18} style={{ color: "var(--text-primary)" }} />
                   </div>
 
-                  <div className="pt-2">
+                  <div className="pt-1 sm:pt-2">
                     <div className="flex items-center gap-2 mb-1">
                       <p className="text-xs font-bold uppercase tracking-widest" style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}>
                         {step.num}
@@ -188,10 +188,10 @@ export default function Process() {
                         {step.duration}
                       </span>
                     </div>
-                    <h3 className="font-bold text-lg mb-2" style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}>
+                    <h3 className="font-bold text-base sm:text-lg mb-1.5 sm:mb-2" style={{ fontFamily: "var(--font-space)", color: "var(--text-primary)" }}>
                       {step.title}
                     </h3>
-                    <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                    <p className="text-xs sm:text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
                       {step.desc}
                     </p>
                   </div>
@@ -206,12 +206,12 @@ export default function Process() {
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
           transition={{ duration: 0.5, delay: 1.2 }}
-          className="text-center mt-16"
+          className="text-center mt-12 sm:mt-16"
         >
           <a
             href="#contact"
             onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
-            className="btn-yellow group"
+            className="btn-yellow group w-full sm:w-auto text-center justify-center text-xs sm:text-sm"
             data-analytics="process-cta"
           >
             Book Free Consultation
