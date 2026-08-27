@@ -124,9 +124,22 @@ export default function ProjectDetailsModal({
             >
               {/* Header Details */}
               <motion.div variants={fadeInUp} className="space-y-4 pt-4">
-                <span className="inline-block px-3 py-1 rounded-full bg-neutral-200/50 border border-black/5 text-[9px] font-bold uppercase tracking-[0.2em] text-neutral-600">
-                  {project.categoryBadge}
-                </span>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="inline-block px-3 py-1 rounded-full bg-neutral-200/50 border border-black/5 text-[9px] font-bold uppercase tracking-[0.2em] text-neutral-600">
+                    {project.categoryBadge}
+                  </span>
+                  {project.projectType && (
+                    <span className={`inline-block px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-[0.2em] ${
+                      project.projectType === "Client Project"
+                        ? "bg-emerald-100 text-emerald-800 border border-emerald-200"
+                        : project.projectType === "Demo Project"
+                        ? "bg-amber-100 text-amber-800 border border-amber-200"
+                        : "bg-blue-100 text-blue-800 border border-blue-200"
+                    }`}>
+                      {project.projectType}
+                    </span>
+                  )}
+                </div>
                 
                 <h2 className="text-3xl md:text-4xl lg:text-[40px] font-black tracking-tight leading-tight text-neutral-900">
                   {project.title}
@@ -144,10 +157,10 @@ export default function ProjectDetailsModal({
                   </div>
                   <div>
                     <span className="block text-[9px] font-bold text-neutral-400 uppercase tracking-widest mb-1">
-                      Year
+                      Type
                     </span>
                     <span className="text-xs font-bold text-neutral-800">
-                      {project.year}
+                      {project.projectType}
                     </span>
                   </div>
                   <div>

@@ -6,7 +6,7 @@ import { Briefcase, Heart, Clock, Calendar } from "lucide-react";
 import AnimatedCounter from "./AnimatedCounter";
 
 const stats = [
-  { value: 50, suffix: "+", label: "Projects Delivered", icon: Briefcase },
+  { value: 60, suffix: "+", label: "Projects Delivered", icon: Briefcase },
   { value: 100, suffix: "%", label: "Client Satisfaction", icon: Heart },
   { label: "< 24hr Response", isText: true, textValue: "< 24hr", icon: Clock },
   { label: "Since 2024", isText: true, textValue: "Since 2024", icon: Calendar },

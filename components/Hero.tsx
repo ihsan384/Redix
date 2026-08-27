@@ -77,7 +77,7 @@ const TICKER_ITEMS = [
 ];
 
 const TRUST_INDICATORS = [
-  "50+ Projects Delivered",
+  "60+ Projects Delivered",
   "100% Client Satisfaction",
   "Replies Within 1 Hour",
 ];

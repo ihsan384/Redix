@@ -6,9 +6,9 @@ import { Mail, MessageCircle, Phone, MapPin, Send, CheckCircle2, Sparkles, Alert
 
 const contactLinks = [
   { Icon: MessageCircle, label: "WhatsApp", value: "Chat with us", href: "https://wa.me/919497013275", color: "#25d366" },
-  { Icon: Mail, label: "Email", value: "[EMAIL_ADDRESS]", href: "mailto:[EMAIL_ADDRESS]", color: "var(--text-primary)" },
-  { Icon: Phone, label: "Call", value: "+91 99465 91260", href: "tel:+919946591260", color: "var(--text-primary)" },
-  { Icon: MapPin, label: "Location", value: "Based in India · Serving Remotly", href: "#", color: "var(--text-muted)" },
+  { Icon: Mail, label: "Email", value: "hello@redix.media", href: "mailto:hello@redix.media", color: "var(--text-primary)" },
+  { Icon: Phone, label: "Call", value: "+91 94970 13275", href: "tel:+919497013275", color: "var(--text-primary)" },
+  { Icon: MapPin, label: "Location", value: "Based in India · Serving Remotely", href: "#", color: "var(--text-muted)" },
 ];
 
 const services = [
@@ -28,55 +28,63 @@ const serviceBudgets: Record<string, string[]> = {
     "₹3,000 – ₹5,000",
     "₹5,000 – ₹10,000",
     "₹10,000 – ₹25,000",
-    "₹25,000+"
+    "₹25,000+",
+    "Custom (Let's Talk)",
   ],
   "Custom CRM (One-Time)": [
     "₹5,000 – ₹10,000",
     "₹10,000 – ₹20,000",
     "₹20,000 – ₹35,000",
-    "₹35,000+"
+    "₹35,000+",
+    "Custom (Let's Talk)",
   ],
   "Custom ERP (One-Time)": [
     "₹4,000 – ₹10,000",
     "₹10,000 – ₹20,000",
     "₹20,000 – ₹35,000",
-    "₹35,000+"
+    "₹35,000+",
+    "Custom (Let's Talk)",
   ],
   "ERP + CRM Solution": [
-    "Custom Quote",
     "₹10,000 – ₹25,000",
     "₹25,000 – ₹50,000",
-    "₹50,000+"
+    "₹50,000+",
+    "Custom (Let's Talk)",
   ],
   "Social Media Posters": [
     "₹299 / design",
     "₹1,000 – ₹3,000 (Pack)",
     "₹3,000 – ₹5,000",
-    "₹5,000+"
+    "₹5,000+",
+    "Custom (Let's Talk)",
   ],
   "Video Editing": [
     "₹499 – ₹1,500 / video",
     "₹1,500 – ₹3,500 / video",
     "₹3,500 – ₹7,500 / video",
-    "₹7,500+"
+    "₹7,500+",
+    "Custom (Let's Talk)",
   ],
   "Social Media Management": [
     "Under ₹3,000 / mo",
     "₹3,000 – ₹7,000 / mo",
     "₹7,000 – ₹15,000 / mo",
-    "₹15,000+ / mo"
+    "₹15,000+ / mo",
+    "Custom (Let's Talk)",
   ],
   "Branding & Design": [
     "Under ₹3,000",
     "₹3,000 – ₹7,000",
     "₹7,000 – ₹15,000",
-    "₹15,000+"
+    "₹15,000+",
+    "Custom (Let's Talk)",
   ],
   "Other": [
     "Under ₹3,000",
     "₹3,000 – ₹7,000",
     "₹7,000 – ₹15,000",
-    "₹15,000+"
+    "₹15,000+",
+    "Custom (Let's Talk)",
   ]
 };
 

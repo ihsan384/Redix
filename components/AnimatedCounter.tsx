@@ -11,11 +11,11 @@ interface AnimatedCounterProps {
 
 export default function AnimatedCounter({
   end,
-  duration = 2000,
+  duration = 1800,
   suffix = "",
   prefix = "",
 }: AnimatedCounterProps) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(end);
   const ref = useRef<HTMLSpanElement>(null);
   const hasAnimated = useRef(false);
 
@@ -32,13 +32,18 @@ export default function AnimatedCounter({
             // Ease out cubic
             const eased = 1 - Math.pow(1 - progress, 3);
             setCount(Math.round(eased * end));
-            if (progress < 1) requestAnimationFrame(animate);
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            } else {
+              setCount(end);
+            }
           };
 
+          setCount(0);
           requestAnimationFrame(animate);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.2 }
     );
 
     if (ref.current) observer.observe(ref.current);

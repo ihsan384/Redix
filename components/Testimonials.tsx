@@ -36,7 +36,7 @@ const socialProofStats = [
   { icon: Users, value: "35+", label: "Happy Clients" },
   { icon: Briefcase, value: "60+", label: "Projects Delivered" },
   { icon: Globe, value: "6", label: "Countries Served" },
-  { icon: ShieldCheck, value: "100%", label: "Verified Reviews" },
+  { icon: ShieldCheck, value: "100%", label: "Client Feedback" },
 ];
 
 // Exact authentic client reviews provided by user
@@ -208,7 +208,7 @@ export default function Testimonials() {
               className="text-xs uppercase tracking-widest"
               style={{ color: "var(--text-muted)", fontFamily: "var(--font-space)" }}
             >
-              Verified Malayali Client Reviews
+              Client Reviews & Feedback
             </span>
 
             {/* Live Database sync badge */}
@@ -223,7 +223,7 @@ export default function Testimonials() {
               }}
             >
               <Database size={11} />
-              {isLiveSynced ? "Live ERP Verified DB Sync" : "Verified Database"}
+              {isLiveSynced ? "Live Client Reviews Sync" : "Client Reviews"}
             </span>
           </div>
 
