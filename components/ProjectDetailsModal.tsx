@@ -128,17 +128,6 @@ export default function ProjectDetailsModal({
                   <span className="inline-block px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-neutral-200/50 border border-black/5 text-[9px] font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] text-neutral-600">
                     {project.categoryBadge}
                   </span>
-                  {project.projectType && (
-                    <span className={`inline-block px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[9px] font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] ${
-                      project.projectType === "Client Project"
-                        ? "bg-emerald-100 text-emerald-800 border border-emerald-200"
-                        : project.projectType === "Demo Project"
-                        ? "bg-amber-100 text-amber-800 border border-amber-200"
-                        : "bg-blue-100 text-blue-800 border border-blue-200"
-                    }`}>
-                      {project.projectType}
-                    </span>
-                  )}
                 </div>
                 
                 <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-black tracking-tight leading-tight text-neutral-900">
@@ -146,21 +135,13 @@ export default function ProjectDetailsModal({
                 </h2>
 
                 {/* Metadata Table */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-6 border-y border-black/5">
+                <div className="grid grid-cols-3 sm:grid-cols-3 gap-4 py-6 border-y border-black/5">
                   <div>
                     <span className="block text-[9px] font-bold text-neutral-400 uppercase tracking-widest mb-1">
                       Client
                     </span>
                     <span className="text-xs font-bold text-neutral-800">
                       {project.client}
-                    </span>
-                  </div>
-                  <div>
-                    <span className="block text-[9px] font-bold text-neutral-400 uppercase tracking-widest mb-1">
-                      Type
-                    </span>
-                    <span className="text-xs font-bold text-neutral-800">
-                      {project.projectType}
                     </span>
                   </div>
                   <div>

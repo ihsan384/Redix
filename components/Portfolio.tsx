@@ -33,7 +33,6 @@ export interface Project {
   id: string;
   title: string;
   categoryBadge: string;
-  projectType: "Client Project" | "Concept Project" | "Demo Project";
   filterCategories: FilterCategory[];
   image: string;
   description: string;
@@ -70,7 +69,6 @@ const projects: Project[] = [
     id: "cloth-studio",
     title: "Cloth Studio — Fashion Storefront",
     categoryBadge: "Fashion E-Commerce",
-    projectType: "Client Project",
     filterCategories: ["All", "E-Commerce", "Business", "Landing Page"],
     image: "/projects/cloth_studio.png",
     description: "A conversion-focused digital storefront designed for a modern fashion brand featuring clean product visual hierarchy, curated collections (Ladies Wear, Kids Wear, Custom Tailoring), and direct WhatsApp order channels.",
@@ -115,7 +113,6 @@ const projects: Project[] = [
     id: "gym-rrp",
     title: "Gym RRP Management ERP",
     categoryBadge: "ERP Software",
-    projectType: "Demo Project",
     filterCategories: ["All", "ERP", "Business"],
     image: "/projects/gym_erp.png",
     description: "Enterprise resource planning system for gyms with active attendance matrixes, automated membership tier subscriptions, payment analytics dashboards, and trainer-scheduling APIs.",
@@ -160,7 +157,6 @@ const projects: Project[] = [
     id: "restaurant-landing",
     title: "Bespoke Aroma Bistro Page",
     categoryBadge: "Restaurant",
-    projectType: "Concept Project",
     filterCategories: ["All", "Restaurant", "Landing Page"],
     image: "https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=600&h=400&fit=crop",
     description: "Premium culinary landing page showcasing virtual reservations, menu interactions, and dynamic booking systems.",
@@ -206,7 +202,6 @@ const projects: Project[] = [
     id: "cafe-website",
     title: "Elixir Coffee Storefront",
     categoryBadge: "Cafe Website",
-    projectType: "Concept Project",
     filterCategories: ["All", "Restaurant", "Business"],
     image: "/assets/cafedemo.png",
     description: "Bespoke café digital storefront with integrated online ordering systems, gallery matrices, and responsive map locators.",
@@ -251,7 +246,6 @@ const projects: Project[] = [
     id: "business-portfolio",
     title: "Ayan Creative Portfolio",
     categoryBadge: "Portfolio",
-    projectType: "Client Project",
     filterCategories: ["All", "Portfolio", "Business"],
     image: "/projects/solitude.png",
     description: "Premium portfolio for a graphic designer, built with buttery-smooth scroll physics and custom layout grids.",
@@ -297,7 +291,6 @@ const projects: Project[] = [
     id: "pet-shop",
     title: "Paws & Claws Storefront",
     categoryBadge: "Business Website",
-    projectType: "Concept Project",
     filterCategories: ["All", "Business"],
     image: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=800&q=80",
     description: "Charming digital storefront designed for a modern veterinary and premium pet supplies shop detailing appointments and care plans.",
@@ -342,7 +335,6 @@ const projects: Project[] = [
     id: "cafe-v2",
     title: "Brew & Bites Portal V2",
     categoryBadge: "React Web App",
-    projectType: "Demo Project",
     filterCategories: ["All", "Restaurant", "Business"],
     image: "/projects/brew_lab.png",
     description: "Next-gen café portal featuring reactive state filters, online payment gateways, and lightweight motion templates.",
@@ -388,7 +380,6 @@ const projects: Project[] = [
     id: "interior-studio",
     title: "Hearth Design Studio",
     categoryBadge: "Architecture Portfolio",
-    projectType: "Concept Project",
     filterCategories: ["All", "Portfolio", "Business"],
     image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80",
     description: "An elegant minimal portfolio displaying high-resolution interior layouts, project metrics, and client review panels.",
@@ -433,7 +424,6 @@ const projects: Project[] = [
     id: "coco-cafe",
     title: "Coco Cafe Branding Page",
     categoryBadge: "Branding",
-    projectType: "Client Project",
     filterCategories: ["All", "Restaurant", "Branding", "Business"],
     image: "/assets/cocoicafe.png",
     description: "Official web storefront for Coco Cafe India focusing on luxury brand details, active menu guides, and organic SEO structures.",
@@ -603,19 +593,10 @@ function BentoCard({
         <ProjectImage src={project.image} alt={project.title} heightClass={imageContainerHeight} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
 
-        {/* Top-Left Category & Project Type Badges (Glassmorphic) */}
+        {/* Top-Left Category Badge (Glassmorphic) */}
         <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-20 pointer-events-none flex flex-wrap items-center gap-1.5 max-w-[calc(100%-80px)]">
           <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-black/80 text-white text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.16em] sm:tracking-[0.2em] backdrop-blur-xl">
             {project.categoryBadge}
-          </span>
-          <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.12em] sm:tracking-[0.16em] backdrop-blur-xl ${
-            project.projectType === "Client Project"
-              ? "bg-emerald-950/85 text-emerald-300 border border-emerald-400/30"
-              : project.projectType === "Demo Project"
-              ? "bg-amber-950/85 text-amber-300 border border-amber-400/30"
-              : "bg-blue-950/85 text-blue-300 border border-blue-400/30"
-          }`}>
-            {project.projectType}
           </span>
         </div>
 
@@ -633,8 +614,6 @@ function BentoCard({
           {/* Metadata Row */}
           <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-2 text-xs text-neutral-400 font-medium">
             <span className="font-bold text-neutral-600 uppercase tracking-widest text-[11px] sm:text-xs">{project.client}</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-neutral-300" />
-            <span className="font-semibold text-neutral-500 text-[11px] sm:text-xs">{project.projectType}</span>
             <span className="w-1.5 h-1.5 rounded-full bg-neutral-300" />
             <span className="font-normal text-[11px] sm:text-xs">{project.categoryBadge}</span>
           </div>
