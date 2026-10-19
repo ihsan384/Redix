@@ -110,6 +110,54 @@ const projects: Project[] = [
     }
   },
   {
+    id: "forge-fitness",
+    title: "Forge Fitness Club Landing Page",
+    categoryBadge: "Fitness Club",
+    filterCategories: ["All", "Landing Page", "Business"],
+    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=80",
+    description: "High-performance digital landing page and athletic web application built for a premier strength training gym in Punalur, Kerala featuring interactive program rosters, tiered pricing, and direct enquiry channels.",
+    tech: ["React", "TypeScript", "Tailwind CSS", "Vite", "Framer Motion", "Lucide React"],
+    demoUrl: "https://gymdemo.redix.in",
+    caseStudyUrl: "#",
+    client: "Forge Fitness Club",
+    year: "2026",
+    size: "small",
+    duration: "2 Weeks",
+    industry: "Fitness & Athletics",
+    overview: {
+      problem: "Forge Fitness Club needed an athletic, high-impact web presence to replace fragmented social media messages, convey their discipline-first training ethos, and capture prospective member enquiries in Punalur, Kollam.",
+      solution: "We designed and engineered a fast, modern single-page web app with high-contrast typography, interactive workout program discovery, tiered membership packages (Monthly, Quarterly, Annual), coach profiles, and validated enquiry routing.",
+      result: "Established an authoritative digital presence for the gym, increased prospective member conversions, and streamlined workout program inquiries."
+    },
+    features: [
+      "Interactive Program Rosters",
+      "Tiered Membership Plans (₹1,499/mo to ₹11,999/yr)",
+      "Certified Coach & Trainer Spotlights",
+      "Interactive Enquiry Form with Validation",
+      "Facility Training Zones Showcase",
+      "Operating Hours & Integrated Google Maps"
+    ],
+    githubUrl: "https://github.com/ihsan384/Gym-demo",
+    metrics: [
+      { value: "99%", label: "Mobile UX Score" },
+      { value: "1.1s", label: "Page Load Time" },
+      { value: "100%", label: "Responsive Layout" },
+      { value: "Direct", label: "Enquiry Funnel Conversion" }
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=1200&q=80"
+    ],
+    testimonial: {
+      rating: 5,
+      text: "REDIX.MEDIA delivered an elite web presence for Forge Fitness Club. The sleek dark aesthetic, fast loading, and instant enquiry form have made onboarding new members effortless.",
+      author: "Forge Fitness Club — Punalur, Kollam"
+    }
+  },
+  {
     id: "gym-rrp",
     title: "Gym RRP Management ERP",
     categoryBadge: "ERP Software",
@@ -196,6 +244,53 @@ const projects: Project[] = [
       rating: 5,
       text: "The booking flow is flawless. Our customers frequently praise the design when making reservations.",
       author: "Aroma Bistro"
+    }
+  },
+  {
+    id: "cinemapremis",
+    title: "Cinemapremis — Movie Promotion & PR Agency",
+    categoryBadge: "Entertainment & PR",
+    filterCategories: ["All", "Branding", "Business", "Landing Page"],
+    image: "/projects/cinemapremis.jpg",
+    description: "Cinematic web platform and digital PR portfolio engineered for a leading film promotion agency showcasing 10M+ audience reach, interactive canvas particle motion, and campaign breakdowns for major South Indian releases.",
+    tech: ["HTML5", "CSS3", "JavaScript", "HTML5 Canvas", "Lucide"],
+    demoUrl: "https://cinemapremis.redix.in",
+    caseStudyUrl: "#",
+    client: "Cinemapremis",
+    year: "2026",
+    size: "large",
+    duration: "3 Weeks",
+    industry: "Media & Entertainment",
+    overview: {
+      problem: "Cinemapremis had delivered 75+ campaigns with 10M+ reach across social media, but lacked an authoritative, high-impact digital presence to pitch prominent production houses, present verified campaign metrics, and capture inbound producer inquiries.",
+      solution: "We designed and engineered a bespoke cinematic web platform featuring interactive HTML5 Canvas particle physics, dynamic metric counters, interactive campaign showcases (Bethlehem Kudumba Unit, I'm Game, Khalifa, Texas Tiger), and an integrated collaboration booking engine.",
+      result: "Elevated brand prestige across the cinema industry, established an authoritative portfolio for client pitches, and opened direct producer consultation channels via WhatsApp and email."
+    },
+    features: [
+      "Interactive HTML5 Canvas Particle System",
+      "Featured Film Campaign Showcases (10M+ Reach)",
+      "PR Service Matrix (Movie Promotions, PR, Reels)",
+      "Animated Metric Counters & Milestone Roadmap",
+      "Instagram Feed Modal Lightbox",
+      "Collaboration Inquiry Wizard & Direct WhatsApp Channel"
+    ],
+    githubUrl: "https://github.com/ihsan384/Ajas",
+    metrics: [
+      { value: "10M+", label: "Total Audience Reach" },
+      { value: "75+", label: "Film Campaigns" },
+      { value: "5M+", label: "Social Interactions" },
+      { value: "100%", label: "Responsive Layout" }
+    ],
+    gallery: [
+      "/projects/cinemapremis.jpg",
+      "/projects/cinemapremis_game.jpg",
+      "/projects/cinemapremis_bethlehem.jpg",
+      "/projects/cinemapremis_tiger.jpg"
+    ],
+    testimonial: {
+      rating: 5,
+      text: "REDIX.MEDIA delivered a stunning, cinematic website that perfectly captures our energy. It has made pitching our promotional services to top filmmakers and production houses effortless.",
+      author: "Cinemapremis — Movie Promotion & PR Team"
     }
   },
   {
@@ -490,8 +585,10 @@ function ProjectImage({ src, alt, heightClass }: { src: string; alt: string; hei
         onLoad={() => setLoading(false)}
         onError={() => {
           setLoading(false);
-          if (src.includes("gym")) {
+          if (src.includes("gym") || src.includes("forge")) {
             setImgSrc("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80");
+          } else if (src.includes("cinema") || src.includes("ajas")) {
+            setImgSrc("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&q=80");
           } else if (src.includes("cafe") || src.includes("coco") || src.includes("brew")) {
             setImgSrc("https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&q=80");
           } else if (src.includes("pet")) {

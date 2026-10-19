@@ -198,7 +198,7 @@ export default function ProjectDetailsModal({
                       Live Demo
                     </span>
                     <h4 className="text-base font-extrabold text-neutral-900 leading-tight">
-                      Explore the complete Fusion Fit ERP with sample data.
+                      <span className="text-[#FFC107]">Explore</span> the complete Fusion Fit <span className="text-[#FFC107]">ERP</span> with sample data.
                     </h4>
                   </div>
 
